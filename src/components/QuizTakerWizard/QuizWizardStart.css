@@ -1,0 +1,131 @@
+.quizWizStartMain{
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* align-content: center; */
+    height: 800px;
+    margin: 0 auto;
+}
+
+.quizStartBody{
+    background:rgba(51, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 320px;
+    height: 800px;
+    text-align: center;
+}
+/* .quizStartBody>h3{
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.quizStartBody>p{
+    margin-top: 5px;
+    margin-bottom: 8px;
+} */
+.quizStartBody>img{
+    width: 100%;
+    /* height: 100%; */
+}
+
+.buttonArea{
+    display: flex;
+    justify-content: space-around;
+}
+.prettyButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;  
+    text-decoration: none;
+    color: white;
+}
+
+.green{
+    background: greenyellow;
+}
+.cancelRed{
+    background: darkred;
+}
+
+@media (min-width: 490px){
+    .quizWizStartMain{
+        height: 900px;
+    }
+    .quizStartBody{
+        width: 480px;
+        height: 900px;
+    }
+    .quizStartBody>h2{
+        font-size: 40px;
+    }
+    .quizStartBody>h3{
+        font-size: 30px;
+    }
+    .quizStartBody>p{
+        font-size: 20px;
+    }
+    .quizStartBody>h4{
+        font-size: 15px;
+    }
+    .prettyButton{
+        width: 110px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+@media (min-width: 770px){
+    .quizWizStartMain{
+        height: 1100px;
+    }
+    .quizStartBody{
+        width: 760px;
+        height: 1100px;
+    }
+    .quizStartBody>h2{
+        font-size: 50px;
+    }
+    .quizStartBody>h3{
+        font-size: 40px;
+    }
+    .quizStartBody>p{
+        font-size: 30px;
+    }
+    .quizStartBody>h4{
+        font-size: 25px;
+    }
+    .prettyButton{
+        width: 140px;
+        height: 60px;
+        font-size: 30px;
+    }
+}
+@media (min-width: 1440px){
+    .quizWizStartMain{
+        height: 1200px;
+    }
+    .quizStartBody{
+        width: 1390px;
+        height: 1200px;
+    }
+    .quizStartBody>h2{
+        font-size: 60px;
+    }
+    .quizStartBody>h3{
+        font-size: 50px;
+    }
+    .quizStartBody>p{
+        font-size: 40px;
+    }
+    .quizStartBody>h4{
+        font-size: 35px;
+    }
+    .prettyButton{
+        width: 160px;
+        height: 70px;
+        font-size: 35px;
+    }
+}

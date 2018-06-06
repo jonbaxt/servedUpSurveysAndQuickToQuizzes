@@ -1,0 +1,148 @@
+/* Dashboard main body  */
+.dashMain{
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.body{
+    color: #00ccff;
+    width: 100%;
+}
+
+
+/* Surveys Area and Children */
+.AvailableSurveysBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF);
+}
+
+/* Quizzes Area and Children */
+.AvailableQuizzesBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF);
+}
+
+.displayBox{
+    width: 260px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 20px;
+    background:rgba(51, 0, 0, 0.2);
+    display: flex;
+    color: #00ccff;
+    box-shadow: 2px 6px 4px rgba(0, 204, 255, 0.2);
+    border-radius: 5%;
+    transition: 2s all ease;
+}
+.displayBox:hover{
+    background:rgba(51, 0, 0, 0.4);
+    box-shadow: 2px 6px 4px rgba(0, 204, 255, 0.9);
+    transition: 2s all ease;
+}
+.displayBox>div>div>h4{
+    font-size: 20px;
+}
+.displayBox>div>div>p{
+    font-size: 18px;
+}
+.boxTitles{
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+}
+.linkPicture{
+    width: 100%;
+}
+.noLineUnderneath{
+     text-decoration-line: none;
+    color: black;
+    text-decoration: none;
+}
+
+.centerBox{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.underline{
+    text-decoration-line: underline;
+    font-weight: bolder;
+}
+
+.marBot{
+    margin-bottom: 5px;
+}
+
+@media (min-width: 490px){
+.AvailableSurveysBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF);
+}
+/* Quizzes Area and Children */
+.displayBox{
+    width: 450px;
+}
+.displayBox>div>div>h4{
+    font-size: 24px;
+}
+.displayBox>div>div>p{
+    font-size: 22px;
+}
+.boxTitles{
+    font-size: 62px;
+}
+}
+
+
+@media (min-width: 770px){
+.displayBox{
+    width: 280px;
+}
+.displayBox>div>div>h4{
+    font-size: 26px;
+}
+.displayBox>div>div>p{
+    font-size: 22px;
+}
+.boxTitles{
+    font-size: 62px;
+}
+.marBot{
+    margin-bottom: 2px;
+}
+.wrapWhenBig{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+}
+
+@media (min-width: 1440px){
+.displayBox{
+    width: 800px;
+}
+.displayBox>div>div>h4{
+    font-size: 50px;
+}
+.displayBox>div>div>p{
+    font-size: 40px;
+}
+.boxTitles{
+    font-size: 75px;
+}
+.wrapWhenBig{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+}

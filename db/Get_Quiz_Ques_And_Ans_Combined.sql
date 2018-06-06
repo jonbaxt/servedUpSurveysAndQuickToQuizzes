@@ -1,0 +1,3 @@
+SELECT quizquestions.quiz_id, quizquestions.ques_id, quizanswers.ans_id, quizquestions.ques_num,  quizanswers.ans_num, quizquestions.ques_text, quizquestions.ques_img, quizanswers.ans_text, quizanswers.is_correct, quizanswers.ans_img,
+quizquestions.ques_type,  quizquestions.ques_feat_count, quizquestions.question_features, quizquestions.time_limit, quizanswers.ans_special
+FROM quizquestions JOIN quizanswers ON quizquestions.ques_id=quizanswers.quiz_ques_id;
