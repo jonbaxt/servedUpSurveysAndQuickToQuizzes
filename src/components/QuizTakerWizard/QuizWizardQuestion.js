@@ -41,7 +41,7 @@ class QuizWizardQuestion extends Component {
         console.log(quesCount)
         // this.setState({ countOfQuestions: quesCount })
         return (
-            <div className={css(quesStyles.quizWizQuesMain)} >
+            <div className={css(quesStyles.quizWizQuesMain, quesStyles.pageStart)} >
                 <div className={css(quesStyles.buttonDiv)} >
                     <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/quiz/${this.props.match.params.quizId}/start`} >Restart</Link>
                 </div>
@@ -53,16 +53,26 @@ class QuizWizardQuestion extends Component {
         )
     }
 }
+const initialOpacityKeyframes = {
+    'from': { opacity: 0 },
+    'to': { opacity: 1 }
+}
 const quesStyles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     mainArea: {
         background: 'linear-gradient(to left,#0000FF,#330099, #3300CC, #3300CC, #330099, #0000FF)'
     },
     quizWizQuesMain: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        height: '1300px',
     },
     bottomButtons: {
-        // border: '1px solid green',
         background: 'lightgreen',
         color: 'white',
         textDecoration: 'none'

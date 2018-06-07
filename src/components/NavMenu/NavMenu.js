@@ -64,14 +64,14 @@ class NavMenu extends Component {
                         css(Styles.dropDown, Styles.hide)
                     }>
                     <div className={css(Styles.dropDownInnerBox)}>
-                        <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/Dashboard' >
-                            <span className={css(Styles.dropDownInnerInnerBox, Styles.showBorder)} onClick={() => console.log('Clicked Create Survey/Quiz')}>
+                        <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/createnew/${this.props.user.id}/start`} >
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Create Survey/Quiz')}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faPlus} />
                                 <span>Create Survey/Quiz</span>
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/results/quiz/allquizresults' >
-                            <span className={css(Styles.dropDownInnerInnerBox, Styles.showBorder)} onClick={() => console.log('Clicked Results')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Results')}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faChartArea} />
                                 <span>Results</span>
                             </span>
@@ -79,13 +79,13 @@ class NavMenu extends Component {
                     </div>
                     <div className={css(Styles.dropDownInnerBox)}>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/manage/userssurveys/${this.props.user.id}`} >
-                            <span className={css(Styles.dropDownInnerInnerBox, Styles.showBorder)} onClick={() => console.log('Clicked Your Surveys and Quizzes')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Your Surveys and Quizzes')}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faFolderOpen} />
                                 <span>Your Surveys and Quizzes</span>
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/' >
-                            <span className={css(Styles.dropDownInnerInnerBox, Styles.showBorder)} onClick={() => console.log('Clicked Logout')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Logout')}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faEject} />
                                 <span>Logout</span>
                             </span>
@@ -245,37 +245,21 @@ const Styles = StyleSheet.create({
     dropDownTablet: {
         '@media (min-width: 490px)': {
             transition: '1s all ease',
-            height: '150px',
+            height: '190px',
         },
     },
     dropDownLaptop: {
         '@media (min-width: 700px)': {
             transition: '1s all ease',
-            height: '150px',
+            height: '230px',
         },
     },
     dropDownBiggest: {
         '@media (min-width: 1400px)': {
             transition: '1s all ease',
-            height: '150px',
+            height: '260px',
         }
     }
-    // tablet: {
-    //     '@media (min-width: 490px)': {
-    //         fontSize: '50px',
-    //     },
-    // },
-    // laptop: {
-    //     '@media (min-width: 700px)': {
-    //         fontSize: '70px',
-    //     },
-    // },
-    // biggest: {
-    //     '@media (min-width: 1400px)': {
-    //         fontSize: '90px',
-    //     }
-    // }
-
 })
 /*
 h1{

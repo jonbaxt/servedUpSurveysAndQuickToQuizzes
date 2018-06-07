@@ -241,8 +241,18 @@ class QuizEditor extends Component {
                     return (
                         <div key={el.ques_id} className={css(Styles.borderShadow, Styles.boxW, Styles.marTandB, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol, Styles.flSpBt)}>
+                            <div className={css(Styles.flBox, Styles.boxW, Styles.hoverOnSelection, Styles.flSpBt)}>
                                 <p className={css(Styles.wWrap)} >Question # {el.ques_num}</p>
+                                <button className={css(Styles.editStyle)} onClick={() => {
+                                            console.log('Delete Question ', el.ques_id)
+                                            // this.handleSelectedChange('ques_text')
+                                            // this.handleTemporaryQuesIdSelected(el.ques_id)
+                                            // this.handleTemporaryStringAccess(el.ques_text)
+                                            // this.editQuestionBoxChange()
+                                        }} >Delete Question</button>
+                                </div>
                                 <br /><br />
+                                
                                 <p>Question Text:</p>
                                 <div className={css(Styles.flBox, Styles.boxW, Styles.hoverOnSelection, Styles.flSpBt)}>
                                     <p className={css(Styles.wWrap)} >{el.ques_text}</p>
@@ -552,7 +562,7 @@ class QuizEditor extends Component {
                 switch (this.state.selectedChange) {
                     case 'ques_text':
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)}>Question Text</p><br /><br />
                                 <p>{this.state.temporaryStringAccess}</p><br /><br /><br />
@@ -576,7 +586,7 @@ class QuizEditor extends Component {
                         </div>)
                     case 'ques_type':
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)} >Question Type</p><br /><br /><br />
                                 <p>Currently: {this.state.temporaryStringAccess}</p><br /><br /><br />
@@ -604,7 +614,7 @@ class QuizEditor extends Component {
                         </div>)
                     case 'ques_img':
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)} >Question Image</p>
                                 <img src={this.state.temporaryStringAccess} alt='' className={css(Styles.picSiz)} />
@@ -629,7 +639,7 @@ class QuizEditor extends Component {
                         </div>)
                     case 'question_features':
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)} >Question Features</p>
                                 <p>{this.state.temporaryStringAccess}</p>
@@ -652,7 +662,7 @@ class QuizEditor extends Component {
                         </div>)
                     case 'time_limit':
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)} >Time Limit</p>
                                 <p>{this.state.temporaryStringAccess}</p>
@@ -676,7 +686,7 @@ class QuizEditor extends Component {
 
                     default:
                         return (<div className={
-                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.hideQuestionEditor)}>
+                            this.state.questionBoxVisible ? css(conditionalDisplayStyles.displayQuestionEditor) : css(conditionalDisplayStyles.displayQuestionEditor,conditionalDisplayStyles.hideQuestionEditor)}>
                             <div className={css(Styles.flBox, Styles.flCol)} >
                                 <p className={css(Styles.texSizBig)} >Nothing Selected</p>
                                 <button className={css(Styles.editStyle)}
@@ -697,11 +707,11 @@ class QuizEditor extends Component {
                 <h1>Quiz Editor</h1>
                 <br />
                 {/* <div className={css(Styles.editorMainBox)}> */}
-                {editDelete()}
                 {changeInputs()}
                 {changeQuestionInputs()}
                 {makeAnswers()}
                 {confirmDeleteBox()}
+                {editDelete()}
                 {/* </div> */}
             </div>
         )
@@ -757,23 +767,32 @@ const conditionalDisplayStyles = StyleSheet.create({
         left: '-400px'
     },
     displayQuestionEditor: {
+        // display: 'flex',
+        // justifyContent: 'center',
+        // transform: '1s all ease',
+        // overflow: 'hidden',
         animationName: [initialOpacityKeyframes, initialTranslateKeyframes],
         animationDuration: '0.5s',
         animationTimingFunction: 'ease-in',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
+        // width: '100%',
         width: '310px',
-        height: '500px',
+        // height: '400px',
+        // height: '500px',
         position: 'fixed'
     },
     hideQuestionEditor: {
+        // transform: '1s all ease',
         animationName: [outOpacityKeyframes, outTranslateKeyframes],
         animationDuration: '1s',
         animationTimingFunction: 'ease-out',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
-        width: '310px',
-        height: '500px',
+        // width: '0%',
+        // width: '310px',
+        // height: '0px',
+        // height: '500px',
         position: 'absolute',
         left: '-400px'
     },

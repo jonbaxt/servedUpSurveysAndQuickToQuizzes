@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -26,9 +27,9 @@ class SurveyWizardStart extends Component {
         let anonymous = 'not anonymous';
         this.props.currentSurveyInfo.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
         return (
-            <div className='quizWizStartMain'>
+            <div className={`surveyWizStartMain ${css(Styles.pageStart)}`}>
                 {/* <NavMenu /> */}
-                <div className='quizStartBody'>
+                <div className='surveyStartBody'>
                     <h2>Served Up Surveys</h2>
                     <br />
                     <h3>{this.props.currentSurveyInfo.title}</h3>
@@ -41,9 +42,9 @@ class SurveyWizardStart extends Component {
                     <br />
                     <br /> This survey is {anonymous}</p>
                     <br />
-                    <div className='buttonArea'>
-                        <Link className='prettyButton green' to={`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/1`} >Start Survey</Link>
-                        <Link className='prettyButton cancelRed' to='/Dashboard' >Cancel</Link>
+                    <div className='surveyButtonArea'>
+                        <Link className='surveyPrettyButton green' to={`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/1`} >Start Survey</Link>
+                        <Link className='surveyPrettyButton cancelRed' to='/Dashboard' >Cancel</Link>
                     </div>
                     <br />
                     <h4>Survey Created By: {this.props.currentSurveyInfo.survey_creator}</h4>
@@ -52,6 +53,18 @@ class SurveyWizardStart extends Component {
         )
     }
 }
+const initialOpacityKeyframes = {
+    'from': { opacity: 0 },
+    'to': { opacity: 1 }
+}
+const Styles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
+});
 let mapStateToProps = (state) => {
     return {
         currentSurveyInfo: state.currentSurveyInfo,

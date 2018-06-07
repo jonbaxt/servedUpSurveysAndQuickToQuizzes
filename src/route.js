@@ -20,6 +20,10 @@ import SurveyWizardEnd from './components/SurveyTakerWizard/SurveyWizardEnd';
 import QuizDoneResults from './components/Results/QuizView/QuizDoneResults/QuizDoneResults';
 import AllQuizResults from './components/Results/QuizView/AllQuizResults/AllQuizResults';
 
+import SurveyQuizCreator from './components/SurveyQuizCreator/SurveyQuizCreator';
+import QuizCreateStart from './components/SurveyQuizCreator/QuizCreatorWizard/QuizCreateStart';
+import SurveyCreateStart from './components/SurveyQuizCreator/SurveyCreatorWizard/SurveyCreateStart';
+
 export default (
     <Switch>
         {/* Login and DashBoardRoutes */}
@@ -45,7 +49,11 @@ export default (
         {/* Results Routes */}
         <Route path='/results/afterQuizTake/byQuizNumber/:currentUserId/quiz/:quizId' component={QuizDoneResults} />
         <Route path='/results/quiz/allquizresults' component={AllQuizResults} />
-        
+
+        {/* Creation Routes */}
+        <Route path='/createnew/:currentUserId/start' component={SurveyQuizCreator} />
+        <Route path='/createnew/:currentUserId/quiz/quizsetup' component={QuizCreateStart} />
+        <Route path='/createnew/:currentUserId/survey/surveysetup' component={SurveyCreateStart} />
 
 
         {/* <Route path='/Admin/Dashboard' component={AdminDashboard} /> */}

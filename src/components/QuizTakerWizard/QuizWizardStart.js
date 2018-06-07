@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { StyleSheet, css } from 'aphrodite';
 
 // import NavMenu from '../NavMenu/NavMenu';
 import './QuizWizardStart.css'
@@ -30,7 +31,7 @@ class QuizWizardStart extends Component {
             timedString = 'not timed'
         }
         return (
-            <div className='quizWizStartMain'>
+            <div className={`quizWizStartMain ${css(Styles.pageStart)}`}>
                 {/* <NavMenu /> */}
                 <div className='quizStartBody'>
                     <h2>Quick To Quizzes</h2>
@@ -56,6 +57,18 @@ class QuizWizardStart extends Component {
         )
     }
 }
+const initialOpacityKeyframes = {
+    'from': { opacity: 0 },
+    'to': { opacity: 1 }
+}
+const Styles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
+});
 let mapStateToProps = (state) => {
     return {
         currentQuizInfo: state.currentQuizInfo,

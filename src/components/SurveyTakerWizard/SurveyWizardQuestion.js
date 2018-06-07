@@ -48,7 +48,7 @@ class SurveyWizardQuestion extends Component {
         // console.log(quesCount)
         // this.setState({ countOfQuestions: quesCount })
         return (
-            <div className={css(quesStyles.quizWizQuesMain)} >
+            <div className={css(quesStyles.quizWizQuesMain, quesStyles.pageStart)} >
                 
                 <div className={css(quesStyles.buttonDiv)} >
                     <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/start`} >Restart</Link>
@@ -64,13 +64,23 @@ class SurveyWizardQuestion extends Component {
         )
     }
 }
+const initialOpacityKeyframes = {
+    'from': { opacity: 0 },
+    'to': { opacity: 1 }
+}
 const quesStyles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     quizWizQuesMain: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        height: '1300px',
     },
     bottomButtons: {
-        // border: '1px solid green',
         background: 'lightgreen',
         color: 'white',
         textDecoration: 'none'

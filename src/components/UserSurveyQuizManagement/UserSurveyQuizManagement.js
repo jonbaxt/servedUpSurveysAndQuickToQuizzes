@@ -35,7 +35,7 @@ class UserSurveyQuizManagement extends Component {
     }
     render() {
         return (
-            <div className={css(Styles.pageStart, Styles.SurveyQuizMainBox, Styles.tempBorder)}>
+            <div className={css(Styles.pageStart, Styles.SurveyQuizMainBox)}>
                 <h1>{this.props.user.user_name}'s </h1><h2>Surveys/Quizzes</h2><h3>Maintenance and Management</h3>
                 <br />
                 <h2 className={css(Styles.underLiner)}>Quizzes</h2>

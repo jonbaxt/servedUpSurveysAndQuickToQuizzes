@@ -25,11 +25,11 @@ class QuizWizardEnd extends React.Component {
         console.log(this.props.resultsTemporaryStore)
         console.log(this.props.user.user_name)
         return (
-            <div className={css(styles.quizMainEnd)}>
-                <h1>End of Quiz</h1>
-                <p>You have completed the full quiz</p>
-                <p>Congratulations {this.props.user.user_name}!!</p>
-                <p>Click here to see your results</p>
+            <div className={css(styles.quizMainEnd, styles.pageStart)}>
+                <h1 className={css(styles.h1Normal, styles.h1Tablet, styles.h1Laptop, styles.h1Biggest)}>End of Quiz</h1><br/><br/>
+                <p className={css(styles.pNormal, styles.pTablet, styles.pLaptop, styles.pBiggest)}>You have completed the full quiz</p>
+                <p className={css(styles.pNormal, styles.pTablet, styles.pLaptop, styles.pBiggest)}>Congratulations {this.props.user.user_name}!!</p>
+                <p className={css(styles.pNormal, styles.pTablet, styles.pLaptop, styles.pBiggest)}>Click here to see your results</p><br/><br/>
                 <Link to={`/results/afterQuizTake/byQuizNumber/${this.props.match.params.currentUserId}/quiz/${this.props.match.params.quizId}`}
                     className={css(styles.noLine)}
                 >
@@ -47,13 +47,34 @@ function mapStateToProps(state) {
         resultsTemporaryStore: state.resultsTemporaryStore
     }
 }
+const initialOpacityKeyframes = {
+    'from': {
+        opacity: 0,
+    },
 
+    'to': {
+        opacity: 1,
+    }
+}
 const styles = StyleSheet.create({
+    h1Normal: { fontSize: '40px', transition: '1s all ease', },
+    h1Tablet: { '@media (min-width: 490px)': { fontSize: '50px', transition: '1s all ease', }, },
+    h1Laptop: { '@media (min-width: 700px)': { fontSize: '60px', transition: '1s all ease', }, },
+    h1Biggest: { '@media (min-width: 1400px)': { fontSize: '70px', transition: '1s all ease', }, },
+    pNormal: { fontSize: '18px', transition: '1s all ease', },
+    pTablet: { '@media (min-width: 490px)': { fontSize: '28px', transition: '1s all ease', }, },
+    pLaptop: { '@media (min-width: 700px)': { fontSize: '38px', transition: '1s all ease', }, },
+    pBiggest: { '@media (min-width: 1400px)': { fontSize: '48px', transition: '1s all ease', }, },
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     quizMainEnd: {
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
-        // justifyContent: 'center',
         height: '600px'
     },
     buttonClickArea: {
@@ -63,10 +84,13 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         background: 'lightblue',
+        fontSize: '20px',
+        fontWeight: 'bold',
         color: 'white',
         border: 'none',
         textDecoration: 'none',
-        boxShadow: '4px 5px 6px rgba(173, 216, 230, 0.6)'
+        boxShadow: '4px 5px 6px rgba(173, 216, 230, 0.6)',
+        borderRadius: '5%',
     },
     noLine: {
         textDecoration: 'none',
@@ -78,7 +102,7 @@ const styles = StyleSheet.create({
         ':hover': {
             color: '#00ccff',
             background: 'rgba(173, 216, 230, 0.6)',
-            boxShadow: '4px 5px 6px rgba(173, 216, 230, 0.2)',
+            boxShadow: '4px 5px 6px rgba(173, 216, 230, 0.8)',
             transition: 'all 1s ease'
         }
     }

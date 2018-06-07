@@ -1,19 +1,15 @@
 import React from 'react';
-// import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 
 
 import {
-    insertNewSurveyAnswerIntoResultsArray, 
+    insertNewSurveyAnswerIntoResultsArray,
     getMegaSurveyTable, getCurrentScaleInSurvey
 } from '../../ducks/reducer';
 import { Link } from 'react-router-dom';
 
 function SurveyWizardQuestionBuild(props) {
-    // console.log(props)
-    // console.log(props.sendParams)
-    // console.log(props.sendTable)
     return (
         <div>
             {dealWithMegaSurvey(props.sendTable, props.sendParams, props)}
@@ -58,12 +54,12 @@ function dealWithMegaSurvey(MegaSurvey, nestedRoutes, propsObject) {
                 }
                     style={{ textDecoration: 'none' }}
                     key={element.ans_id}>
-                    <span className={css(styles.answerBoxes)} onClick={() => {
+                    <span className={css(styles.answerBoxes, styles.answerBoxesTablet, styles.answerBoxesLaptop, styles.answerBoxesBiggest)} onClick={() => {
                         propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
                         // console.log(`I was clicked ${element.ans_id} and ${element.ans_text}`)
                     }} >
                         {decideImageAnswerArea(element.ans_img)}
-                        <p style={{ marginLeft: '8px' }} >{element.ans_text}</p>
+                        <p className={css(styles.answerBoxText, styles.answerBoxTextTablet, styles.answerBoxTextLaptop, styles.answerBoxTextBiggest)} >{element.ans_text}</p>
                     </span>
                 </Link>
             )
@@ -100,86 +96,86 @@ function dealWithMegaSurvey(MegaSurvey, nestedRoutes, propsObject) {
         let answerId = possibleAnswers.map((element, index) => element.ans_id)
         mapAnswersToScreen =
             (
-                
+
                 <div>
-                <div className={css(styles.scaleArea)}>
-                    {/* <div > */}
-                    <p>1</p>
-                    <input
-                        style={{ width: '200px' }}
-                        type='range'
-                        min='1'
-                        max='10'
-                        value={propsObject.scaleValueForSurveysSave}
-                        onChange={(e) => {propsObject.getCurrentScaleInSurvey(e.target.value)}} />
-                    <p>10</p>
+                    <div className={css(styles.scaleArea)}>
+                        {/* <div > */}
+                        <p>1</p>
+                        <input
+                            style={{ width: '200px' }}
+                            type='range'
+                            min='1'
+                            max='10'
+                            value={propsObject.scaleValueForSurveysSave}
+                            onChange={(e) => { propsObject.getCurrentScaleInSurvey(e.target.value) }} />
+                        <p>10</p>
                     </div>
                     <div className={css(styles.scaleArea)}>
                         <p>Your Answer: {propsObject.scaleValueForSurveysSave}</p>
                         <Link to={
-                        quesCount <= nestedRoutes.quesId ?
-                            `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
-                            : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
-                    }
-                        style={{ textDecoration: 'none' }}
-                        key={answerId[0]}>
-                        <span className={css(styles.rangeButton)} onClick={() => {
-                            // console.log(propsObject.scaleValueForSurveysSave)
-                            
-                            let compiledAnswer = {
-                                Survey_Ques_Id: handleProps[0].ques_id,
-                                Answer_Id: answerId[0],
-                                Takers_Answer: propsObject.scaleValueForSurveysSave,
-                                Taken_Count: 1,
-                                Survey_Taker_Id: nestedRoutes.currentUserId
-                            }
-                            // console.log(compiledAnswer)
-                            propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
-                        }}>Submit Number</span>
+                            quesCount <= nestedRoutes.quesId ?
+                                `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
+                                : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
+                        }
+                            style={{ textDecoration: 'none' }}
+                            key={answerId[0]}>
+                            <span className={css(styles.rangeButton)} onClick={() => {
+                                // console.log(propsObject.scaleValueForSurveysSave)
+
+                                let compiledAnswer = {
+                                    Survey_Ques_Id: handleProps[0].ques_id,
+                                    Answer_Id: answerId[0],
+                                    Takers_Answer: propsObject.scaleValueForSurveysSave,
+                                    Taken_Count: 1,
+                                    Survey_Taker_Id: nestedRoutes.currentUserId
+                                }
+                                // console.log(compiledAnswer)
+                                propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
+                            }}>Submit Number</span>
                         </Link>
                     </div>
                 </div>
             )
-    }else if (qT === 'scale5') {
+    } else if (qT === 'scale5') {
         let answerId = possibleAnswers.map((element, index) => element.ans_id)
         mapAnswersToScreen =
             (
-                
+
                 <div>
-                <div className={css(styles.scaleArea)}>
-                    {/* <div > */}
-                    <p>1</p>
-                    <input
-                        style={{ width: '200px' }}
-                        type='range'
-                        min='1'
-                        max='5'
-                        value={propsObject.scaleValueForSurveysSave}
-                        onChange={(e) => { propsObject.getCurrentScaleInSurvey(e.target.value)}} />
-                    <p>5</p>
+                    <div className={css(styles.scaleArea)}>
+                        {/* <div > */}
+                        <p>1</p>
+                        <input
+                            style={{ width: '200px' }}
+                            type='range'
+                            min='1'
+                            max='5'
+                            value={propsObject.scaleValueForSurveysSave}
+                            onChange={(e) => { propsObject.getCurrentScaleInSurvey(e.target.value) }} />
+                        <p>5</p>
                     </div>
                     <div className={css(styles.scaleArea)}>
                         <p>Your Answer: {propsObject.scaleValueForSurveysSave}</p>
                         <Link to={
-                        quesCount <= nestedRoutes.quesId ?
-                            `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
-                            : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
-                    }
-                        style={{ textDecoration: 'none' }}
-                        key={answerId[0]}>
-                        <span className={css(styles.rangeButton)} onClick={() => {
-                            // console.log(propsObject.scaleValueForSurveysSave)
-                            
-                            let compiledAnswer = {
-                                Survey_Ques_Id: handleProps[0].ques_id,
-                                Answer_Id: answerId[0],
-                                Takers_Answer: propsObject.scaleValueForSurveysSave,
-                                Taken_Count: 1,
-                                Survey_Taker_Id: nestedRoutes.currentUserId
-                            }
-                            // console.log(compiledAnswer)
-                            propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
-                        }}>Submit Number</span>
+                            quesCount <= nestedRoutes.quesId ?
+                                `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
+                                : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
+                        }
+                            style={{ textDecoration: 'none' }}
+                            key={answerId[0]}>
+                            <span className={css(styles.rangeButton)} onClick={() => {
+                                // console.log(propsObject.scaleValueForSurveysSave)
+
+                                let compiledAnswer = {
+                                    Survey_Ques_Id: handleProps[0].ques_id,
+                                    Answer_Id: answerId[0],
+                                    Takers_Answer: propsObject.scaleValueForSurveysSave,
+                                    Taken_Count: 1,
+                                    Survey_Taker_Id: nestedRoutes.currentUserId
+                                }
+                                // console.log(compiledAnswer)
+                                propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
+                            }}>Submit Number</span>
                         </Link>
                     </div>
                 </div>
@@ -188,64 +184,60 @@ function dealWithMegaSurvey(MegaSurvey, nestedRoutes, propsObject) {
         let answerId = possibleAnswers.map((element, index) => element.ans_id)
         mapAnswersToScreen =
             (
-                
+
                 <div>
-                <div className={css(styles.scaleArea)}>
-                    {/* <div > */}
-                    <p>1</p>
-                    <input
-                        style={{ width: '200px' }}
-                        type='range'
-                        min='1'
-                        max='3'
-                        value={propsObject.scaleValueForSurveysSave}
-                        onChange={(e) => { propsObject.getCurrentScaleInSurvey(e.target.value)}}/>
-                    <p>3</p>
+                    <div className={css(styles.scaleArea)}>
+                        {/* <div > */}
+                        <p>1</p>
+                        <input
+                            style={{ width: '200px' }}
+                            type='range'
+                            min='1'
+                            max='3'
+                            value={propsObject.scaleValueForSurveysSave}
+                            onChange={(e) => { propsObject.getCurrentScaleInSurvey(e.target.value) }} />
+                        <p>3</p>
                     </div>
                     <div className={css(styles.scaleArea)}>
                         <p>Your Answer: {propsObject.scaleValueForSurveysSave}</p>
                         <Link to={
-                        quesCount <= nestedRoutes.quesId ?
-                            `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
-                            : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
-                    }
-                        style={{ textDecoration: 'none' }}
-                        key={answerId[0]}>
-                        <span className={css(styles.rangeButton)} onClick={() => {
-                            // console.log(propsObject.scaleValueForSurveysSave)
-                            
-                            let compiledAnswer = {
-                                Survey_Ques_Id: handleProps[0].ques_id,
-                                Answer_Id: answerId[0],
-                                Takers_Answer: propsObject.scaleValueForSurveysSave,
-                                Taken_Count: 1,
-                                Survey_Taker_Id: nestedRoutes.currentUserId
-                            }
-                            // console.log(compiledAnswer)
-                            propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
-                        }}>Submit Number</span>
+                            quesCount <= nestedRoutes.quesId ?
+                                `/surveyDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.surveyId}/${nestedRoutes.quesId}/complete`
+                                : `/${nestedRoutes.currentUserId}/survey/${nestedRoutes.surveyId}/${nextRoute}`
+                        }
+                            style={{ textDecoration: 'none' }}
+                            key={answerId[0]}>
+                            <span className={css(styles.rangeButton)} onClick={() => {
+                                // console.log(propsObject.scaleValueForSurveysSave)
+
+                                let compiledAnswer = {
+                                    Survey_Ques_Id: handleProps[0].ques_id,
+                                    Answer_Id: answerId[0],
+                                    Takers_Answer: propsObject.scaleValueForSurveysSave,
+                                    Taken_Count: 1,
+                                    Survey_Taker_Id: nestedRoutes.currentUserId
+                                }
+                                // console.log(compiledAnswer)
+                                propsObject.insertNewSurveyAnswerIntoResultsArray(compiledAnswer)
+                            }}>Submit Number</span>
                         </Link>
                     </div>
                 </div>
             )
     }
     return (
-        <div className={css(styles.quizBodyContainer
-            // , styles.testBorder
-        )}>
-            <div 
-            // className={css(styles.testBorder)} 
-            >
-                <h2>{surveyTitle}</h2>
-                <h3>{`Question #${questionNumber}`}</h3>
+        <div className={css(styles.quizBodyContainer, styles.pageStart)}>
+            <div>
+                <h2 className={css(styles.h2Normal, styles.h2Tablet, styles.h2Laptop, styles.h2Biggest)}>{surveyTitle}</h2>
+                <h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`Question #${questionNumber}`}</h3>
                 {questionImage ? <img className={css(styles.imageResize)} src={questionImage} alt='' /> : null}
             </div>
-            <div 
+            <div
             // className={css(styles.testBorder)} 
             >
-                <h3>{`${questionText}`}</h3>
+                <h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`${questionText}`}</h3>
             </div>
-            <div className={css(styles.answerArea)}>
+            <div className={css(styles.answerArea, styles.answerAreaTablet, styles.answerAreaLaptop, styles.answerAreaBiggest)}>
                 {mapAnswersToScreen}
             </div>
         </div>
@@ -253,39 +245,76 @@ function dealWithMegaSurvey(MegaSurvey, nestedRoutes, propsObject) {
 }
 function decideImageAnswerArea(AnswerImage) {
     if (AnswerImage) {
-        return (<img className={css(styles.imageInAnswer)} src={AnswerImage} alt='' />)
+        return (<img className={css(styles.imageInAnswer, styles.imageInAnswerTablet, styles.imageInAnswerLaptop, styles.imageInAnswerBiggest)} src={AnswerImage} alt='' />)
     } else {
         return null;
     }
 }
-
-// const styles = StyleSheet.create({
-//     sliderWrapper: {
-//         display: 'inline-block',
-//         width: '20px',
-//         height: '150px',
-//         borderRadius: '50%',
-//         padding: '10px'
-//       },
-//       sliderWrapperInput: {
-//         width: '150px',
-//         height: '20px',
-//         margin: '0',
-//         transformOrigin: '75px 75px'
-//         // ,
-//         // transform: 'rotate(-90deg)'
-//       }
-// })
-
+const initialOpacityKeyframes = { 'from': { opacity: 0, }, 'to': { opacity: 1, } }
 const styles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        transition: 'ease all',
+        // animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     testBorder: {
         border: '1px solid black'
     },
     quizBodyContainer: {
+        transition: '1s all ease',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center'
+    },
+    h2Normal: { fontSize: '30px', transition: '1s all ease', },
+    h2Tablet: { '@media (min-width: 490px)': { fontSize: '40px', transition: '1s all ease', }, },
+    h2Laptop: { '@media (min-width: 700px)': { fontSize: '50px', transition: '1s all ease', }, },
+    h2Biggest: { '@media (min-width: 1400px)': { fontSize: '60px', transition: '1s all ease', }, },
+    h3Normal: { fontSize: '20px', transition: '1s all ease', },
+    h3Tablet: { '@media (min-width: 490px)': { fontSize: '30px', transition: '1s all ease', }, },
+    h3Laptop: { '@media (min-width: 700px)': { fontSize: '40px', transition: '1s all ease', }, },
+    h3Biggest: { '@media (min-width: 1400px)': { fontSize: '50px', transition: '1s all ease', }, },
+    answerBoxes: {
+        margin: '2px',
+        width: '140px',
+        height: '100px',
+        display: 'flex',
+        alignItems: 'center',
+        background: 'lightblue',
+        transition: '1s all ease',
+        color: 'white',
+        borderRadius: '2%',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.2)',
+    },
+    answerBoxesTablet: {
+        '@media (min-width: 490px)': {
+            width: '160px',
+            height: '120px',
+            display: 'flex',
+            alignItems: 'center',
+            transition: '1s all ease',
+        },
+    },
+    answerBoxesLaptop: {
+        '@media (min-width: 700px)': {
+            width: '180px',
+            height: '140px',
+            display: 'flex',
+            alignItems: 'center',
+            transition: '1s all ease',
+        },
+    },
+    answerBoxesBiggest: {
+        '@media (min-width: 1400px)': {
+            width: '200px',
+            height: '160px',
+            display: 'flex',
+            alignItems: 'center',
+            transition: '1s all ease',
+        },
     },
     answerArea: {
         display: 'flex',
@@ -294,15 +323,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center'
     },
-    answerBoxes: {
-        margin: '2px',
-        width: '140px',
-        height: '100px',
-        display: 'flex',
-        alignItems: 'center',
-        border: 'solid 1px blue',
-        background: 'lightblue',
-        color: 'white'
+    answerAreaTablet: {
+        '@media (min-width: 490px)': {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            transition: '1s all ease',
+        },
+    },
+    answerAreaLaptop: {
+        '@media (min-width: 700px)': {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            transition: '1s all ease',
+        },
+    },
+    answerAreaBiggest: {
+        '@media (min-width: 1400px)': {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            transition: '1s all ease',
+        },
     },
     rangeButton: {
         margin: '2px',
@@ -314,18 +354,19 @@ const styles = StyleSheet.create({
         background: 'lightblue',
         color: 'white'
     },
-    bottomButtons: {
-        border: '1px solid green',
-        background: 'lightgreen',
-        color: 'white',
-        textDecoration: 'none'
-    },
-    imageResize: {
-        width: '300px'
-    },
-    imageInAnswer: {
-        width: '50px'
-    },
+    answerBoxText: { marginLeft: '8px', fontSize: '15px', },
+    answerBoxTextTablet: { '@media (min-width: 490px)': { marginLeft: '8px', fontSize: '20px', }, },
+    answerBoxTextLaptop: { '@media (min-width: 700px)': { marginLeft: '8px', fontSize: '25px', }, },
+    answerBoxTextBiggest: { '@media (min-width: 1400px)': { marginLeft: '8px', fontSize: '28px', }, },
+    bottomButtons: { background: 'lightgreen', color: 'white', textDecoration: 'none' },
+    imageResize: { width: '300px', transition: '1s all ease', },
+    imageResizeTablet: { '@media (min-width: 490px)': { width: '400px', transition: '1s all ease' } },
+    imageResizeLaptop: { '@media (min-width: 700px)': { width: '500px', transition: '1s all ease' } },
+    imageResizeBiggest: { '@media (min-width: 1400px)': { width: '600px', transition: '1s all ease' } },
+    imageInAnswer: { width: '50px', transition: '1s all ease' },
+    imageInAnswerTablet: { '@media (min-width: 490px)': { width: '60px', transition: '1s all ease' } },
+    imageInAnswerLaptop: { '@media (min-width: 700px)': { width: '70px', transition: '1s all ease' } },
+    imageInAnswerBiggest: { '@media (min-width: 1400px)': { width: '80px', transition: '1s all ease' } },
     red: {
         backgroundColor: 'red'
     },
@@ -355,8 +396,8 @@ function mapStateToProps(state) {
     }
 }
 export default connect(mapStateToProps, {
-    insertNewSurveyAnswerIntoResultsArray, 
-    getMegaSurveyTable, 
+    insertNewSurveyAnswerIntoResultsArray,
+    getMegaSurveyTable,
     getCurrentScaleInSurvey
 })(SurveyWizardQuestionBuild);
     // let questionCriteria = handleProps.map((arrayValue, index, originalArray) => {
