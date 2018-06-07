@@ -44,7 +44,14 @@ class QuizCreateStart extends React.Component {
                     <h3 className={css(st.texCen)} >Description</h3>
                     <p>This will be used to show the a brief description of what the survey is about on the quiz selection page.</p><br />
 
-                    <textarea placeholder='Your Description' rows='5' /><br /><br />
+                    <textarea className={css(st.textAreaBoxStyled)} placeholder='Your Description' rows='5' /><br /><br />
+
+                    <h3 className={css(st.texCen)} >Pick a Start Image</h3>
+                    <p>Make a start image! Copy a URL and paste into the textbox and see your image here!</p><br/>
+                    <input className={css(st.inputBoxStyled)} placeholder='URL Link' type='url' onChange={(el) => this.handleNewStartImg(el.target.value)} value={this.state.newStartImg} /><br/><br/>
+
+                    <img src={this.state.newStartImg} alt='' /><br/><br/>
+
 
                     <button>Create New Quiz</button>
                     <br />
@@ -85,6 +92,7 @@ const st = StyleSheet.create({
     },
     inputBoxStyled: {
         marginLeft: '5px',
+        fontFamily: 'Oswald, sans-serif',
         border: 'none',
         width: '290px',
         background: 'rgba(0, 204, 255, 0.6)',
@@ -97,6 +105,7 @@ const st = StyleSheet.create({
         marginLeft: '5px',
         width: '290px',
         border: 'none',
+        fontFamily: 'Oswald, sans-serif',
         color: 'white',
         background: 'rgba(0, 204, 255, 0.6)',
         color: 'white',

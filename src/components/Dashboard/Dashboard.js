@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 // import NavMenu from '../NavMenu/NavMenu';
 import './Dashboard.css'
-import { getUser, getAllUsers, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable } from '../../ducks/reducer';
+import { getUser, getUserById, getAllUsers, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable } from '../../ducks/reducer';
 
 class Dashboard extends Component {
     constructor() {
@@ -17,6 +17,9 @@ class Dashboard extends Component {
     }
     componentDidMount() {
         //Gets currently logged in user
+        // if(this.props.user.id === -1 ){
+        // this.props.getUser();
+        // }
         axios.get('/auth/me').then(res => {
             this.props.getUser(res.data)
         }).catch((err) => console.log('Didnt work', err))
@@ -24,6 +27,12 @@ class Dashboard extends Component {
         axios.get('/api/getSurveyUsers').then(response => {
             this.props.getAllUsers(response.data);
         }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
+        // console.log(this.props)
+        // if(this.props.location.pathname !== '/Dashboard/undefined'){
+        //     let currentId = this.props.surveyUsersTable.filter(el => el.id === this.props.match.params.currentUserId)
+        //     this.props.getUserById(currentId[0])
+        // }
+
         //Gets query to show quizzes
         axios.get('/api/quizmain').then(resDat => {
             this.props.getQuizTable(resDat.data);
@@ -42,6 +51,7 @@ class Dashboard extends Component {
         }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
     }
     render() {
+        console.log(this.props.match.params)
         let showSurveyList = this.props.surveyTable.map((element, index) => {
             let anonymous = 'not anonymous';
             element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
@@ -168,6 +178,7 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
     getUser,
+    getUserById,
     getAllUsers,
     getQuizTable,
     getMegaQuizTable,

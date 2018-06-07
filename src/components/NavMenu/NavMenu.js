@@ -29,7 +29,7 @@ class NavMenu extends Component {
 
     render() {
         let showImage = () => {
-            if(this.props.user.length !== 0){
+            if(this.props.user){
                 return (<img className={css(Styles.userImg, Styles.tabletUserImage, Styles.laptopUserImage, Styles.biggestUserImage)} src={this.props.user.img} alt='' />)
             }else{
                 return(<div></div>)
@@ -42,7 +42,8 @@ class NavMenu extends Component {
                 >
                     <div className={css(Styles.flR)}>
                         {showImage()}
-                        <Link className={css(Styles.noLine)} to='/Dashboard' >
+                        <Link className={css(Styles.noLine)} to={`/Dashboard/${this.props.user.id}`} >
+                        {/* <Link className={css(Styles.noLine)} to={`/Dashboard`} > */}
                             <h1 className={css(Styles.hTag, Styles.hTagTablet, Styles.hTagLaptop, Styles.hTagBiggest)}>
                                 <FontAwesomeIcon icon={faCofee} />
                                 Served Up Surveys
@@ -65,27 +66,34 @@ class NavMenu extends Component {
                     }>
                     <div className={css(Styles.dropDownInnerBox)}>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/createnew/${this.props.user.id}/start`} >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Create Survey/Quiz')}>
+                        {/* <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/createnew/userId/start`} > */}
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => {
+                                this.showNavFn()
+                                console.log('Clicked Create Survey/Quiz')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faPlus} />
                                 <span>Create Survey/Quiz</span>
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/results/quiz/allquizresults' >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Results')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
+                                console.log('Clicked Results')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faChartArea} />
                                 <span>Results</span>
                             </span>
                         </Link>
                     </div>
                     <div className={css(Styles.dropDownInnerBox)}>
+                        {/* <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/manage/userssurveys/userId`} > */}
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/manage/userssurveys/${this.props.user.id}`} >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Your Surveys and Quizzes')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
+                                console.log('Clicked Your Surveys and Quizzes')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faFolderOpen} />
                                 <span>Your Surveys and Quizzes</span>
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/' >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => console.log('Clicked Logout')}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
+                                console.log('Clicked Logout')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faEject} />
                                 <span>Logout</span>
                             </span>

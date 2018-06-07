@@ -28,7 +28,8 @@ export default (
     <Switch>
         {/* Login and DashBoardRoutes */}
         <Route path='/' component={Login} exact />
-        <Route path='/Dashboard' component={Dashboard} />
+        <Route path='/Dashboard/' component={Dashboard} />
+        <Route path='/Dashboard/:currentUserId' component={Dashboard} />
         <Route path='/Dashboard/:currentUserId/AdminView' component={AdminDashboard} />
 
         {/* SurveyManagement Links */}

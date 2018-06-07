@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 const initialState = {
     //Main app use variables
@@ -6,6 +6,10 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
+        // id: -1,
+        // user_name: '',
+        // img: '',
+        // auth0_id: ''
         id: 1,
         user_name: "Jonathan Baxter",
         img: "https://lh5.googleusercontent.com/-JLfHGi69FlQ/AAAAAAAAAAI/AAAAAAAAAT8/MvFrMrA3hi8/photo.jpg",
@@ -83,6 +87,7 @@ const initialState = {
 
 //User Types
 const GET_USER = 'GET_USER';
+const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_USERS = 'GET_ALL_USERS';
 const GET_SURVEY_ADMINS = 'GET_SURVEY_ADMINS';
 
@@ -113,11 +118,19 @@ const INSERT_NEW_SURVEY_ANS_RESULT = 'INSERT_NEW_SURVEY_ANS_RESULT';
 
 //-------------------------------------------------User Actions----------------------------------------------------------------------
 //Gets the current user from login cycle.
-export function getUser(userData) {
-
+export function getUser(userResult) {
+    // let userResult = axios.get('/auth/me').then(res => {
+    //     return res.data // this.props.getUser(res.data)
+    // }).catch((err) => console.log('Didnt work', err))
     return {
         type: GET_USER,
-        payload: userData
+        payload: userResult
+    }
+}
+export function getUserById(id){
+    return {
+        type: GET_USER_BY_ID,
+        payload: id
     }
 }
 //Gets complete list of users from from app users database.
@@ -280,6 +293,8 @@ export default function reducer(state = initialState, action) {
         // case GET_USER + '_PENDING':                                            //With pending you could animation for pending time when database is being accessed
         // case GET_USER + '_REJECTED': 
         //     return console.log(`${action.payload} did not make it for some reason`)
+        case GET_USER_BY_ID: 
+            return Object.assign({}, state, { user: action.payload })
         case GET_ALL_USERS:
             return (
                 // console.log(action.payload),
