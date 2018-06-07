@@ -6,46 +6,6 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
-        // id: -1,
-        // user_name: '',
-        // img: '',
-        // auth0_id: ''
-        id: 1,
-        user_name: "Jonathan Baxter",
-        img: "https://lh5.googleusercontent.com/-JLfHGi69FlQ/AAAAAAAAAAI/AAAAAAAAAT8/MvFrMrA3hi8/photo.jpg",
-        auth0_id: "google-oauth2|114719994213853202721"
-        // id: 2,
-        // user_name: "Knuckles",
-        // img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ_SzzNsQosujngZ1WL7hZi7WmpHZlLCQ3_htoFhYUb1PMb4-g",
-        // auth0_id: "Autho_id_awes"
-        // id: 3,
-        // user_name: "The Brain",
-        // img: "https://img.etsystatic.com/il/c12f23/1276523468/il_570xN.1276523468_3td0.jpg?version=1",
-        // auth0_id: "TheBrainCommandsAll"
-        // id: 4,
-        // user_name: "Jerry Springer",
-        // img: "https://imagecdn.wciu.com/Ocau6-1477409965-7-show-JerrySpringer-760x400.png",
-        // auth0_id: "AuthorizedPig"
-        // id: 5,
-        // user_name: "Jerry Seinfeld",
-        // auth0_id: "AuthorizedComic",
-        // img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Jerry_Seinfeld.jpg/250px-Jerry_Seinfeld.jpg"
-        // id: 6,
-        // user_name: "Jerry Lewis",
-        // img: "https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2017/08/20140023/Jerry-Lewis-nutty-professor-700x380.jpg",
-        // auth0_id: "AuthorizNutProfessor"
-        // id: 7,
-        // user_name: "Leroy Jenkins",
-        // img: "https://ih1.redbubble.net/image.43363301.5311/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1.jpg",
-        // auth0_id: "AuthorizJENKINS!!"
-        // id: 8,
-        // user_name: "Jonathan Baxter",
-        // img: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-        // auth0_id: "google-oauth2|113917534783401720882"
-        // id: 9,
-        // user_name: "Jon Baxter",
-        // img: "https://lh3.googleusercontent.com/-Ac4DWJ6TAv8/AAAAAAAAAAI/AAAAAAAAAAc/GGCx7TN9ERY/photo.jpg",
-        // auth0_id: "google-oauth2|104198879589231371430"
     },
 
 
