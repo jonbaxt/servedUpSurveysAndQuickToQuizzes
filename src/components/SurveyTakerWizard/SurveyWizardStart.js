@@ -53,10 +53,7 @@ class SurveyWizardStart extends Component {
         )
     }
 }
-const initialOpacityKeyframes = {
-    'from': { opacity: 0 },
-    'to': { opacity: 1 }
-}
+const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
     pageStart: {
         animationName: initialOpacityKeyframes,

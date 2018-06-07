@@ -15,6 +15,7 @@ const initialState = {
     //This is the table of quizzes to be used on the dashboard page.
     quizTable: [],
     surveyTable: [],
+    currentPageIsLoginPage: false,
     //All of this is for people who are currently taking quizzes
     //Logic stores for dashboard to store for app to use to figure out which quiz being used.
     currentQuizId: -1,
@@ -50,6 +51,8 @@ const GET_USER = 'GET_USER';
 const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_USERS = 'GET_ALL_USERS';
 const GET_SURVEY_ADMINS = 'GET_SURVEY_ADMINS';
+
+const TOGGLE_LOGIN_PAGE = 'TOGGLE_LOGIN_PAGE';
 
 //Quiz Types
 const SET_QUIZ_ID = 'SET_QUIZ_ID';
@@ -87,7 +90,7 @@ export function getUser(userResult) {
         payload: userResult
     }
 }
-export function getUserById(id){
+export function getUserById(id) {
     return {
         type: GET_USER_BY_ID,
         payload: id
@@ -105,6 +108,12 @@ export function getSurveyAdmins(surveyAdminsTable) {
     return {
         type: GET_SURVEY_ADMINS,
         payload: surveyAdminsTable
+    }
+}
+export function toggleLoginPage(theToggle) {
+    return {
+        type: TOGGLE_LOGIN_PAGE,
+        payload: theToggle
     }
 }
 //-------------------------------------------------Quiz Actions----------------------------------------------------------------------
@@ -253,7 +262,7 @@ export default function reducer(state = initialState, action) {
         // case GET_USER + '_PENDING':                                            //With pending you could animation for pending time when database is being accessed
         // case GET_USER + '_REJECTED': 
         //     return console.log(`${action.payload} did not make it for some reason`)
-        case GET_USER_BY_ID: 
+        case GET_USER_BY_ID:
             return Object.assign({}, state, { user: action.payload })
         case GET_ALL_USERS:
             return (
@@ -266,6 +275,8 @@ export default function reducer(state = initialState, action) {
         //         )
         case GET_SURVEY_ADMINS:
             return Object.assign({}, state, { surveyAdminsTable: action.payload })
+        case TOGGLE_LOGIN_PAGE:
+            return Object.assign({}, state, { currentPageIsLoginPage: action.payload })
         //-------------------------------------QUIZ CASES------------------------------------
         case SET_QUIZ_ID:
             return Object.assign({}, state, { currentQuizId: action.payload })

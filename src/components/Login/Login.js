@@ -9,7 +9,7 @@ import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 
 export default function Login() {
     return (
-        <div className={css(Styles.mainContainer, Styles.back, Styles.biggerBack, Styles.fuzzIn)}>
+        <div className={css(Styles.mainContainer,  Styles.fuzzIn)}>
             <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Welcome to</h1>
 
             <h1 className={css(Styles.margins, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Served Up Surveys</h1>
@@ -101,9 +101,6 @@ const initialTranslateKeyframes = {
 //   )
 
 const Styles = StyleSheet.create({
-    back: {
-        height: '745px'
-    },
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -200,9 +197,4 @@ const Styles = StyleSheet.create({
             fontSize: '55px'
         }
     },
-    biggerBack: {
-        '@media (min-width: 1400px)': {
-        height: '1000px'
-        }
-    }
 })

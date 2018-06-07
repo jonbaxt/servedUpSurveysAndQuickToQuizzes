@@ -30,7 +30,7 @@ class AllQuizResults extends Component {
     render() {
         
           return (
-            <div>
+            <div className={css(Styles.pageStart)}>
 {/* <br /> */}
 <h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Charts</h2>
  <br />
@@ -46,7 +46,14 @@ class AllQuizResults extends Component {
     }
 }
 
+const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     tabletSizeFontMid: {
         '@media (min-width: 490px)': {
             fontSize: '40px'
