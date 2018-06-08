@@ -22,12 +22,25 @@ class NavMenu extends Component {
             showNav: false
         }
     }
+
+    changeVisibility = () => {
+        if(this.props.pathnameCurrent.length !== 0){
+            if(this.props.pathnameCurrent[0] !== '/'){
+                return css(hideStyles.visNav, Styles.topNav, Styles.trans)
+            }else{
+                return css(hideStyles.hidNav, Styles.topNav)
+            }
+        }
+    }
+
     showNavFn = () => {
         this.setState({ showNav: !this.state.showNav })
         // console.log(this.state.showNav)
     }
 
     render() {
+        // console.log(this.props)
+        console.log(this.props.pathnameCurrent)
         let showImage = () => {
             if(this.props.user){
                 return (<img className={css(Styles.userImg, Styles.tabletUserImage, Styles.laptopUserImage, Styles.biggestUserImage)} src={this.props.user.img} alt='' />)
@@ -36,7 +49,8 @@ class NavMenu extends Component {
             }
         }
         return (
-            <header className={css(Styles.topNav, Styles.trans)}>
+            <header className={this.changeVisibility()}>
+            {/* <header className={css(Styles.topNav, Styles.trans)}> */}
                 <div
                     className={css(Styles.topArea)}
                 >
@@ -110,6 +124,15 @@ class NavMenu extends Component {
         )
     }
 }
+
+const hideStyles = StyleSheet.create({
+    visNav: {
+        visibility: 'visible',
+    },
+    hidNav: {
+        visibility: 'hidden',
+    },
+});
 
 const Styles = StyleSheet.create({
     topNav: {
@@ -298,7 +321,8 @@ h6{
 
 let mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        pathnameCurrent: state.pathnameCurrent,
     }
 }
 

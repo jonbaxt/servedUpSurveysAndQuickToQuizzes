@@ -6,10 +6,13 @@ import { StyleSheet, css } from 'aphrodite';
 
 // import NavMenu from '../NavMenu/NavMenu';
 import './QuizWizardStart.css'
-import { setCurrentQuizInfo, getMegaQuizTable } from '../../ducks/reducer';
+import { setCurrentQuizInfo, getMegaQuizTable, setCurrentPathname } from '../../ducks/reducer';
 
 class QuizWizardStart extends Component {
     componentDidMount() {
+        if(this.props.pathnameCurrent.length !== 0){
+            this.props.setCurrentPathname(this.props.location.pathname)
+        }
         //FIXME: Need to work on this later.
         // if(this.props.user.id !== this.props.match.params.currentUserId){
         //     console.log('does not match in redux')
@@ -73,11 +76,13 @@ let mapStateToProps = (state) => {
     return {
         currentQuizInfo: state.currentQuizInfo,
         user: state.user,
-        megaQuizTable: state.megaQuizTable
+        megaQuizTable: state.megaQuizTable,
+        pathnameCurrent: state.pathnameCurrent,
     }
 }
 const mapDispatchToProps = {
     setCurrentQuizInfo, 
-    getMegaQuizTable
+    getMegaQuizTable,
+    setCurrentPathname
 }
 export default connect(mapStateToProps, mapDispatchToProps)(QuizWizardStart);

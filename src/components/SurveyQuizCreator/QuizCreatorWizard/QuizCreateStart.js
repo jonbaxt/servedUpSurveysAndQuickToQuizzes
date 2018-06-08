@@ -143,7 +143,6 @@ const st = StyleSheet.create({
         width: '290px',
         border: 'none',
         fontFamily: 'Oswald, sans-serif',
-        color: 'white',
         background: 'rgba(0, 204, 255, 0.6)',
         color: 'white',
         '::placeholder': {

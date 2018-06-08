@@ -1,32 +1,50 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
+import { connect } from 'react-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
+import { setCurrentPathname } from '../../ducks/reducer'
 import faCofee from '@fortawesome/fontawesome-free-solid/faCoffee'
 import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 // import faArrowAltCircleUp from '@fortawesome/fontawesome-free-regular/f0aa'
 // import faArrowAltCircleUp from '@fortawesome/fontawesome-free-regular/fa-arrow-circle-up'
 
-export default function Login() {
-    return (
-        <div className={css(Styles.mainContainer,  Styles.fuzzIn)}>
-            <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Welcome to</h1>
+// function Login(props) {
+class Login extends React.Component {
 
-            <h1 className={css(Styles.margins, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Served Up Surveys</h1>
+    componentDidMount(){
+        console.log(this.props)
+        setLoginPath(this.props)
+    }
 
-            <FontAwesomeIcon className={css(Styles.twirlyText, Styles.hoverFont, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faCofee} />
+    render() {
 
-            <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >And</h1>
+        return (
+            <div className={css(Styles.mainContainer, Styles.fuzzIn)}>
+                <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Welcome to</h1>
 
-            <h1 className={css(Styles.margins, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Quick to Quizzes</h1>
+                <h1 className={css(Styles.margins, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Served Up Surveys</h1>
 
-            <FontAwesomeIcon className={css(Styles.margins, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faRoad} />
+                <FontAwesomeIcon className={css(Styles.twirlyText, Styles.hoverFont, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faCofee} />
 
-            <a href={process.env.REACT_APP_LOGIN} className={css(Styles.noLine)} >
-                <span className={css(Styles.loginButton, Styles.hoverButton, Styles.tabletSizeButton, Styles.smallLaptopSizeButton, Styles.SizeButton)} >Login</span>
-            </a>
-        </div>
-    )
+                <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >And</h1>
+
+                <h1 className={css(Styles.margins, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Quick to Quizzes</h1>
+
+                <FontAwesomeIcon className={css(Styles.margins, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faRoad} />
+
+                <a href={process.env.REACT_APP_LOGIN} className={css(Styles.noLine)} >
+                    <span className={css(Styles.loginButton, Styles.hoverButton, Styles.tabletSizeButton, Styles.smallLaptopSizeButton, Styles.SizeButton)} >Login</span>
+                </a>
+
+                {/* <span onChange={()=> setLoginPath(props)} ></span> */}
+            </div>
+        )
+    }
+}
+
+function setLoginPath(propsPass) {
+    propsPass.setCurrentPathname(propsPass.location.pathname)
 }
 const translateKeyframes = {
     '0%': {
@@ -169,7 +187,7 @@ const Styles = StyleSheet.create({
     tabletSizeButton: {
         '@media (min-width: 490px)': {
             width: '130px',
-            height:  '110px',
+            height: '110px',
             fontSize: '35px'
         }
     },
@@ -198,3 +216,11 @@ const Styles = StyleSheet.create({
         }
     },
 })
+
+function mapStateToProps(state) {
+    return {
+        pathnameCurrent: state.pathnameCurrent
+    }
+}
+
+export default connect(mapStateToProps, { setCurrentPathname })(Login);

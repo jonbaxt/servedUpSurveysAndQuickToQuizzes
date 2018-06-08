@@ -5,8 +5,8 @@ const initialState = {
     //User information of who is currently logged in.
 
     //FIXME: This will need to be not hardcoded after building project
-    user: {
-    },
+    user: {},
+    pathnameCurrent: [],
 
 
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.
@@ -15,7 +15,6 @@ const initialState = {
     //This is the table of quizzes to be used on the dashboard page.
     quizTable: [],
     surveyTable: [],
-    currentPageIsLoginPage: false,
     //All of this is for people who are currently taking quizzes
     //Logic stores for dashboard to store for app to use to figure out which quiz being used.
     currentQuizId: -1,
@@ -52,7 +51,7 @@ const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_USERS = 'GET_ALL_USERS';
 const GET_SURVEY_ADMINS = 'GET_SURVEY_ADMINS';
 
-const TOGGLE_LOGIN_PAGE = 'TOGGLE_LOGIN_PAGE';
+const SET_CURRENT_PATHNAME = 'SET_CURRENT_PATHNAME';
 
 //Quiz Types
 const SET_QUIZ_ID = 'SET_QUIZ_ID';
@@ -91,6 +90,7 @@ export function getUser(userResult) {
     }
 }
 export function getUserById(id) {
+    
     return {
         type: GET_USER_BY_ID,
         payload: id
@@ -110,10 +110,10 @@ export function getSurveyAdmins(surveyAdminsTable) {
         payload: surveyAdminsTable
     }
 }
-export function toggleLoginPage(theToggle) {
+export function setCurrentPathname(newPathname) {
     return {
-        type: TOGGLE_LOGIN_PAGE,
-        payload: theToggle
+        type: SET_CURRENT_PATHNAME,
+        payload: newPathname
     }
 }
 //-------------------------------------------------Quiz Actions----------------------------------------------------------------------
@@ -275,9 +275,9 @@ export default function reducer(state = initialState, action) {
         //         )
         case GET_SURVEY_ADMINS:
             return Object.assign({}, state, { surveyAdminsTable: action.payload })
-        case TOGGLE_LOGIN_PAGE:
-            return Object.assign({}, state, { currentPageIsLoginPage: action.payload })
-        //-------------------------------------QUIZ CASES------------------------------------
+        case SET_CURRENT_PATHNAME:
+            return Object.assign({}, state, { pathnameCurrent: [action.payload] })
+        //-------------------------------------QUIZ CASES-----------------------------------
         case SET_QUIZ_ID:
             return Object.assign({}, state, { currentQuizId: action.payload })
         case SET_CURRENT_QUIZ_INFO:

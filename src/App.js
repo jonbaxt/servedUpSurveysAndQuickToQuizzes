@@ -3,7 +3,7 @@ import Route from './route';
 // import { connect } from 'react-redux';
 
 import NavMenu from './components/NavMenu/NavMenu';
-// import { toggleLoginPage } from './ducks/reducer'
+// import { setCurrentPathname } from './ducks/reducer'
 
 import fontawesome from '@fortawesome/fontawesome'
 // import FontAwesomeIcon from '@fortawesome/react-fontawesome'
@@ -19,10 +19,10 @@ import './App.css';
 
 class App extends Component {
 
-  //  { this.props.toggleLoginPage(!this.props.currentPageIsLoginPage)}
-  // firstToggle = () => {return this.props.toggleLoginPage(!this.props.currentPageIsLoginPage)}
+  //  { this.props.setCurrentPathname(!this.props.pathnameCurrent)}
+  // firstToggle = () => {return this.props.setCurrentPathname(!this.props.pathnameCurrent)}
   // componentDidMount(){
-  //   this.props.toggleLoginPage(!this.props.currentPageIsLoginPage)
+  //   this.props.setCurrentPathname(!this.props.pathnameCurrent)
   // }
 
 
@@ -46,8 +46,8 @@ class App extends Component {
 
 // let mapStateToProps = (state) => {
 //   return {
-//     currentPageIsLoginPage: state.currentPageIsLoginPage
+//     pathnameCurrent: state.pathnameCurrent
 //   }
 // }
-// export default connect( mapStateToProps, { toggleLoginPage } )(App);
+// export default connect( mapStateToProps, { setCurrentPathname } )(App);
 export default App;

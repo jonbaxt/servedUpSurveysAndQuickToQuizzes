@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 // import NavMenu from '../NavMenu/NavMenu';
 import './Dashboard.css'
-import { getUser, getUserById, getAllUsers, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable } from '../../ducks/reducer';
+import { getUser, getUserById, getAllUsers, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
 
 class Dashboard extends Component {
     constructor() {
@@ -16,6 +16,9 @@ class Dashboard extends Component {
         }
     }
     componentDidMount() {
+        if(this.props.pathnameCurrent.length !== 0){
+            this.props.setCurrentPathname(this.props.location.pathname)
+        }
         //Gets currently logged in user
         // if(this.props.user.id === -1 ){
         // this.props.getUser();
@@ -173,7 +176,8 @@ function mapStateToProps(state) {
         quizTable: state.quizTable,
         megaQuizTable: state.megaQuizTable,
         megaSurveyTable: state.megaSurveyTable,
-        surveyTable: state.surveyTable
+        surveyTable: state.surveyTable,
+        pathnameCurrent: state.pathnameCurrent
     }
 }
 const mapDispatchToProps = {
@@ -185,6 +189,7 @@ const mapDispatchToProps = {
     getMegaSurveyTable,
     setSelectedQuiz,
     setSelectedSurvey,
-    getSurveyTable
+    getSurveyTable,
+    setCurrentPathname    
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
