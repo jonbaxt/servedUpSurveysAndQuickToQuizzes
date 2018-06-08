@@ -101,6 +101,9 @@ app.post('/api/quizAnswerSubmission/SubmitToQuizResultsTable', controller.postTo
 app.get( '/api/quizResultsByUser/:id', controller.getQuizResultsByUserId);
 app.get( '/api/quizresults/joinedtable', controller.getJoinedAllQuizResults);
 
+//QuizCreatorCalls
+app.post('/api/quizCreation/newQuiz', controller.postNewQuiz);
+
 //Quiz Edit Calls
 app.put('/api/quizedit/from/quiztable/where/id/:quizId', controller.editQuizTableById );
 app.put('/api/quizedit/from/quizquestionstable/where/:quizId/:quesId', controller.editQuizQuestionTableById );

@@ -799,12 +799,16 @@ const conditionalDisplayStyles = StyleSheet.create({
     displayAnswerEditor: {
         animationName: [initialOpacityKeyframes, initialTranslateKeyframes],
         animationDuration: '0.5s',
+        // overflow: 'visible',
+        // overflow: 'scroll',
+        overflow: 'auto',
         animationTimingFunction: 'ease-in',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
+        height: '600px',
         width: '310px',
-        left: '50px',
-        position: 'absolute'
+        // left: '50px',
+        position: 'fixed'
     },
     hideAnswerEditor: {
         animationName: [outOpacityKeyframes, outTranslateKeyframes],
@@ -813,6 +817,7 @@ const conditionalDisplayStyles = StyleSheet.create({
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
         width: '310px',
+        // height: '600px',
         position: 'absolute',
         left: '-400px'
     },

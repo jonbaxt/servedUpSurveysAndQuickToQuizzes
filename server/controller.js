@@ -78,10 +78,19 @@ module.exports = {
     // For getting the quiz results table back to see results data.
     getQuizResultsTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-
+        
         dbInstance.Get_All_Quiz_Results().then(quizResults => {
             res.status(200).send(quizResults);
         }).catch(err => console.log(err))
+    },
+    postNewQuiz: (req, res, next) => {
+        const dbInstance = req.app.get('db');
+        const data = req.body;
+        // console.log(data.Title);
+        dbInstance.Post_New_Quiz([data.Title, data.Description, data.Start_Img, data.Timed, Number(data.Quiz_Owner)]).then(newQuizReturn => {
+            console.log( newQuizReturn)
+            res.status(200).send(newQuizReturn);
+        }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
     },
     postToQuizResults: (req, res, next) => {
         const dbInstance = req.app.get('db');

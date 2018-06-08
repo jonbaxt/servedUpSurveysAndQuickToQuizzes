@@ -1,5 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
+import { connect } from 'react-redux';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+
+import faImages from '@fortawesome/fontawesome-free-solid/faImages'
 
 class QuizCreateStart extends React.Component {
     constructor() {
@@ -9,6 +14,7 @@ class QuizCreateStart extends React.Component {
             newDescription: '',
             newStartImg: '',
             newTimed: false,
+
 
         }
         this.handleNewTitle = this.handleNewTitle.bind(this);
@@ -31,7 +37,22 @@ class QuizCreateStart extends React.Component {
     handleNewTimedChange(trueOrFalse) {
         this.setState({ newTimed: trueOrFalse })
     }
+    handleSubmitQuizCreate = () => {
+        const compiledAnswer = {
+            Title: this.state.newTitle,
+            Description: this.state.newDescription,
+            Start_Img: this.state.newStartImg,
+            Timed: this.state.newTimed,
+            Quiz_Owner: this.props.user.id
+        }
+        axios.post('/api/quizCreation/newQuiz', compiledAnswer).then( (response) => {
+            console.log(response)
+        }).catch( (err) => console.log(err))
+
+    }
     render() {
+        let previewImage = () => { return (this.state.newStartImg !== '' ? <img src={this.state.newStartImg} alt='' className={css(st.picResize)} /> : <div className={css(st.fontResizePicArea)}><FontAwesomeIcon className={css(st.fontResize)} icon={faImages} /></div>) }
+        let timedDecision = () => {return ( this.state.newTimed ? <p className={css(st.texCen)} >Quiz will be timed</p> : <p className={css(st.texCen)} >Quiz will not be timed</p>)}
 
         return (
             <div className={css(st.fl, st.jConCen, st.marTop, st.pageStart)}>
@@ -44,19 +65,26 @@ class QuizCreateStart extends React.Component {
                     <h3 className={css(st.texCen)} >Description</h3>
                     <p>This will be used to show the a brief description of what the survey is about on the quiz selection page.</p><br />
 
-                    <textarea className={css(st.textAreaBoxStyled)} placeholder='Your Description' rows='5' /><br /><br />
+                    <textarea className={css(st.textAreaBoxStyled)} value={this.state.newDescription} onChange={(el)=> this.handleNewDescription(el.target.value)} placeholder='Your Description' rows='5' /><br /><br />
 
                     <h3 className={css(st.texCen)} >Pick a Start Image</h3>
-                    <p>Make a start image! Copy a URL and paste into the textbox and see your image here!</p><br/>
-                    <input className={css(st.inputBoxStyled)} placeholder='URL Link' type='url' onChange={(el) => this.handleNewStartImg(el.target.value)} value={this.state.newStartImg} /><br/><br/>
+                    <p>Make a start image! Copy a URL and paste into the textbox and see your image here!</p><br />
+                    <input className={css(st.inputBoxStyled)} placeholder='URL Link' type='url' onChange={(el) => this.handleNewStartImg(el.target.value)} value={this.state.newStartImg} /><br /><br />
 
-                    <img src={this.state.newStartImg} alt='' /><br/><br/>
+                    {previewImage()}<br /><br />
 
+                    <h3 className={css(st.texCen)} >Timing</h3>
+                    <p>Would you like these quiz questions to be timed?</p><br />
 
-                    <button>Create New Quiz</button>
+                    <div className={css(st.fl, st.spA)} >
+                        <button className={css(st.yesNoButtons, st.yesNoHover)} onClick={() => this.handleNewTimedChange(true)} >YES</button> <button className={css(st.yesNoButtons, st.yesNoHover)}  onClick={() => this.handleNewTimedChange(false)}>NO</button>
+                        {/* <span>YES</span> <span>NO</span> */}
+                    </div><br />
+                    {timedDecision()}
                     <br />
+                    <div className={css(st.fl, st.jConCen)} ><button className={css(st.createButton, st.yesNoHover)} onClick={()=>this.handleSubmitQuizCreate()}>Create New Quiz</button></div><br />
                 </div>
-
+                <br /><br /><br /><br />
             </div>
         )
     }
@@ -77,8 +105,17 @@ const st = StyleSheet.create({
     jConCen: {
         justifyContent: 'center'
     },
+    spA: {
+        justifyContent: 'space-around',
+    },
+    spB: {
+        justifyContent: 'space-between',
+    },
     texCen: {
         textAlign: 'center'
+    },
+    marCen: {
+        margin: '0 auto',
     },
     marTop: {
         marginTop: '15px'
@@ -116,13 +153,58 @@ const st = StyleSheet.create({
             animationTimingFunction: 'ease',
             animationIterationCount: 'infinite'
         },
-
-
+    },
+    picResize: {
+        width: '100%',
+        transition: '1s all ease',
+    },
+    fontResizePicArea: {
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+        transition: '1s all ease',
+    },
+    fontResize: {
+        transition: '1s all ease',
+        fontSize: '150px',
     },
     shadow: {
         boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.8)',
     },
-
+    yesNoButtons: {
+        width: '80px',
+        height: '40px',
+        background: 'rgba(0, 204, 255, 0.6)',
+        border: 'none',
+        borderRadius: '5%',
+        fontWeight: 'bold',
+        color: 'white',
+        transition: '1s all ease',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.4)',
+    },
+    yesNoHover: {
+        ':hover': {
+            boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+            transition: '1s all ease',
+        },
+    },
+    createButton: {
+        width: '140px',
+        height: '40px',
+        background: 'rgba(0, 204, 255, 0.6)',
+        fontWeight: 'bold',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5%',
+        transition: '1s all ease',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.4)',
+    },
 })
 
-export default QuizCreateStart;
+function mapStateToProps(state){
+    return {
+        user: state.user,
+    }
+}
+
+export default connect(mapStateToProps, null)(QuizCreateStart);
