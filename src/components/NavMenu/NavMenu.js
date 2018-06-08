@@ -30,6 +30,8 @@ class NavMenu extends Component {
             }else{
                 return css(hideStyles.hidNav, Styles.topNav)
             }
+        }else{
+            return css(Styles.topNav, Styles.trans)
         }
     }
 
@@ -40,7 +42,7 @@ class NavMenu extends Component {
 
     render() {
         // console.log(this.props)
-        console.log(this.props.pathnameCurrent)
+        // console.log(this.props.pathnameCurrent)
         let showImage = () => {
             if(this.props.user){
                 return (<img className={css(Styles.userImg, Styles.tabletUserImage, Styles.laptopUserImage, Styles.biggestUserImage)} src={this.props.user.img} alt='' />)

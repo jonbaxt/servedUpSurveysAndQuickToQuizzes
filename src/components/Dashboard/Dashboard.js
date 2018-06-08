@@ -54,7 +54,7 @@ class Dashboard extends Component {
         }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
     }
     render() {
-        console.log(this.props.match.params)
+        // console.log(this.props.match.params)
         let showSurveyList = this.props.surveyTable.map((element, index) => {
             let anonymous = 'not anonymous';
             element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
