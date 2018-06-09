@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 // import NavMenu from '../NavMenu/NavMenu';
 import './Dashboard.css'
-import { getUser, getUserById, getAllUsers, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
+import { getUser, getUserById, getAllUsers, getSurveyAdmins, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
 
 class Dashboard extends Component {
     constructor() {
@@ -30,12 +30,10 @@ class Dashboard extends Component {
         axios.get('/api/getSurveyUsers').then(response => {
             this.props.getAllUsers(response.data);
         }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
-        // console.log(this.props)
-        // if(this.props.location.pathname !== '/Dashboard/undefined'){
-        //     let currentId = this.props.surveyUsersTable.filter(el => el.id === this.props.match.params.currentUserId)
-        //     this.props.getUserById(currentId[0])
-        // }
-
+        axios.get('/api/getAdmins').then(response => {
+            this.props.getSurveyAdmins(response.data);
+        }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
+        
         //Gets query to show quizzes
         axios.get('/api/quizmain').then(resDat => {
             this.props.getQuizTable(resDat.data);
@@ -55,32 +53,27 @@ class Dashboard extends Component {
     }
     render() {
         // console.log(this.props.match.params)
-        let showSurveyList = this.props.surveyTable.map((element, index) => {
-            let anonymous = 'not anonymous';
-            element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
+        let showSurveyList = this.props.surveyTable.filter(el => el.site_approval === true ).map((element, index) => {
+            // let anonymous = 'not anonymous';
+            // element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
             return (
                 <Link to={`/${this.props.user.id}/survey/${element.survey_id}/start`} key={element.survey_id} onClick={() => this.props.setSelectedSurvey(element.survey_id)}
                     className='noLineUnderneath'
                     style={{ textDecoration: 'none' }} >
                     <div className='displayBox'  >
                         <div className='rightSide'>
-
-                            <div className='marBot'>
-                                <h4>{element.title}</h4>
-                            </div>
                             <div className='leftSide'>
                                 <img className='linkPicture' src={element.start_img} alt='' />
                             </div>
-
-                            <div
-                            // className='border'
-                            >
+                            <div className='marBot'>
+                                <h4>{element.title}</h4>
+                            </div>
+                            <div>
                                 <p className='underline'>Description</p>
                                 <p>{element.description}</p>
                             </div>
                             <div className='centerBox'>
                                 <p className='underline'>Created by</p> <p>{element.survey_creator}</p>
-                                <p>This survey is {anonymous}</p>
                             </div>
                         </div>
                     </div>
@@ -88,24 +81,24 @@ class Dashboard extends Component {
             )
         })
 
-        let showQuizList = this.props.quizTable.map((element, index) => {
-            let timedString = 'not timed'
-            if (element.timed) {
-                timedString = 'timed'
-            } else {
-                timedString = 'not timed'
-            }
+        let showQuizList = this.props.quizTable.filter(el => el.site_approval === true ).map((element, index) => {
+            // let timedString = 'not timed'
+            // if (element.timed) {
+            //     timedString = 'timed'
+            // } else {
+            //     timedString = 'not timed'
+            // }
             return (
                 <Link to={`/${this.props.user.id}/quiz/${element.quiz_id}/start`} key={element.quiz_id} onClick={() => this.props.setSelectedQuiz(element.quiz_id)} style={{ textDecoration: 'none' }} className='noLineUnderneath' >
                     <div className='displayBox'  >
 
                         <div className='rightSide'>
-                            <div className='marBot'>
-                                <h4>{element.title}</h4>
-                            </div>
 
                             <div className='leftSide'>
                                 <img className='linkPicture' src={element.start_img} alt='' />
+                            </div>
+                            <div className='marBot'>
+                                <h4>{element.title}</h4>
                             </div>
 
                             <div
@@ -116,7 +109,6 @@ class Dashboard extends Component {
                             </div>
                             <div className='centerBox'>
                                 <p className='underline'>Created by</p><p>{element.quiz_creator}</p>
-                                <p>This quiz is {timedString}</p>
                             </div>
                         </div>
                     </div>
@@ -173,6 +165,7 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         surveyUsersTable: state.surveyUsersTable,
+        surveyAdminsTable: state.surveyAdminsTable,
         quizTable: state.quizTable,
         megaQuizTable: state.megaQuizTable,
         megaSurveyTable: state.megaSurveyTable,
@@ -184,6 +177,7 @@ const mapDispatchToProps = {
     getUser,
     getUserById,
     getAllUsers,
+    getSurveyAdmins,
     getQuizTable,
     getMegaQuizTable,
     getMegaSurveyTable,

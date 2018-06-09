@@ -20,7 +20,7 @@ auth0_id TEXT
 
 CREATE TABLE SurveyAdmins(
 Admin_Id SERIAL PRIMARY KEY,
-Survey_User_Id INTEGER REFERENCES SurveyUsers(Id),
+Survey_User_Id INTEGER REFERENCES SurveyUsers(Id) ON DELETE CASCADE,
 Can_Edit_Tables BOOLEAN,
 Can_Delete_Tables BOOLEAN,
 Can_Approve_New_Tables BOOLEAN,
@@ -125,7 +125,12 @@ VALUES
 ('Jerry Lewis', 'https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2017/08/20140023/Jerry-Lewis-nutty-professor-700x380.jpg', 'AuthorizNutProfessor'),
 ('Leroy Jenkins', 'https://ih1.redbubble.net/image.43363301.5311/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1.jpg', 'AuthorizJENKINS!!'),
 ('Jonathan Baxter', 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', 'google-oauth2|113917534783401720882'),
-('Jon Baxter', 'https://lh3.googleusercontent.com/-Ac4DWJ6TAv8/AAAAAAAAAAI/AAAAAAAAAAc/GGCx7TN9ERY/photo.jpg', 'google-oauth2|104198879589231371430');
+('Jon Baxter', 'https://lh3.googleusercontent.com/-Ac4DWJ6TAv8/AAAAAAAAAAI/AAAAAAAAAAc/GGCx7TN9ERY/photo.jpg', 'google-oauth2|104198879589231371430'),
+('The Doctor', 'http://thedoctorwhocompanion.com/wp-content/uploads/2016/02/day-of-the-doctor-11th-doctor-matt-smith.jpg', 'authDoctor'),
+('The Master', 'https://i.pinimg.com/736x/83/fd/ef/83fdef0656bca56b05b74c1ccbb1f64f--doctor-who-art-tenth-doctor.jpg', 'authMaster'),
+('Bugs Bunny', 'http://www.toonopedia.com/bugs.jpg', 'authLooney'),
+('Donald Duck', 'https://vignette.wikia.nocookie.net/disney/images/d/db/Donald_Duck_Iconic.png/revision/latest?cb=20160905174817', 'authDonny'),
+('Goofy', 'https://vignette.wikia.nocookie.net/disney/images/2/27/Goofy_transparent.png/revision/latest?cb=20170426165903', 'authoGoof');
 
 INSERT INTO SurveyAdmins
 (Survey_User_Id, Can_Edit_Tables, Can_Delete_Tables, Can_Approve_New_Tables, Can_Handle_Flagged_Tables, Admin_Title, Supervisor_Id)
@@ -137,19 +142,12 @@ VALUES
 INSERT INTO Quiz
 (Title, Description, Start_Img, Created_On, Updated_On, Timed, Site_Approval, Quiz_Owner)
 VALUES
-('Sonic the Hedgehog', 'Think you know everything about that hedgehog? Maybe you do. But in the end, there can only be one Sonic.', 'https://images-na.ssl-images-amazon.com/images/I/51juEROJpOL._SX425_.jpg', 
-'2018-05-22',
-'2018-05-22',
-TRUE, TRUE, 1),
-('Looney Tunes', 'What`s up doc? Nuttin like a good day for a quiz', 'https://rfathead-res.cloudinary.com/image/upload/q_auto/c_pad,w_4225,h_3000/roomplus/97-97085_looney_tunes_collection_realbig_6628.jpg', 
-'2018-05-22',
-'2018-05-22',
-TRUE, FALSE, 3),
+('Sonic the Hedgehog', 'Think you know everything about that hedgehog? Maybe you do. But in the end, there can only be one Sonic.', 'https://images-na.ssl-images-amazon.com/images/I/51juEROJpOL._SX425_.jpg', '2018-05-22', '2018-05-22', FALSE, TRUE, 1),
+('Looney Tunes', 'What`s up doc? Nuttin like a good day for a quiz', 'https://rfathead-res.cloudinary.com/image/upload/q_auto/c_pad,w_4225,h_3000/roomplus/97-97085_looney_tunes_collection_realbig_6628.jpg', '2018-05-22', '2018-05-22', FALSE, TRUE, 3),
 ('Harry Potter', 'Do you know Harry Potter Well? Find out how you add up.', 'https://cdn.movieweb.com/img.news.tops/NEh8pECIhK0xkm_2_b/Harry-Potter-Why-Daniel-Radcliffe-Was-Cast.jpg', 
-'2018-05-22',
-'2018-05-22',
-
-FALSE, FALSE, 2);
+'2018-05-22', '2018-05-22', FALSE, TRUE, 2),
+('Who`s Who? A Quiz of Pictures', 'Take your best guess on who these people are in the group of pictures in this quiz. See how you do.', 'https://images.pexels.com/photos/109919/pexels-photo-109919.jpeg?auto=compress&cs=tinysrgb&h=350', CURRENT_DATE, CURRENT_DATE, FALSE, TRUE, 1),
+('You don`t know jack', '', '', CURRENT_DATE, CURRENT_DATE, FALSE, FALSE, 1);
 
 INSERT INTO QuizQuestions
 (Ques_Num, Ques_Text, Ques_Type, Ques_Img, Ques_Feat_Count, Question_Features, Time_Limit, Quiz_Id)
@@ -170,7 +168,20 @@ VALUES
 (1, 'Harry Potter is known as:', 'mult-choice', 'https://www.irishtimes.com/polopoly_fs/1.3170107.1501253408!/image/image.jpg_gen/derivatives/box_620_330/image.jpg', 0, null, NULL, 3),
 (2, 'What does muggle mean in Harry Potter?', 'mult-choice', 'https://www.dhresource.com/0x0s/f2-albu-g5-M01-E3-49-rBVaJFmyR2eAIpyRAANoD6cAJQ4972.jpg/wholesale-muggle-sticker-decal-for-car-window.jpg', 0, null, NULL, 3),
 (3, 'There are vampires in Harry Potter', 'mult-choice', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Bela_Lugosi_as_Dracula.jpg/300px-Bela_Lugosi_as_Dracula.jpg', 0, null, NULL, 3),
-(4, 'Hagrid, when he becomes a professor teaches what?', 'mult-choice', 'https://vignette.wikia.nocookie.net/harrypotter/images/5/52/Hagrid_moleskin_overcoat.png/revision/latest?cb=20161121052755', 0, null, NULL, 3);
+(4, 'Hagrid, when he becomes a professor teaches what?', 'mult-choice', 'https://vignette.wikia.nocookie.net/harrypotter/images/5/52/Hagrid_moleskin_overcoat.png/revision/latest?cb=20161121052755', 0, null, NULL, 3),
+(1, 'Who is Rick Sanchez?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(2, 'Who is Gandhi?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(3, 'Who is Betty Boop?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(4, 'Who is Michael Myers?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(5, 'Who is the Shadow?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(6, 'Who is Adam Sandler?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(7, 'Who is Popeye?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(8, 'Who is Dick Van Dyke?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(9, 'Who is Fred Flintstone?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(10, 'Who is Mr. Rogers?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(11, 'Who is George Washington?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(12, 'Who is Mr. Clean?', 'pic_guess', NULL, 0, NULL, NULL, 4),
+(13, 'Who is Tim Allen?', 'pic_guess', NULL, 0, NULL, NULL, 4);
 
 INSERT INTO QuizAnswers
 ( Ans_Num, Ans_Text, Ans_Img, Ans_Special, Is_Correct, Quiz_Ques_Id )
@@ -235,10 +246,59 @@ VALUES
 (1, 'Defense Against the Dark Arts', NULL, null, FALSE, 17),
 (2, 'Divination', NULL, null, FALSE, 17),
 (3, 'Potions', NULL, null, FALSE, 17),
-(4, 'Care of Magical Creatures', NULL, null, TRUE, 17);
-
-
-
+(4, 'Care of Magical Creatures', NULL, null, TRUE, 17),
+(1, NULL, 'https://vignette.wikia.nocookie.net/rickandmorty/images/f/f1/Jerry_Smith.png/revision/latest?cb=20160923151111', NULL, FALSE, 18),
+(2, NULL, 'https://vignette.wikia.nocookie.net/rickandmorty/images/6/6c/MeeseeksHQ.png/revision/latest?cb=20150930232412', NULL, FALSE, 18),
+(3, NULL, 'https://upload.wikimedia.org/wikipedia/en/a/a6/Rick_Sanchez.png', NULL, TRUE, 18),
+(4, NULL, 'https://vignette.wikia.nocookie.net/rickandmorty/images/4/41/Morty_Smith.jpg/revision/latest?cb=20170217193441', NULL, FALSE, 18),
+(1, NULL, 'https://cdn.wealthygorilla.com/wp-content/uploads/2016/07/78-Famous-Mahatma-Gandhi-Quotes.jpg', NULL, TRUE, 19),
+(2, NULL, 'https://www.dalailama.com/assets/pages/%C2%A9ManuelBauer_AgenturFocus_M_4272_15Anp.jpg', NULL, FALSE, 19),
+(3, NULL, 'https://mrmumblog.files.wordpress.com/2015/09/hbo-curbyourenthusiasm-header.jpg', NULL, FALSE, 19),
+(4, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIoP7zD5cSUZ6VUfbLWaV4tJHVUtInQTAItYCht-8lMXa4JQUHTg', NULL, FALSE, 19),
+(1, NULL, 'http://www2.pictures.zimbio.com/mp/_43XZq9cz9fl.jpg', NULL, FALSE, 20),
+(2, NULL, 'https://vignette.wikia.nocookie.net/fantendo/images/a/a3/Betty_boop.png/revision/latest?cb=20140501225247', NULL, TRUE, 20),
+(3, NULL, 'https://media.glamour.com/photos/5a3131f5968b09301d8d1d20/master/w_644,c_limit/betty-riverdale-cw-4-1.jpg', NULL, FALSE, 20),
+(4, NULL, 'https://www.bettycrocker.com/-/media/legacy/Images/Betty-Crocker/Menus-Holidays-Parties/MHPLibrary/Parties-and-Get-Togethers/Vintage-Betty/The-Betty-Crocker-Portraits/The-Betty-Crocker-Portraits_06.jpg', NULL, FALSE, 20),
+(1, NULL, 'http://horror.wpengine.netdna-cdn.com/wp-content/uploads/2017/12/mm-1024x576.jpg', NULL, TRUE, 21),
+(2, NULL, 'https://www.screengeek.net/wp-content/uploads/2017/05/jason.jpg', NULL, FALSE, 21),
+(3, NULL, 'http://bloody-disgusting.com/wp-content/uploads/2017/09/bacon1.jpg', NULL, FALSE, 21),
+(4, NULL, 'http://bloody-disgusting.com/wp-content/uploads/2017/08/cult-of-chucky-.jpg', NULL, FALSE, 21),
+(1, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Warren_Beatty_as_Dick_Tracy.jpg/200px-Warren_Beatty_as_Dick_Tracy.jpg', NULL, FALSE, 22),
+(2, NULL, 'https://i.pinimg.com/originals/3e/88/b3/3e88b3f0d814cad6c1a347cbb9be4d24.jpg', NULL, FALSE, 22),
+(3, NULL, 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTBmYmNhNzEtYmI4Zi00Y2ExLTgyYTEtNDI0Mjg0MDgxNzMwXkEyXkFqcGdeQXVyNzU1NzE3NTg@._V1_CR0,45,480,270_AL_UX477_CR0,0,477,268_AL_.jpg', NULL, TRUE, 22),
+(4, NULL, 'http://images.indianexpress.com/2017/09/gott_fb_759.jpg?w=610', NULL, FALSE, 22),
+(1, NULL, 'https://st.depositphotos.com/1814084/1413/i/950/depositphotos_14133064-stock-photo-adam-sandler-at-adam-sandlers.jpg', NULL, TRUE, 23),
+(2, NULL, 'https://upload.wikimedia.org/wikipedia/en/9/92/Chris_Farley.jpg', NULL, FALSE, 23),
+(3, NULL, 'https://pixel.nymag.com/imgs/daily/vulture/2015/11/13/13-david-spade.w190.h190.2x.jpg', NULL, FALSE, 23),
+(4, NULL, 'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTE4MDAzNDEwNzc3ODM1MDIy/will-ferrell-9542601-1-402.jpg', NULL, FALSE, 23),
+(1, NULL, 'https://vignette.wikia.nocookie.net/popeye/images/6/6c/J._Wellington_Wimpy.png/revision/latest?cb=20141106195705', NULL, FALSE, 24),
+(2, NULL, 'https://vignette.wikia.nocookie.net/popeye/images/a/ad/Mr_Bluto.png/revision/latest?cb=20141228234728', NULL, FALSE, 24),
+(3, NULL, 'https://vignette.wikia.nocookie.net/popeye/images/3/39/Picture_2.png/revision/latest?cb=20150104215207', NULL, TRUE, 24),
+(4, NULL, 'https://vignette.wikia.nocookie.net/popeye/images/6/60/Swee%27Pea.png/revision/latest?cb=20141106195518', NULL, FALSE, 24),
+(1, NULL, 'https://m.media-amazon.com/images/M/MV5BMTU5NjA4MDU0MV5BMl5BanBnXkFtZTYwMDI0MzQ2._V1_UX214_CR0,0,214,317_AL_.jpg', NULL, FALSE, 25),
+(2, NULL, 'http://media4.s-nbcnews.com/j/MSNBC/Components/Slideshows/_production/ss-130123-Dick-Van-Dyke/ss-130122-Dick-Van-Dyke-1960.today-ss-slide-desktop.jpg', NULL, TRUE, 25),
+(3, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Andy_Griffith_Andy_Griffith_Show_1960.jpg/220px-Andy_Griffith_Andy_Griffith_Show_1960.jpg', NULL, FALSE, 25),
+(4, NULL, 'https://i.pinimg.com/originals/99/cc/62/99cc620f12706090bf3c317159029bf3.jpg', NULL, FALSE, 25),
+(1, NULL, 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ad/Fred_Flintstone.png/165px-Fred_Flintstone.png', NULL, TRUE, 26),
+(2, NULL, 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Barney_Rubble.png/160px-Barney_Rubble.png', NULL, FALSE, 26),
+(3, NULL, 'https://upload.wikimedia.org/wikipedia/en/6/67/George_Jetson.png', NULL, FALSE, 26),
+(4, NULL, 'https://vignette.wikia.nocookie.net/thejetsons/images/8/89/Elroy_Jetson.png/revision/latest?cb=20120306200916', NULL, FALSE, 26),
+(1, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Don_Knotts_1975.JPG/220px-Don_Knotts_1975.JPG', NULL, FALSE, 27),
+(2, NULL, 'http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/mr-magoo-mr-magoo-8.1.jpg', NULL, FALSE, 27),
+(3, NULL, 'http://www.neighborhoodarchive.com/images/mrn/characters/mr_mcfeely/1765.jpg', NULL, FALSE, 27),
+(4, NULL, 'http://cdn.kidscreen.com/wp/wp-content/uploads/2018/02/Fred-Rogers.jpg?ebbec3', NULL, TRUE, 27),
+(1, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/JamesMadison.jpg/220px-JamesMadison.jpg', NULL, FALSE, 28),
+(2, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Benjamin_Franklin_by_Joseph_Duplessis_1778.jpg/220px-Benjamin_Franklin_by_Joseph_Duplessis_1778.jpg', NULL, FALSE, 28),
+(3, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29.jpg/1200px-Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29.jpg', NULL, FALSE, 28),
+(4, NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Stuart-george-washington-constable-1797.jpg/170px-Stuart-george-washington-constable-1797.jpg', NULL, TRUE, 28),
+(1, NULL, 'https://static8.depositphotos.com/1281717/827/i/950/depositphotos_8276107-stock-photo-brawny-man-in-cap-in.jpg', NULL, FALSE, 29),
+(2, NULL, 'https://static.comicvine.com/uploads/scale_super/11111/111114304/5422628-fb_brawny_movember.jpg', NULL, FALSE, 29),
+(3, NULL, 'https://upload.wikimedia.org/wikipedia/en/thumb/7/73/Mr._Clean_logo.png/220px-Mr._Clean_logo.png', NULL, TRUE, 29),
+(4, NULL, 'http://rs853.pbsrc.com/albums/ab95/CarsonRandProject/mark-henry.jpg~c200', NULL, FALSE, 29),
+(1, NULL, 'http://thebigsmoke.com.au/wp-content/uploads/download-5.jpeg', NULL, FALSE, 30),
+(2, NULL, 'https://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/1/70/170f7d56-b44f-11e7-afb7-17e7f768bcb4/59e7ce0625fd3.image.png', NULL, TRUE, 30),
+(3, NULL, 'https://i.imgflip.com/p5aei.jpg', NULL, FALSE, 30),
+(4, NULL, 'http://ethnicelebs.com/wp-content/uploads/2014/06/Dana-Carvey.jpg', NULL, FALSE, 30);
 
 
 

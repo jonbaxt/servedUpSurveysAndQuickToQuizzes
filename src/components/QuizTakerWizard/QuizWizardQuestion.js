@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import QuestionBuild from './QuestionBuild';
@@ -42,9 +42,9 @@ class QuizWizardQuestion extends Component {
         // this.setState({ countOfQuestions: quesCount })
         return (
             <div className={css(quesStyles.quizWizQuesMain, quesStyles.pageStart)} >
-                <div className={css(quesStyles.buttonDiv)} >
+                {/* <div className={css(quesStyles.buttonDiv)} >
                     <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/quiz/${this.props.match.params.quizId}/start`} >Restart</Link>
-                </div>
+                </div> */}
                 <QuestionBuild sendTable={this.props.megaQuizTable} sendParams={this.props.match.params} />
                 <div className='' >
 

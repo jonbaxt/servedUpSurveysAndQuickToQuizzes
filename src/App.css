@@ -2,17 +2,6 @@
 
 .App {
   font-family: 'Oswald', sans-serif;
-  /* background: lightblue; */
-  
-  /* background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF);
-  color: #00ccff; */
- 
-
-  /* animationIterationCount: 'infinite', */
-  /* animation-duration: initial; */
-  /* transition: eas */
-  /* animationDuration: '3s, 1500ms', */
-  /* width: 100%; */
 }
 .NavArea{
   position: fixed;
@@ -20,7 +9,6 @@
 }
 
 .RouteArea{
-  /* margin-top: 50px; */
   padding-top: 40px;
   transition: 1s all ease;
 }
@@ -62,7 +50,6 @@ h6{
   }
   
   .RouteArea{
-    /* margin-top: 50px; */
     padding-top: 60px;
     transition: 1s all ease;
   }
@@ -74,7 +61,6 @@ h6{
   }
   
   .RouteArea{
-    /* margin-top: 50px; */
     padding-top: 70px;
     transition: 1s all ease;
   }
@@ -86,7 +72,6 @@ h6{
   }
   
   .RouteArea{
-    /* margin-top: 50px; */
     padding-top: 80px;
     transition: 1s all ease;
   }

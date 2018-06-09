@@ -17,11 +17,14 @@ import SurveyWizardStart from './components/SurveyTakerWizard/SurveyWizardStart'
 import SurveyWizardQuestion from './components/SurveyTakerWizard/SurveyWizardQuestion';
 import SurveyWizardEnd from './components/SurveyTakerWizard/SurveyWizardEnd';
 
-import QuizDoneResults from './components/Results/QuizView/QuizDoneResults/QuizDoneResults';
+import AllViews from './components/Results/AllViews/AllViews';
 import AllQuizResults from './components/Results/QuizView/AllQuizResults/AllQuizResults';
+import AllSurveyResults from './components/Results/SurveyView/AllSurveyResults/AllSurveyResults';
+import QuizDoneResults from './components/Results/QuizView/QuizDoneResults/QuizDoneResults';
 
 import SurveyQuizCreator from './components/SurveyQuizCreator/SurveyQuizCreator';
 import QuizCreateStart from './components/SurveyQuizCreator/QuizCreatorWizard/QuizCreateStart';
+import QuizCreateQuestionAnswerBuilder from './components/SurveyQuizCreator/QuizCreatorWizard/QuizCreateQuestionAnswerBuilder';
 import SurveyCreateStart from './components/SurveyQuizCreator/SurveyCreatorWizard/SurveyCreateStart';
 
 export default (
@@ -30,7 +33,7 @@ export default (
         <Route path='/' component={Login} exact />
         <Route path='/Dashboard/' component={Dashboard} />
         <Route path='/Dashboard/:currentUserId' component={Dashboard} />
-        <Route path='/Dashboard/:currentUserId/AdminView' component={AdminDashboard} />
+        <Route path='/Admin/Dashboard/:currentUserId/AdminView' component={AdminDashboard} />
 
         {/* SurveyManagement Links */}
         <Route path='/manage/userssurveys/:currentUserId' component={UserSurveyQuizManagement} />
@@ -49,11 +52,15 @@ export default (
         
         {/* Results Routes */}
         <Route path='/results/afterQuizTake/byQuizNumber/:currentUserId/quiz/:quizId' component={QuizDoneResults} />
+        <Route path='/mainresults/resultsnavredirect/:currentUserId/home' component={AllViews} />
         <Route path='/results/quiz/allquizresults' component={AllQuizResults} />
+        <Route path='/results/survey/allsurveyresults' component={AllSurveyResults} />
+        
 
         {/* Creation Routes */}
         <Route path='/createnew/:currentUserId/start' component={SurveyQuizCreator} />
         <Route path='/createnew/:currentUserId/quiz/quizsetup' component={QuizCreateStart} />
+        <Route path='/createnew/:currentUserId/quiz/quizquestionssetup' component={QuizCreateQuestionAnswerBuilder} />
         <Route path='/createnew/:currentUserId/survey/surveysetup' component={SurveyCreateStart} />
 
 

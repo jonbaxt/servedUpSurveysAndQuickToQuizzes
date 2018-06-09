@@ -84,7 +84,7 @@ function CreateTotalChart(quizResultsUltraJoinedTable) {
         ]
     }
     let chartingTotal = {
-        labels: ['#1', '#2', '#3', '#4', '#5', '#6', '#7', '#9', '#10'],
+        labels: ['Ques #1', 'Ques #2', 'Ques #3', 'Ques #4', 'Ques #5', 'Ques #6', 'Ques #7', 'Ques #9', 'Ques #10'],
         datasets: [
             {
                 label: 'Total Results Correct By Question',
@@ -99,7 +99,7 @@ function CreateTotalChart(quizResultsUltraJoinedTable) {
         ]
     }
     let chartingTotalQuiz2 = {
-        labels: ['#1', '#2'],
+        labels: ['Ques #1', 'Ques #2'],
         datasets: [
             {
                 label: 'Total Results Correct By Question',
@@ -114,7 +114,7 @@ function CreateTotalChart(quizResultsUltraJoinedTable) {
         ]
     }
     let chartingTotalQuiz3 = {
-        labels: ['#1', '#2', '#3', '#4'],
+        labels: ['Ques #1', 'Ques #2', 'Ques #3', 'Ques #4'],
         datasets: [
             {
                 label: 'Total Results Correct By Question',
@@ -156,20 +156,20 @@ function CreateTotalChart(quizResultsUltraJoinedTable) {
         <div>
             <h1 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Quiz: {quiz1Title}</h1>
             <p className={css(Styles.tabletSizeFontSmall, Styles.smallLaptopSizeFontSmall)}>How many have taken quiz: {totalSurveyTakersQuiz1}</p>
-            <Pie className={css(onClickStyles.pieClick)} data={chartingTotal} />
             <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Questions</h3>
             {mapQuiz1Questions}
+            <Pie className={css(onClickStyles.pieClick)} data={chartingTotal} />
             {/* <Bar className={css(onClickStyles.barClick)} data={chartingTotal} /> */}
             <h1  className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)} >Quiz: {quiz2Title}</h1>
             <p className={css(Styles.tabletSizeFontSmall, Styles.smallLaptopSizeFontSmall)}>How many have taken quiz: {totalSurveyTakersQuiz2}</p>
-            <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz2} />
             <h3  className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Questions</h3>
             {mapQuiz2Questions}
+            <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz2} />
             <h1  className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Quiz: {quiz3Title}</h1>
             <p className={css(Styles.tabletSizeFontSmall, Styles.smallLaptopSizeFontSmall)}>How many have taken quiz: {totalSurveyTakersQuiz3}</p>
-            <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz3} />
             <h3  className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Questions</h3>
             {mapQuiz3Questions}
+            <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz3} />
             
             {/* <button onClick={() => console.log('Clicked Pie')}>Pie</button>
             <button onClick={() => console.log('Clicked Bar')}>Bar</button>

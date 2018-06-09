@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
 import SurveyWizardQuestionBuild from './SurveyWizardQuestionBuild';
@@ -40,23 +40,23 @@ class SurveyWizardQuestion extends Component {
         // console.log(this.props.user)
         // console.log(this.props.match.params)
         // console.log(this.props.megaQuizTable)     
-        let nextRoute = Number(this.props.match.params.quesId) + 1;
+        // let nextRoute = Number(this.props.match.params.quesId) + 1;
         // let lastRoute = Number(this.props.match.params.quesId) - 1;
              //FIXME:
-        let quesNumArray = this.props.megaSurveyTable.filter((arrVal) => arrVal.survey_id === Number(this.props.match.params.surveyId)).map((el) => el.ques_num).filter((el, ind, orig) => el !== orig[ind - 1])
-        let quesCount = Math.max(...quesNumArray)
+        // let quesNumArray = this.props.megaSurveyTable.filter((arrVal) => arrVal.survey_id === Number(this.props.match.params.surveyId)).map((el) => el.ques_num).filter((el, ind, orig) => el !== orig[ind - 1])
+        // let quesCount = Math.max(...quesNumArray)
         // console.log(quesCount)
         // this.setState({ countOfQuestions: quesCount })
         return (
             <div className={css(quesStyles.quizWizQuesMain, quesStyles.pageStart)} >
                 
-                <div className={css(quesStyles.buttonDiv)} >
-                    <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/start`} >Restart</Link>
-                <Link to={quesCount <= this.props.match.params.quesId ?`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/complete`: `/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/${nextRoute}`}
+                {/* <div className={css(quesStyles.buttonDiv)} > */}
+                    {/* <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/start`} >Restart</Link> */}
+                {/* <Link to={quesCount <= this.props.match.params.quesId ?`/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/complete`: `/${this.props.match.params.currentUserId}/survey/${this.props.match.params.surveyId}/${nextRoute}`}
                     className={css(quesStyles.bottomButtons)}
                     style={{ textDecoration: 'none' }}
-                >Submit Answer</Link>
-                </div>
+                >Submit Answer</Link> */}
+                {/* </div> */}
                 <div className='' >
                 <SurveyWizardQuestionBuild sendTable={this.props.megaSurveyTable} sendParams={this.props.match.params} />
                 </div>

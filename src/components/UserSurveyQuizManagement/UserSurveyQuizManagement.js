@@ -49,10 +49,7 @@ class UserSurveyQuizManagement extends Component {
         )
     }
 }
-const initialOpacityKeyframes = {
-    'from': { opacity: 0 },
-    'to': { opacity: 1 }
-}
+const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
     pageStart: {
         animationName: initialOpacityKeyframes,
@@ -75,33 +72,6 @@ const Styles = StyleSheet.create({
     }
 
 })
-
-/*
-h1{
-  font-size: 40px;
-  font-weight: bolder;
-}
-h2{
-  font-size: 30px;
-  font-weight: bolder;
-}
-h3{
-  font-size: 20px;
-  font-weight: bolder;
-}
-h4{
-  font-size: 10px;
-  font-weight: bolder;
-}
-h5{
-  font-size: 5px;
-  font-weight: bolder;
-}
-h6{
-  font-size: 3px;
-  font-weight: bolder;
-}
-*/
 
 let mapStateToProps = (state) => {
     return {

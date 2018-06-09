@@ -87,6 +87,7 @@ app.get('/auth/me', (req, res) => {
 //User Calls
 app.get('/api/findSessionUser/:id', controller.findTheSurveyUser);
 app.get( '/api/getSurveyUsers', controller.getSurveyUsersTable);
+app.get('/api/getAdmins', controller.getSurveyAdmins);
 
 //Quiz Calls
 app.get( '/api/quizmain', controller.fetchAllQuizzesList);

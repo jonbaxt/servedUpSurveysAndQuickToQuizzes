@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { css, StyleSheet } from 'aphrodite';
-// import { css, StyleSheet } from 'aphrodite';
 
 export default function UserSurveyList(props){
     let userStuff = props.getUser;
     let surveyListTable = props.getSurveys;
-    // console.log(userStuff)
-    // console.log(surveyListTable)
 
     function createUsersSurveys() {
         let userSurveys;
@@ -18,24 +15,21 @@ export default function UserSurveyList(props){
                     <Link className={css(Styles.linkFormat)} to={`/manage/userssurveys/${userStuff.id}/${el.survey_id}/EditDelete`} >
                     <div >
                         <br/><h3 className={css(Styles.textTitle, Styles.texCen)}>{el.title}</h3><br />
-                        {/* <h5 className={css(Styles.textPar)}>Your Description:<br /> {el.description}</h5><br /> */}
                         <h6 className={css(Styles.textPar, Styles.underLiner)}>Approved by Admin</h6><h6 className={css(Styles.textPar)}>{el.site_approval ? 'Approved for public' : 'Pending Approval'}</h6><br />
-                        {/* <h5 className={css(Styles.textPar)}>Date Created: {el.created_on}</h5>
-                        <h5 className={css(Styles.textPar)}>Last Updated: {el.updated_on}</h5> */}
                         <img className={css(Styles.picResize)} src={el.start_img} alt='' /><br/>
                     </div>
                     </Link>
+                    <br /><br />
                 </div>
             )
         });
     } else{
         userSurveys = ( <div className={css(Styles.tempBorder, Styles.quizSurveyBoxes, Styles.fuzzyBeforeHover, Styles.notFuzzy)}>
-        <Link className={css(Styles.linkFormat)} to={`/quizcreator/usersquizzes/${userStuff.id}/createnew`} >
+        <Link className={css(Styles.linkFormat)} to={`/createnew/${userStuff.id}/survey/surveysetup`} >
         <h3 className={css(Styles.textTitle, Styles.texCen)}>You haven't made a Survey. Create one!</h3>
-        </Link>
+        </Link> <br /><br />
         </div> )
     }
-        // console.log(userSurveys)
         return (
             <div>
                 <br />
@@ -43,15 +37,12 @@ export default function UserSurveyList(props){
             </div>
         )
     }
-
     return (
         <div className={css(Styles.mainQuizSurveyBox)}>
             {createUsersSurveys()}
         </div>
     )
-
 }
-
 const Styles = StyleSheet.create({
     tempBorder: {
         boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.2)',

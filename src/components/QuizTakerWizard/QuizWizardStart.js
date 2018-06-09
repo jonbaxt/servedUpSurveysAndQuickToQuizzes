@@ -3,7 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 // import NavMenu from '../NavMenu/NavMenu';
 import './QuizWizardStart.css'
 import { setCurrentQuizInfo, getMegaQuizTable, setCurrentPathname } from '../../ducks/reducer';
@@ -37,14 +38,13 @@ class QuizWizardStart extends Component {
             <div className={`quizWizStartMain ${css(Styles.pageStart)}`}>
                 {/* <NavMenu /> */}
                 <div className='quizStartBody'>
-                    <h2>Quick To Quizzes</h2>
-                    <br />
-                    <h3>{this.props.currentQuizInfo.title}</h3>
+                    <h2><FontAwesomeIcon icon={faRoad}/> Quick To Quizzes</h2>
                     <br />
                     <img src={this.props.currentQuizInfo.start_img} alt='' />
                     <br />
-                    <p>Quiz Description:<br /> 
+                    <h3>{this.props.currentQuizInfo.title}</h3>
                     <br />
+                    <p>Quiz Description:<br /> 
                     {this.props.currentQuizInfo.description} 
                     <br />
                     <br /> This quiz is {timedString}</p>

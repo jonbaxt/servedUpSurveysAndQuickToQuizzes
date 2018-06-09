@@ -17,27 +17,25 @@ export default function UserQuizList(props) {
         userQuizzes = quizListTable.filter(el => el.quiz_owner_id === userStuff.id).map((el, ind, origAr) => {
                 return (
                     <div className={css(Styles.tempBorder, Styles.tempBorderWide, Styles.quizSurveyBoxes)} key={el.quiz_id}>
-                    {/*<div className={css(Styles.tempBorder, Styles.quizSurveyBoxes, Styles.fuzzyBeforeHover, Styles.notFuzzy)} key={el.quiz_id}>*/}
+
                         <Link className={css(Styles.linkFormat)} to={`/manage/usersquizzes/${userStuff.id}/${el.quiz_id}/EditDelete`} >
                         <div >
                             <br/><h3 className={css(Styles.textTitle, Styles.texCen)}>{el.title}</h3><br />
-                            {/* <h5 className={css(Styles.textPar)}>Your Description: {el.description}</h5><br /> */}
                             <h6 className={css(Styles.textPar, Styles.underLiner)}>Approved by Admin</h6><h6 className={css(Styles.textPar)}>{el.site_approval ? 'Approved for public' : 'Pending Approval'}</h6><br />
-                            {/* <h5 className={css(Styles.textPar)}>Date Created: {el.created_on}</h5>
-                            <h5 className={css(Styles.textPar)}>Last Updated: {el.updated_on}</h5> */}
-
 
                             <img className={css(Styles.picResize)} src={el.start_img} alt='' /><br/>
                         </div>
                         </Link>
+                        <br /><br />
                     </div>
                 )
         });
     } else {
         userQuizzes = ( <div className={css(Styles.tempBorder, Styles.quizSurveyBoxes, Styles.fuzzyBeforeHover, Styles.notFuzzy)}>
-        <Link className={css(Styles.linkFormat)} to={`/quizcreator/usersquizzes/${userStuff.id}/createnew`} >
+        <Link className={css(Styles.linkFormat)} to={`/createnew/${userStuff.id}/quiz/quizsetup`} >
         <h3 className={css(Styles.textTitle, Styles.texCen)}>You haven't made a Quiz. Create one!</h3>
         </Link>
+        <br /><br />
         </div> )
     }
         // console.log(userQuizzes)

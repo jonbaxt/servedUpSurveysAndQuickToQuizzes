@@ -1,6 +1,5 @@
 .surveyWizStartMain{
     display: flex;
-    height: 800px;
     margin: 0 auto;
 }
 
@@ -10,7 +9,6 @@
     flex-direction: column;
     margin: 0 auto;
     width: 290px;
-    height: 500px;
     text-align: center;
     box-shadow: 2px 6px 4px rgba(0, 204, 255, 0.2);
     border-radius: 2%;
@@ -40,12 +38,8 @@
 }
 
 @media (min-width: 490px){
-    .surveyWizStartMain{
-        height: 900px;
-    }
     .surveyStartBody{
         width: 480px;
-        height: 700px;
     }
     .surveyStartBody>h2{
         font-size: 40px;
@@ -66,12 +60,8 @@
     }
 }
 @media (min-width: 770px){
-    .surveyWizStartMain{
-        height: 1100px;
-    }
     .surveyStartBody{
         width: 760px;
-        height: 900px;
     }
     .surveyStartBody>h2{
         font-size: 50px;
@@ -92,12 +82,8 @@
     }
 }
 @media (min-width: 1440px){
-    .surveyWizStartMain{
-        height: 1300px;
-    }
     .surveyStartBody{
         width: 1390px;
-        height: 1100px;
     }
     .surveyStartBody>h2{
         font-size: 60px;

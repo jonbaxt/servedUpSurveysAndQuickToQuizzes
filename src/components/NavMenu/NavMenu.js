@@ -50,6 +50,19 @@ class NavMenu extends Component {
                 return(<div></div>)
             }
         }
+
+        let adminPrivilegeLink = () => {
+            let currentAdmin = ''
+            if( this.props.surveyAdminsTable.length !== 0 ){
+            currentAdmin = this.props.surveyAdminsTable.filter(el => el.survey_user_id === this.props.user.id)           
+            } 
+            if(currentAdmin !== ''){
+                return(<div><Link to={`/Admin/Dashboard/${this.props.user.id}/AdminView`}>{showImage()}</Link></div> )
+            }else{
+                return(<div>{showImage()}</div>)
+            }
+        }
+
         return (
             <header className={this.changeVisibility()}>
             {/* <header className={css(Styles.topNav, Styles.trans)}> */}
@@ -57,7 +70,7 @@ class NavMenu extends Component {
                     className={css(Styles.topArea)}
                 >
                     <div className={css(Styles.flR)}>
-                        {showImage()}
+                        {adminPrivilegeLink()}
                         <Link className={css(Styles.noLine)} to={`/Dashboard/${this.props.user.id}`} >
                         {/* <Link className={css(Styles.noLine)} to={`/Dashboard`} > */}
                             <h1 className={css(Styles.hTag, Styles.hTagTablet, Styles.hTagLaptop, Styles.hTagBiggest)}>
@@ -90,7 +103,9 @@ class NavMenu extends Component {
                                 <span>Create Survey/Quiz</span>
                             </span>
                         </Link>
-                        <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/results/quiz/allquizresults' >
+                        <Link 
+                        className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} 
+                        to={`/mainresults/resultsnavredirect/${this.props.user.id}/home`} >
                             <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
                                 console.log('Clicked Results')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faChartArea} />
@@ -324,6 +339,7 @@ h6{
 let mapStateToProps = (state) => {
     return {
         user: state.user,
+        surveyAdminsTable: state.surveyAdminsTable,
         pathnameCurrent: state.pathnameCurrent,
     }
 }

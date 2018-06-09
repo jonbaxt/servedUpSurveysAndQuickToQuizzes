@@ -3,7 +3,8 @@ import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
 // import NavMenu from '../NavMenu/NavMenu';
 import './SurveyWizardStart.css'
 import { setCurrentSurveyInfo, getMegaSurveyTable } from '../../ducks/reducer';
@@ -30,14 +31,13 @@ class SurveyWizardStart extends Component {
             <div className={`surveyWizStartMain ${css(Styles.pageStart)}`}>
                 {/* <NavMenu /> */}
                 <div className='surveyStartBody'>
-                    <h2>Served Up Surveys</h2>
-                    <br />
-                    <h3>{this.props.currentSurveyInfo.title}</h3>
+                    <h2><FontAwesomeIcon icon={faCoffee} />Served Up Surveys</h2>
                     <br />
                     <img src={this.props.currentSurveyInfo.start_img} alt='' />
                     <br />
-                    <p>Survey Description: <br />
+                    <h3>{this.props.currentSurveyInfo.title}</h3>
                     <br />
+                    <p>Survey Description: <br />
                     {this.props.currentSurveyInfo.description} 
                     <br />
                     <br /> This survey is {anonymous}</p>

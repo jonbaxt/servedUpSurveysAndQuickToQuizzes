@@ -89,20 +89,45 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
                 </span>
             )
         })
+    } else if (qT === 'pic_guess') {
+        mapAnswersToScreen = possibleAnswers.map((element, index) => {
+            //TODO: 
+            //TODO: 
+            //TODO: Need to fix the Taken count to increment properly.
+            //TODO: 
+            //TODO: 
+            //TODO: 
+            const compiledAnswer = {
+                Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: 1, Survey_Taker_Id: nestedRoutes.currentUserId
+            }
+            return (
+                <Link to={
+                    quesCount <= nestedRoutes.quesId ?
+                        `/quizDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.quizId}/${nestedRoutes.quesId}/complete`
+                        : `/${nestedRoutes.currentUserId}/quiz/${nestedRoutes.quizId}/${nextRoute}`
+                }
+                    style={{ textDecoration: 'none' }}
+                    key={element.ans_id}>
+                    <span className={css(styles.answerBoxesPicGuess, styles.hoverButton, styles.fuzzIn)} onClick={() => {
+                        propsObject.insertNewQuizAnswerIntoResultsArray(compiledAnswer)
+                    }} >
+                        <img className={css(styles.imageInAnswerPicGuess, styles.imageInAnswerTabletPicGuess, styles.imageInAnswerLaptopPicGuess, styles.imageInAnswerBiggestPicGuess)} src={element.ans_img} alt='' />)
+                    </span>
+                </Link>
+            )
+        })
     }
 
     //FIXME:
     return (
-        <div className={css(styles.quizBodyContainer, styles.pageStart
-            // , styles.testBorder
-        )}>
+        <div className={css(styles.quizBodyContainer, styles.pageStart)}>
             <div className={css(styles.fuzzIn)} >
-            <br/><h2 className={css(styles.h2Normal, styles.h2Tablet, styles.h2Laptop, styles.h2Biggest)}>{quizTitle}</h2><br/>
-                <h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`Question #${questionNumber}`}</h3><br/>
+                <br /><h2 className={css(styles.h2Normal, styles.h2Tablet, styles.h2Laptop, styles.h2Biggest)}>{quizTitle}</h2><br />
+                <h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`Question #${questionNumber}`}</h3><br />
                 {questionImage ? <img className={css(styles.imageResize, styles.imageResizeTablet, styles.imageResizeLaptop, styles.imageResizeBiggest)} src={questionImage} alt='' /> : null}
             </div>
             <div className={css(styles.fuzzIn)} >
-                <br/><h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`${questionText}`}</h3><br/>
+                <br /><h3 className={css(styles.h3Normal, styles.h3Tablet, styles.h3Laptop, styles.h3Biggest)}>{`${questionText}`}</h3><br />
             </div>
             <div className={css(styles.answerArea, styles.answerAreaTablet, styles.answerAreaLaptop, styles.answerAreaBiggest)}>
                 {mapAnswersToScreen}
@@ -113,9 +138,7 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
 function decideImageAnswerArea(AnswerImage) {
     if (AnswerImage) {
         return (<img className={css(styles.imageInAnswer, styles.imageInAnswerTablet, styles.imageInAnswerLaptop, styles.imageInAnswerBiggest)} src={AnswerImage} alt='' />)
-    } else {
-        return null;
-    }
+    } else { return null; }
 }
 const translateKeyframes = {
     '0%': {
@@ -147,70 +170,15 @@ const translateKeyframes = {
         transform: 'translate(150px)'
     }
 };
-const opacityKeyframes = {
-    '0%': {
-        opacity: 0
-    },
-    '5%': {
-        opacity: 1
+const opacityKeyframes = { '0%': { opacity: 0 }, '5%': { opacity: 1 }, '95%': { opacity: 1 }, '100%': { opacity: 0 } };
+const initialOpacityKeyframes = { 'from': { opacity: 0, }, 'to': { opacity: 1, } }
+const initialTranslateKeyframes = { '0%': { transform: 'translateY(100px)' }, '100%': { transform: 'translateY(0px)' } }
+const outOpacityKeyframes = { 'from': { opacity: 1, }, 'to': { opacity: 0, } }
+const outTranslateKeyframes = { '0%': { transform: 'translateY(0px)' }, '100%': { transform: 'translateY(100px)' } }
 
-    },
-    // '50%': {
-
-    // },
-    '95%': {
-        opacity: 1
-    },
-    '100%': {
-        opacity: 0
-    }
-};
-
-const initialOpacityKeyframes = {
-    'from': {
-        opacity: 0,
-    },
-
-    'to': {
-        opacity: 1,
-    }
-}
-const initialTranslateKeyframes = {
-    '0%': {
-        transform: 'translateY(100px)'
-    },
-    '100%': {
-        transform: 'translateY(0px)'
-    }
-}
-const outOpacityKeyframes = {
-    'from': {
-        opacity: 1,
-    },
-
-    'to': {
-        opacity: 0,
-    }
-}
-const outTranslateKeyframes = {
-    '0%': {
-        transform: 'translateY(0px)'
-    },
-    '100%': {
-        transform: 'translateY(100px)'
-    }
-}
 const styles = StyleSheet.create({
-    pageStart: {
-        animationName: initialOpacityKeyframes,
-        animationDuration: '1s',
-        transition: 'ease all',
-        // animationTimingFunction: 'ease-in',
-        animationIterationCount: 'initial'
-    },
-    testBorder: {
-        border: '1px solid black'
-    },
+    pageStart: { animationName: initialOpacityKeyframes, animationDuration: '1s', transition: 'ease all', animationIterationCount: 'initial' },
+    testBorder: { border: '1px solid black' },
     quizBodyContainer: {
         transition: '1s all ease',
         display: 'flex',
@@ -253,6 +221,14 @@ const styles = StyleSheet.create({
             flexWrap: 'wrap',
             transition: '1s all ease',
         },
+    },
+    answerBoxesPicGuess: {
+        margin: '2px',
+        display: 'flex',
+        alignItems: 'center',
+        transition: '1s all ease',
+        borderRadius: '2%',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.2)',
     },
     answerBoxes: {
         margin: '2px',
@@ -299,15 +275,17 @@ const styles = StyleSheet.create({
     answerBoxTextBiggest: { '@media (min-width: 1400px)': { marginLeft: '8px', fontSize: '28px', }, },
     bottomButtons: { background: 'lightgreen', color: 'white', textDecoration: 'none' },
     imageResize: { width: '300px', transition: '1s all ease', },
-    imageResizeTablet: { '@media (min-width: 490px)': { width: '400px', transition: '1s all ease' }},
-    imageResizeLaptop: { '@media (min-width: 700px)': { width: '500px', transition: '1s all ease' }},
-    imageResizeBiggest: { '@media (min-width: 1400px)': { width: '600px', transition: '1s all ease' }},
+    imageResizeTablet: { '@media (min-width: 490px)': { width: '400px', transition: '1s all ease' } },
+    imageResizeLaptop: { '@media (min-width: 700px)': { width: '500px', transition: '1s all ease' } },
+    imageResizeBiggest: { '@media (min-width: 1400px)': { width: '600px', transition: '1s all ease' } },
     imageInAnswer: { width: '50px', transition: '1s all ease' },
-    imageInAnswerTablet: { '@media (min-width: 490px)': { width: '60px', transition: '1s all ease' }},
-    imageInAnswerLaptop: { '@media (min-width: 700px)': { width: '70px', transition: '1s all ease' }},
-    imageInAnswerBiggest: { '@media (min-width: 1400px)': { width: '80px', transition: '1s all ease' }},
-    red: { backgroundColor: 'red' },
-    blue: { backgroundColor: 'blue' },
+    imageInAnswerTablet: { '@media (min-width: 490px)': { width: '60px', transition: '1s all ease' } },
+    imageInAnswerLaptop: { '@media (min-width: 700px)': { width: '70px', transition: '1s all ease' } },
+    imageInAnswerBiggest: { '@media (min-width: 1400px)': { width: '80px', transition: '1s all ease' } },
+    imageInAnswerPicGuess: { width: '150px', transition: '1s all ease' },
+    imageInAnswerTabletPicGuess: { '@media (min-width: 490px)': { width: '200px', transition: '1s all ease' } },
+    imageInAnswerLaptopPicGuess: { '@media (min-width: 700px)': { width: '300px', transition: '1s all ease' } },
+    imageInAnswerBiggestPicGuess: { '@media (min-width: 1400px)': { width: '500px', transition: '1s all ease' } },
     hoverButton: {
         ':hover': {
             color: '#00ccff',
@@ -334,13 +312,7 @@ const styles = StyleSheet.create({
         animationTimingFunction: 'linear',
         animationIterationCount: 'unset'
     },
-    hoverFont: {
-        ':hover': {
-            transition: '1s ease',
-            color: 'white'
-        }
-
-    }
+    hoverFont: { ':hover': { transition: '1s ease', color: 'white' } }
 });
 function mapStateToProps(state) {
     return {
@@ -348,32 +320,3 @@ function mapStateToProps(state) {
     }
 }
 export default connect(mapStateToProps, { insertNewQuizAnswerIntoResultsArray, getMegaQuizTable })(QuestionBuild);
-    // let questionCriteria = handleProps.map((arrayValue, index, originalArray) => {
-    //     return ({
-    //         questionType: arrayValue.ques_type,
-    //         questionFeatureCount: arrayValue.ques_feat_count,
-    //         questionFeatures: arrayValue.question_features,
-    //         timing: {
-    //             quizTimed: arrayValue.timed,
-    //             timeAllotted: arrayValue.time_limit
-    //         }
-    //     })
-    // })
-    // let quizStarterStuff = handleProps.map((arrayValue, index, originalArray) => {
-    //     return ({
-    //         quizId: arrayValue.quiz_id,
-    //         quesId: arrayValue.ques_id,
-    //         quizTitle: arrayValue.title,
-    //         quizDescription: arrayValue.description,
-    //         quizFrontImg: arrayValue.start_img
-    //     })
-    // })
-    // let ownerObject = handleProps.map((arrayValue, index, originalArray) => {
-    //     return ({
-    //         quiz_owner: arrayValue.quiz_owner,
-    //         ownerProfilePic: arrayValue.quiz_owner_profile_img,
-    //         siteApproval: arrayValue.site_approval,
-    //         originalCreateDate: arrayValue.created_on,
-    //         lastUpdated: arrayValue.updated_on
-    //     })
-    // })

@@ -22,12 +22,17 @@ module.exports = {
     },
     getSurveyUsersTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-
+        
         dbInstance.Get_Survey_Users_Table().then((users) => {
             res.status(200).send(users);
         }).catch((errrrrrrr) => { console.log(`DID NOT GET THE SURVEY USERS FROM DATABASE`, errrrrrrr) })
     },
-
+    getSurveyAdmins: ( req, res, next ) => {
+        const dbInstance = req.app.get('db');
+        dbInstance.Get_All_Admins().then((users) => {
+            res.status(200).send(users);
+        }).catch((errrrrrrr) => { console.log(`DID NOT GET THE SURVEY USERS FROM DATABASE`, errrrrrrr) })
+    },
     // For getting quiz table list for dashboard
     fetchAllQuizzesList: (req, res, next) => {
         const dbInstance = req.app.get('db');
