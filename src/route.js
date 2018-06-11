@@ -63,6 +63,7 @@ export default (
         <Route path='/createnew/:currentUserId/start' component={SurveyQuizCreator} />
         <Route path='/createnew/:currentUserId/quiz/quizsetup' component={QuizCreateStart} />
         <Route path='/createnew/:currentUserId/quiz/quizquestionssetup' component={QuizCreateQuestionAnswerBuilder} />
+        {/* <Route path='/createnew/:currentUserId/quiz/:quizId/quizquestionssetup' component={QuizCreateQuestionAnswerBuilder} /> */}
         <Route path='/createnew/:currentUserId/survey/surveysetup' component={SurveyCreateStart} />
 
 

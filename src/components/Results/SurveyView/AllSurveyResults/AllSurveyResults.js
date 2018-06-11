@@ -58,31 +58,21 @@ handleSur3 = () => {
             return(< Survey3ResultsBuild giveUltraTable={this.props.surveyResultsUltraJoinedTable} />)     
             }
         }
-     return(<div className={css(st.mainResultsDiv)}>
+     return(<div className={css(st.mainResultsDiv, st.pageStart)}>
             <h1>All Survey Results</h1><br/>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur1()}>Survey 1</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur2()} >Survey 2</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur3()} >Survey 3</button>
     {currentSurveyViewed()}
-            {/* <div className={this.state.surv1Vis === 'visible' ? vis.vis : vis.invis}>
-            < Survey1ResultsBuild giveUltraTable={this.props.surveyResultsUltraJoinedTable} className={this.state.surv1Vis === 'visible' ? vis.vis : vis.invis} />
-            </div>
-            <div className={this.state.surv2Vis === 'visible' ? vis.vis : vis.invis}>
-            < Survey2ResultsBuild giveUltraTable={this.props.surveyResultsUltraJoinedTable} className={this.state.surv2Vis === 'visible' ? vis.vis : vis.invis}/>
-            </div>
-            <div className={this.state.surv3Vis === 'visible' ? vis.vis : vis.invis}>
-            < Survey3ResultsBuild giveUltraTable={this.props.surveyResultsUltraJoinedTable} className={this.state.surv3Vis === 'visible' ? vis.vis : vis.invis}/>
-            </div> */}
         </div>)
     }
 }
-// const vis = StyleSheet.create({
-//     vis: {
-//         visibility: 'visible',
-//     },
-//     invis: {
-//         visibility: 'hidden'
-//     }
-// })
+const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const st = StyleSheet.create({
+    pageStart: {
+        animationName: initialOpacityKeyframes,
+        animationDuration: '1s',
+        animationTimingFunction: 'ease-in',
+        animationIterationCount: 'initial'
+    },
     mainResultsDiv: {
         textAlign: 'center',
     },

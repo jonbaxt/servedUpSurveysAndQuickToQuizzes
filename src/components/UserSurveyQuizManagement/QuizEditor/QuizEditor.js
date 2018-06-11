@@ -136,7 +136,7 @@ class QuizEditor extends Component {
                             <p>Current Quiz Version is {approval} to post.</p>
                         </div>
                         <br />
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.flSpBt)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol)}>
                                 <p>Quiz Title</p>
                                 <br />
@@ -156,7 +156,7 @@ class QuizEditor extends Component {
                         </div>
                         <br />
                         <br />
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.flSpBt)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest,  Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol)}>
                                 <p>Quiz Description</p>
                                 <br />
@@ -170,7 +170,7 @@ class QuizEditor extends Component {
                                 }} >Edit</button>
                         </div>
                         <br /><br />
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.flSpBt)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol)}>
                                 <p>Current Starting Image</p>
                                 <br />
@@ -184,7 +184,7 @@ class QuizEditor extends Component {
                                 }} >Edit</button>
                         </div>
                         <br /><br />
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.flSpBt)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol)}>
                                 <p>Timed:</p>
                                 <p>This quiz is {timing}</p>
@@ -202,7 +202,7 @@ class QuizEditor extends Component {
                         {quizQuestionsEditor()}
 
 
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.flBox, Styles.flSpBt)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol)}>
                                 <p>Add a new Question</p>
                                 <br />
@@ -215,7 +215,7 @@ class QuizEditor extends Component {
                         </div>
 
                         <br /><br />
-                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.marTandB, Styles.flBox, Styles.flCol, Styles.hoverOnDiv)}>
+                        <div className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.marTandB, Styles.flBox, Styles.flCol, Styles.hoverOnDiv)}>
                             <span
                                 className={css(Styles.delButton)}
                                 onClick={() => {
@@ -239,9 +239,9 @@ class QuizEditor extends Component {
                     let image = el.ques_img ? <img className={css(Styles.picSiz)} src={el.ques_img} alt='' /> : <p>No picture currently</p>
 
                     return (
-                        <div key={el.ques_id} className={css(Styles.borderShadow, Styles.boxW, Styles.marTandB, Styles.flBox, Styles.flSpBt)}>
+                        <div key={el.ques_id} className={css(Styles.borderShadow, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.marTandB, Styles.flBox, Styles.flSpBt)}>
                             <div className={css(Styles.flBox, Styles.flCol, Styles.flSpBt)}>
-                            <div className={css(Styles.flBox, Styles.boxW, Styles.hoverOnSelection, Styles.flSpBt)}>
+                            <div className={css(Styles.flBox, Styles.boxW, Styles.boxTablet, Styles.boxLaptop, Styles.boxBiggest, Styles.hoverOnSelection, Styles.flSpBt)}>
                                 <p className={css(Styles.wWrap)} >Question # {el.ques_num}</p>
                                 <button className={css(Styles.editStyle)} onClick={() => {
                                             console.log('Delete Question ', el.ques_id)
@@ -883,7 +883,25 @@ const Styles = StyleSheet.create({
     },
     boxW: {
         width: '300px',
-        background: '#3300CC'
+        background: '#3300CC',
+        transition: '1s all ease',
+    },
+    boxTablet: {
+        '@media (min-width: 490px)': {
+            transition: '1s all ease',
+            width: '470px',
+        }
+    },
+    boxLaptop: {
+        '@media (min-width: 700px)': {
+            transition: '1s all ease',
+            width: '680px',
+        }
+    },
+    boxBiggest: {
+        '@media (min-width: 1400px)': {
+            transition: '1s all ease',
+        }
     },
     flBox: {
         display: 'flex'

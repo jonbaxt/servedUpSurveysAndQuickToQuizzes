@@ -6,7 +6,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 function QuizPendingApproval(props){
     
-    console.log(props)
+    // console.log(props)
     return(
         <div className={css(st.surveyUserMainBox)}>
             {QuizPendingBuild(props.giveQuizzes)}
@@ -18,7 +18,7 @@ function QuizPendingApproval(props){
 
 function QuizPendingBuild(propPass){
     let compileSurveys = propPass.filter(e => e.site_approval === false).map( (el, index) => {
-        console.log(el)
+        // console.log(el)
         return(<div key={index} className={css(st.managementBuildBox)}>
         <p>Quizzes</p>
             {/* <div><img src={el.img} alt='' className={css(st.picResize)} /> Id: {el.id} {el.user_name} </div>  <div>{dropDownOptions()}</div> */}

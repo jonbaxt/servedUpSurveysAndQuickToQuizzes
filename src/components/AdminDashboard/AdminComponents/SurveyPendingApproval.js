@@ -18,7 +18,7 @@ function SurveyPendingApproval(props){
 
 function SurveyPendingBuild(propPass){
     let compileSurveys = propPass.filter(e => e.site_approval === false).map( (el, index) => {
-        console.log(el)
+        // console.log(el)
         return(<div key={index} className={css(st.managementBuildBox)}>
         <p>Surveys</p>
             {/* <div><img src={el.img} alt='' className={css(st.picResize)} /> Id: {el.id} {el.user_name} </div>  <div>{dropDownOptions()}</div> */}

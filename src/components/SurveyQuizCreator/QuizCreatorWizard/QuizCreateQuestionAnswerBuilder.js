@@ -8,10 +8,14 @@ import faImages from '@fortawesome/fontawesome-free-solid/faImages'
 // import faToggleOff from '@fortawesome/fontawesome-free-solid/faToggleOff'
 // import faToggleOn from '@fortawesome/fontawesome-free-solid/faToggleOn'
 
+import { getNewQuizJustCreated } from '../../../ducks/reducer'
+import QuesCreate from './QuesCreateComponents/QuesCreate';
+
 class QuizCreateQuestionAnswerBuilder extends React.Component {
     constructor() {
         super()
         this.state = {
+            numberOfQuestions: 1,
             temporaryQuestionsArrayStore: [],
             temporaryAnswersArrayStore: [],
             newTitle: '',
@@ -20,22 +24,39 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
             newTimed: false,
             toggler: false
         }
-        this.handleTempQuestionsArrStore = this.handleTempQuestionsArrStore.bind( this );
-        this.handleTempAnswersArrStore = this.handleTempAnswersArrStore.bind( this );
+        this.handleTempQuestionsArrStore = this.handleTempQuestionsArrStore.bind(this);
+        this.handleTempAnswersArrStore = this.handleTempAnswersArrStore.bind(this);
         this.handleNewTitle = this.handleNewTitle.bind(this);
         this.handleNewDescription = this.handleNewDescription.bind(this);
         this.handleNewStartImg = this.handleNewStartImg.bind(this);
         this.handleNewTimedChange = this.handleNewTimedChange.bind(this);
     }
-    componentDidMount(){
-        
+    componentDidMount() {
+        if (this.props.quizNewCreatedTable.length === 0) {
+            axios.get(`/api/quiztaker/getQuizInfo/${this.props.currentQuizId}`).then((quizInfo) => {
+                this.props.getNewQuizJustCreated(quizInfo.data[0])
+            })
+        }
     }
-    handleTempQuestionsArrStore(e){
-        this.setState({ temporaryQuestionsArrayStore: [ ...this.state.temporaryQuestionsArrayStore, e]})
+    handleTempQuestionsArrStore(e) {
+        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e] })
     }
-    handleTempAnswersArrStore(e){
-        this.setState({ temporaryAnswersArrayStore: [ ...this.state.temporaryAnswersArrayStore, e]})
+    handleTempAnswersArrStore(e) {
+        this.setState({ temporaryAnswersArrayStore: [...this.state.temporaryAnswersArrayStore, e] })
     }
+    handleAddQuestion = (newQuestion) => {
+        this.setState({
+            numberOfQuestions: ++this.state.numberOfQuestions,
+
+        })
+    }
+    handleDelQuestion = () => {
+        this.setState({ numberOfQuestions: --this.state.numberOfQuestions })
+    }
+    handleAdd = (newQuestion) => {
+        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, newQuestion] })
+    }
+
     handleNewTitle(newTit) {
         console.log(newTit)
         this.setState({ newTitle: newTit })
@@ -67,6 +88,18 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
         }).catch((err) => console.log(err))
     }
     render() {
+        let createQuestions = () => {
+            // if(this.state.temporaryQuestionsArrayStore.length !== 0)
+
+
+            // for ( var i=0; i<this.state.numberOfQuestions; i++ ){
+            //     return <QuesCreate key={i} giveQuesNum={i+1} />
+            // }
+            return (<div>
+                <QuesCreate key={1} giveQuesNum={1} />
+            </div>)
+            // }
+        }
         let previewImage = () => { return (this.state.newStartImg !== '' ? <img src={this.state.newStartImg} alt='' className={css(st.picResize)} /> : <div className={css(st.fontResizePicArea)}><FontAwesomeIcon className={css(st.fontResize, st.fontResizeTablet, st.fontResizeLaptop, st.fontResizeBiggest)} icon={faImages} /></div>) }
         return (
             <div className={css(st.fl, st.jConCen, st.marTop, st.pageStart)}>
@@ -74,25 +107,15 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
                     {/* <h1></h1> */}
                     <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >All Questions Currently</h1>
 
+                    <button
+                        onClick={() => this.handleAddQuestion()}>Add Question</button>
+                    <button
+                        onClick={() => this.handleDelQuestion()}>Delete Question</button>
 
-                    <br/><br/><br/><br/>
-                    <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >Question Type</h1><br /><br />
-                    
-                    <div>
-                    <button>
-                    Multiple Choice    
-                    </button>
-                    <button>
-                    Text Write In
-                    </button>
-                    <button>
-                    1 to 10 Responses
-                    </button>
-                    <button>
-                    Picture Guessing
-                    </button>
-                    </div>
+                    <br /><br /><br /><br />
 
+                    <br /><br /><br />
+                    {createQuestions()}
 
 
 
@@ -415,7 +438,9 @@ const st = StyleSheet.create({
 function mapStateToProps(state) {
     return {
         user: state.user,
+        currentQuizId: state.currentQuizId,
+        quizNewCreatedTable: state.quizNewCreatedTable
     }
 }
 
-export default connect(mapStateToProps, null)(QuizCreateQuestionAnswerBuilder);
+export default connect(mapStateToProps, { getNewQuizJustCreated })(QuizCreateQuestionAnswerBuilder);

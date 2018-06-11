@@ -146,7 +146,7 @@ VALUES
 ('Looney Tunes', 'What`s up doc? Nuttin like a good day for a quiz', 'https://rfathead-res.cloudinary.com/image/upload/q_auto/c_pad,w_4225,h_3000/roomplus/97-97085_looney_tunes_collection_realbig_6628.jpg', '2018-05-22', '2018-05-22', FALSE, TRUE, 3),
 ('Harry Potter', 'Do you know Harry Potter Well? Find out how you add up.', 'https://cdn.movieweb.com/img.news.tops/NEh8pECIhK0xkm_2_b/Harry-Potter-Why-Daniel-Radcliffe-Was-Cast.jpg', 
 '2018-05-22', '2018-05-22', FALSE, TRUE, 2),
-('Who`s Who? A Quiz of Pictures', 'Take your best guess on who these people are in the group of pictures in this quiz. See how you do.', 'https://images.pexels.com/photos/109919/pexels-photo-109919.jpeg?auto=compress&cs=tinysrgb&h=350', CURRENT_DATE, CURRENT_DATE, FALSE, TRUE, 1),
+('Who`s Who? A Quiz of Pictures', 'Take your best guess on who these people are in the group of pictures in this quiz. See how you do.', 'https://images.pexels.com/photos/109919/pexels-photo-109919.jpeg?auto=compress&cs=tinysrgb&h=350', CURRENT_DATE, CURRENT_DATE, FALSE, FALSE, 1),
 ('You don`t know jack', '', '', CURRENT_DATE, CURRENT_DATE, FALSE, FALSE, 1);
 
 INSERT INTO QuizQuestions
@@ -450,7 +450,7 @@ VALUES
 ('Parallel Parking, Do you like it?', 'A survey to ask questions about how you like and often do you use parallel parking as a form of parking when given the choice to do so.', 'http://www.eregulations.com/wp-content/uploads/2016/12/Skill_Eight_Part_3.jpg', CURRENT_DATE, CURRENT_DATE, FALSE, TRUE, 1),
 ('The UTA Rapid Bus Transit System', 'This is a survey to guage how people feel about the new rapid transit system currently under construction to guage whether they agree or disagree with the way it was brought as well if they would actually use it.', 'https://archive.sltrib.com/images/2016/0522/utafares_052116~0.jpg', CURRENT_DATE, CURRENT_DATE, FALSE, TRUE, 5),
 ('Spielberg films, are they all good or have they lost quality over time?', 'This survey is here to answer the questions that people have been having in discussions to see if the majority think that Steven Spielberg films have been all good, progressively gotten worse, or have not been good at all.', 'https://i.ytimg.com/vi/Jf_ntUGfV1Q/hqdefault.jpg', CURRENT_DATE, CURRENT_DATE, FALSE, TRUE, 7),
-('Anonymous Survey Tester', 'This survey is specifically going to exist to test anonymous testing features so that an anonymous result can be achieved.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/1200px-Anonymous_emblem.svg.png', CURRENT_DATE, CURRENT_DATE, TRUE, TRUE, 6);
+('Anonymous Survey Tester', 'This survey is specifically going to exist to test anonymous testing features so that an anonymous result can be achieved.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/1200px-Anonymous_emblem.svg.png', CURRENT_DATE, CURRENT_DATE, TRUE, FALSE, 6);
 
 
 INSERT INTO SurveyQuestions

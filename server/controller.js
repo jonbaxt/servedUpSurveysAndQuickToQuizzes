@@ -33,6 +33,19 @@ module.exports = {
             res.status(200).send(users);
         }).catch((errrrrrrr) => { console.log(`DID NOT GET THE SURVEY USERS FROM DATABASE`, errrrrrrr) })
     },
+    editUserName: (req, res, next ) => {
+        const dbInstance = req.app.get('db');
+        console.log(req.body)
+        dbInstance.update_user_name_by_id([Number(req.params.id), req.body[0]].name).then( userTable => {
+            res.status(200).send(userTable)
+        }).catch( err => res.status(500).send( err ))
+    },
+    deleteUserById: (req, res, next ) =>{
+        const dbInstance = req.app.get('db');
+        dbInstance.delete_user_by_id([Number(req.params.id)]).then( userTableReturn => {
+            res.status(200).send(userTableReturn)
+        }).catch( err => res.status(500).send( err ))
+    },
     // For getting quiz table list for dashboard
     fetchAllQuizzesList: (req, res, next) => {
         const dbInstance = req.app.get('db');

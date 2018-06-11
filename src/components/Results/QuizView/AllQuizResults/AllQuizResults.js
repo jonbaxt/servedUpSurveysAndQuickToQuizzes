@@ -32,14 +32,9 @@ class AllQuizResults extends Component {
           return (
             <div className={css(Styles.pageStart)}>
 {/* <br /> */}
-<h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Charts</h2>
+<h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Quiz Charts</h2>
  <br />
                 <BuildTotalResultChart giveTable={this.props.quizResultsUltraJoinedTable}/>
-
-{/* <h2>Individual Quiz Charts</h2> */}
- {/* <br /> */}
-
-                {/* <BuildAllResults giveTable={this.props.quizResultsUltraJoinedTable} /> */}
 
             </div>
         )

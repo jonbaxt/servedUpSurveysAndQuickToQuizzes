@@ -6,30 +6,6 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
-             // id: 1,
-        // user_name: "Jonathan Baxter",
-        // img: "https://lh5.googleusercontent.com/-JLfHGi69FlQ/AAAAAAAAAAI/AAAAAAAAAT8/MvFrMrA3hi8/photo.jpg",
-        // auth0_id: "google-oauth2|114719994213853202721"
-        // id: 10,
-        // user_name: "The Doctor",
-        // img: "http://thedoctorwhocompanion.com/wp-content/uploads/2016/02/day-of-the-doctor-11th-doctor-matt-smith.jpg",
-        // auth0_id: "authDoctor"
-        // id: 11,
-        // user_name: "The Master",
-        // img: "https://i.pinimg.com/736x/83/fd/ef/83fdef0656bca56b05b74c1ccbb1f64f--doctor-who-art-tenth-doctor.jpg",
-        // auth0_id: "authMaster"
-        id: 12,
-        user_name: "Bugs Bunny",
-        img: "http://www.toonopedia.com/bugs.jpg",
-        auth0_id: "authLooney"
-        // id: 13,
-        // user_name: "Donald Duck",
-        // img: "https://vignette.wikia.nocookie.net/disney/images/d/db/Donald_Duck_Iconic.png/revision/latest?cb=20160905174817",
-        // auth0_id: "authDonny"
-        // id: 14,
-        // user_name: "Goofy",
-        // img: "https://vignette.wikia.nocookie.net/disney/images/2/27/Goofy_transparent.png/revision/latest?cb=20170426165903",
-        // auth0_id: "authoGoof"
     },
     pathnameCurrent: [],
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.
@@ -38,9 +14,14 @@ const initialState = {
     //This is the table of quizzes to be used on the dashboard page.
     quizTable: [],
     surveyTable: [],
+    quizNewCreatedTable: [],
     //All of this is for people who are currently taking quizzes
     //Logic stores for dashboard to store for app to use to figure out which quiz being used.
-    currentQuizId: -1,
+    
+    
+    //FIXME: Need to reset this Back to where it's supposed to be before deployment.
+    // currentQuizId: -1,
+    currentQuizId: '6',
     //Used to have redux track what survey is currently being used when in the survey user.
     currentSurveyId: -1,
     //This is the biggest quiz table to managing the quiz wizard builder of the quiz
@@ -85,6 +66,7 @@ const GET_QUIZ_TABLE = 'GET_QUIZ_TABLE';
 // const GET_QUIZ_ANSWERS_TABLE = 'GET_QUIZ_ANSWERS_TABLE';
 const GET_MEGA_QUIZ_TABLE = 'GET_MEGA_QUIZ_TABLE';
 const INSERT_NEW_QUIZ_ANS_RESULT = 'INSERT_NEW_QUIZ_ANS_RESULT';
+const GET_NEW_QUIZ_JUST_CREATED = 'GET_NEW_QUIZ_JUST_CREATED';
 const GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ = 'GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ';
 const GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE = 'GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE';
 
@@ -226,6 +208,14 @@ export function getQuizResultsInJoinedTable(quizJoinedTable) {
     }
 }
 
+export function getNewQuizJustCreated(newQuiz){
+    return {
+        type: GET_NEW_QUIZ_JUST_CREATED,
+        payload: newQuiz
+    }
+}
+
+
 //Survey Actions
 export function setSelectedSurvey(surveyId) {
     return {
@@ -339,11 +329,13 @@ export default function reducer(state = initialState, action) {
         case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ:
             return Object.assign({}, state, {
                 quizResultsFromResultsForUser: action.payload
-                // ,
-                // resultsTemporaryStore: []
+                ,
+                resultsTemporaryStore: []
             })
         case GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE:
             return Object.assign({}, state, { quizResultsUltraJoinedTable: action.payload })
+        case GET_NEW_QUIZ_JUST_CREATED:
+        return Object.assign({}, state, { quizNewCreatedTable: action.payload } )
         // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_REJECTED':
         //     return console.log('Did not submit properly with axios.');
         // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_PENDING':

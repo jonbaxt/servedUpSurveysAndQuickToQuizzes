@@ -88,6 +88,8 @@ app.get('/auth/me', (req, res) => {
 app.get('/api/findSessionUser/:id', controller.findTheSurveyUser);
 app.get( '/api/getSurveyUsers', controller.getSurveyUsersTable);
 app.get('/api/getAdmins', controller.getSurveyAdmins);
+app.put('/api/editUserName/:id', controller.editUserName);
+app.delete('/api/deleteUserById/:id', controller.deleteUserById);
 
 //Quiz Calls
 app.get( '/api/quizmain', controller.fetchAllQuizzesList);
