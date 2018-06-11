@@ -8,6 +8,7 @@ const initialState = {
     user: {
     },
     pathnameCurrent: [],
+    
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.
     surveyUsersTable: [],
     surveyAdminsTable: [],
