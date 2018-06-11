@@ -6,6 +6,30 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
+             // id: 1,
+        // user_name: "Jonathan Baxter",
+        // img: "https://lh5.googleusercontent.com/-JLfHGi69FlQ/AAAAAAAAAAI/AAAAAAAAAT8/MvFrMrA3hi8/photo.jpg",
+        // auth0_id: "google-oauth2|114719994213853202721"
+        // id: 10,
+        // user_name: "The Doctor",
+        // img: "http://thedoctorwhocompanion.com/wp-content/uploads/2016/02/day-of-the-doctor-11th-doctor-matt-smith.jpg",
+        // auth0_id: "authDoctor"
+        // id: 11,
+        // user_name: "The Master",
+        // img: "https://i.pinimg.com/736x/83/fd/ef/83fdef0656bca56b05b74c1ccbb1f64f--doctor-who-art-tenth-doctor.jpg",
+        // auth0_id: "authMaster"
+        id: 12,
+        user_name: "Bugs Bunny",
+        img: "http://www.toonopedia.com/bugs.jpg",
+        auth0_id: "authLooney"
+        // id: 13,
+        // user_name: "Donald Duck",
+        // img: "https://vignette.wikia.nocookie.net/disney/images/d/db/Donald_Duck_Iconic.png/revision/latest?cb=20160905174817",
+        // auth0_id: "authDonny"
+        // id: 14,
+        // user_name: "Goofy",
+        // img: "https://vignette.wikia.nocookie.net/disney/images/2/27/Goofy_transparent.png/revision/latest?cb=20170426165903",
+        // auth0_id: "authoGoof"
     },
     pathnameCurrent: [],
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.

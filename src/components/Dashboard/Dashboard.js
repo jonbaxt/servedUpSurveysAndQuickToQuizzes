@@ -119,20 +119,20 @@ class Dashboard extends Component {
             <div className={css(Styles.pageStart, Styles.dashMain)} >
                 {/* <NavMenu /> */}
                 <div className='body'>
-                    <div className='AvailableQuizzesBox' >
-                        <div>
-                            <p className='boxTitles' >Quizzes</p>
-                        </div>
-                        <div className='wrapWhenBig'>
-                        {showQuizList}
-                        </div>
-                    </div>
                     <div className='AvailableSurveysBox'>
                         <div>
                             <p className='boxTitles' >Surveys</p>
                         </div>
                         <div className='wrapWhenBig'>
                         {showSurveyList}
+                        </div>
+                    </div>
+                    <div className='AvailableQuizzesBox' >
+                        <div>
+                            <p className='boxTitles' >Quizzes</p>
+                        </div>
+                        <div className='wrapWhenBig'>
+                        {showQuizList}
                         </div>
                     </div>
                 </div>
