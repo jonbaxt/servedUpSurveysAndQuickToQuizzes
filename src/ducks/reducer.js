@@ -5,10 +5,9 @@ const initialState = {
     //User information of who is currently logged in.
 
     //FIXME: This will need to be not hardcoded after building project
-    user: {},
+    user: {
+    },
     pathnameCurrent: [],
-
-
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.
     surveyUsersTable: [],
     surveyAdminsTable: [],
@@ -24,20 +23,18 @@ const initialState = {
     megaQuizTable: [],
     megaSurveyTable: [],
     // I have all this information that could be uploaded from the question wizard for here for who knows what.
-
     currentQuizInfo: {},
     currentQuizQuestionsInfo: [],
     currentQuizAnswersInfo: [],
     currentSurveyInfo: {},
-
     currentSelectedQuestionAnswerCount: -1,
-
-
     //This is the state that will be used to setup a store of variables in an array while the quiz is being taken.
     resultsTemporaryStore: [],
     //This is the state that will store what was put in the quiz results
     quizResultsFromResultsForUser: [],
+    surveyResultsFromResultsForUser: [],
     quizResultsUltraJoinedTable: [],
+    surveyResultsUltraJoinedTable: [],
     resultsSurTemporaryStore: [],
     scaleValueForSurveysSave: 5
 }
@@ -52,6 +49,7 @@ const GET_ALL_USERS = 'GET_ALL_USERS';
 const GET_SURVEY_ADMINS = 'GET_SURVEY_ADMINS';
 
 const SET_CURRENT_PATHNAME = 'SET_CURRENT_PATHNAME';
+const RESET_REDUX_TO_INITIAL_STATE = 'RESET_REDUX_TO_INITIAL_STATE';
 
 //Quiz Types
 const SET_QUIZ_ID = 'SET_QUIZ_ID';
@@ -73,8 +71,8 @@ const GET_SURVEY_TABLE = 'GET_SURVEY_TABLE';
 const GET_MEGA_SURVEY_TABLE = 'GET_MEGA_SURVEY_TABLE';
 const GET_CURRENT_SCALE_IN_SURVEY = 'GET_CURRENT_SCALE_IN_SURVEY';
 const INSERT_NEW_SURVEY_ANS_RESULT = 'INSERT_NEW_SURVEY_ANS_RESULT';
-
-
+const GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY = 'GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY';
+const GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE = 'GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE';
 
 //Action Creators
 
@@ -90,7 +88,7 @@ export function getUser(userResult) {
     }
 }
 export function getUserById(id) {
-    
+
     return {
         type: GET_USER_BY_ID,
         payload: id
@@ -114,6 +112,11 @@ export function setCurrentPathname(newPathname) {
     return {
         type: SET_CURRENT_PATHNAME,
         payload: newPathname
+    }
+}
+export function resetReduxToInitialState(){
+    return {
+        type: RESET_REDUX_TO_INITIAL_STATE,
     }
 }
 //-------------------------------------------------Quiz Actions----------------------------------------------------------------------
@@ -233,6 +236,18 @@ export function getMegaSurveyTable(theMegaTable) {
         payload: theMegaTable
     }
 }
+export function getSurveyResultsJustPostedAfterSurvey(surveyRes){
+    return {
+        type: GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY,
+        payload: surveyRes
+    }
+}
+export function getSurveyResultsUltraJoinedTable(ultraTable){
+    return {
+        type: GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE,
+        payload: ultraTable
+    }
+}
 export function insertNewSurveyAnswerIntoResultsArray(newAnswer) {
     return {
         type: INSERT_NEW_SURVEY_ANS_RESULT,
@@ -277,6 +292,8 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { surveyAdminsTable: action.payload })
         case SET_CURRENT_PATHNAME:
             return Object.assign({}, state, { pathnameCurrent: [action.payload] })
+        case RESET_REDUX_TO_INITIAL_STATE:
+            return initialState;
         //-------------------------------------QUIZ CASES-----------------------------------
         case SET_QUIZ_ID:
             return Object.assign({}, state, { currentQuizId: action.payload })
@@ -318,6 +335,11 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { surveyTable: action.payload })
         case GET_MEGA_SURVEY_TABLE:
             return Object.assign({}, state, { megaSurveyTable: action.payload })
+
+        case GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY:
+            return Object.assign({}, state, { surveyResultsFromResultsForUser: action.payload })
+        case GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE:
+            return Object.assign({}, state, { surveyResultsUltraJoinedTable: action.payload })
         case INSERT_NEW_SURVEY_ANS_RESULT:
             return Object.assign({}, state, {
                 resultsSurTemporaryStore: [...state.resultsSurTemporaryStore,

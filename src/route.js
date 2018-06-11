@@ -21,6 +21,7 @@ import AllViews from './components/Results/AllViews/AllViews';
 import AllQuizResults from './components/Results/QuizView/AllQuizResults/AllQuizResults';
 import AllSurveyResults from './components/Results/SurveyView/AllSurveyResults/AllSurveyResults';
 import QuizDoneResults from './components/Results/QuizView/QuizDoneResults/QuizDoneResults';
+import SurveyDoneResults from './components/Results/SurveyView/SurveyDoneResults/SurveyDoneResults';
 
 import SurveyQuizCreator from './components/SurveyQuizCreator/SurveyQuizCreator';
 import QuizCreateStart from './components/SurveyQuizCreator/QuizCreatorWizard/QuizCreateStart';
@@ -48,10 +49,11 @@ export default (
         {/* Survey Taker stuff */}
         <Route path='/:currentUserId/survey/:surveyId/start' component={SurveyWizardStart} />
         <Route path='/:currentUserId/survey/:surveyId/:quesId' component={SurveyWizardQuestion} />
-        <Route path='/surveyDoneReDirect/:currentUserId/:quizId/:quesId/complete' component={SurveyWizardEnd} />
+        <Route path='/surveyDoneReDirect/:currentUserId/:surveyId/:quesId/complete' component={SurveyWizardEnd} />
         
         {/* Results Routes */}
         <Route path='/results/afterQuizTake/byQuizNumber/:currentUserId/quiz/:quizId' component={QuizDoneResults} />
+        <Route path='/results/afterSurveyTake/bySurveyNumber/:currentUserId/survey/:surveyId' component={SurveyDoneResults} />
         <Route path='/mainresults/resultsnavredirect/:currentUserId/home' component={AllViews} />
         <Route path='/results/quiz/allquizresults' component={AllQuizResults} />
         <Route path='/results/survey/allsurveyresults' component={AllSurveyResults} />

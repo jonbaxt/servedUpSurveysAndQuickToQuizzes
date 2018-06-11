@@ -117,7 +117,7 @@ app.get('/api/surveymain', controller.fetchAllSurveysList);
 app.get( '/api/surveymain/getmegasurveytable', controller.getAllSurveyTableInformationInMegaTable);
 app.get(`/api/surveytaker/getSurveyInfo/:surveyId`, controller.getSurveyStartInformation);
 app.post('/api/surveyAnswerSubmission/SubmitToSurveyResultsTable', controller.postToSurveyResults);
-
+app.get('/api/surveyresults/allresults/ultrajoined', controller.getAllSurveyTableResultsInformation);
 
 // const path = require('path');
 // app.get('*', (req, res)=>{

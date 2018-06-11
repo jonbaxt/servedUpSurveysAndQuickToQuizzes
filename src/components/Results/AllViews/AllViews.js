@@ -3,8 +3,8 @@ import { StyleSheet, css } from 'aphrodite';
 import { Link } from 'react-router-dom';
 
 function AllViews(props) {
-    console.log(props)
-    console.log(props.match.params.currentUserId)
+    // console.log(props)
+    // console.log(props.match.params.currentUserId)
     return (
         <div className={css(st.pageStart, st.allViewMain)}>
             <h1 className={css(st.texCen)} >Results Page</h1>

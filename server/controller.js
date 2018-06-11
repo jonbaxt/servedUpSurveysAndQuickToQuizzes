@@ -339,10 +339,18 @@ module.exports = {
     },
     getAllSurveyTableInformationInMegaTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-
+        
         dbInstance.Get_All_Survey_Tables_Info().then(megaResult => {
             // console.log( megaResult)
             res.status(200).send(megaResult);
         }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
-    }
+    },
+    getAllSurveyTableResultsInformation: ( req, res ) => {
+        const dbInstance = req.app.get('db');
+        
+        dbInstance.survey_results_mega_ultra_compiled().then(megaResult => {
+            // console.log( megaResult)
+            res.status(200).send(megaResult);
+        }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
+    },
 }

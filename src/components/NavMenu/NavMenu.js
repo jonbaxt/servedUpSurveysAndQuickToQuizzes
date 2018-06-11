@@ -14,6 +14,8 @@ import faFolderOpen from '@fortawesome/fontawesome-free-solid/faFolderOpen'
 import faEject from '@fortawesome/fontawesome-free-solid/faEject'
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 
+import { resetReduxToInitialState, setCurrentPathname } from '../../ducks/reducer' 
+
 // function NavMenu() {
 class NavMenu extends Component {
     constructor() {
@@ -123,7 +125,10 @@ class NavMenu extends Component {
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/' >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { 
+                                this.props.resetReduxToInitialState();
+                                this.props.setCurrentPathname('/')
+                                this.showNavFn()
                                 console.log('Clicked Logout')}}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faEject} />
                                 <span>Logout</span>
@@ -344,4 +349,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(NavMenu);
+export default connect(mapStateToProps, { resetReduxToInitialState, setCurrentPathname  })(NavMenu);
