@@ -5,36 +5,36 @@ import { css, StyleSheet } from 'aphrodite';
 // import { Link } from 'react-router-dom';
 
 
-// import BuildAllResults from './BuildAllResults';
-import BuildTotalResultChart from './BuildTotalResultChart';
+// import BuildAllResults from './BuildQuizResultsComponents/BuildAllResults';
+// import BuildTotalResultChart from './BuildTotalResultChart';
+import BuildTotalResultChart from './BuildQuizResultsComponents/BuildTotalResultChart';
+
 import { getQuizResultsInJoinedTable } from '../../../../ducks/reducer';
 
 class AllQuizResults extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             range: 2
         }
     }
-    handleRange = (e) => {
-        console.log( e )
-        this.setState({range: e})
-
-    }
     componentDidMount() {
-        axios.get('/api/quizresults/joinedtable').then(tableReturned => {
-            this.props.getQuizResultsInJoinedTable(tableReturned.data)
-        }).catch(err => console.log(err))
+        if (this.props.quizResultsUltraJoinedTable.length === 0) {
+            axios.get('/api/quizresults/joinedtable').then(tableReturned => {
+                this.props.getQuizResultsInJoinedTable(tableReturned.data)
+            }).catch(err => console.log(err))
+        }
     }
+
 
     render() {
-        
-          return (
+
+        return (
             <div className={css(Styles.pageStart)}>
-{/* <br /> */}
-<h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Quiz Charts</h2>
- <br />
-                <BuildTotalResultChart giveTable={this.props.quizResultsUltraJoinedTable}/>
+                {/* <br /> */}
+                <h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Quiz Charts</h2>
+                <br />
+                <BuildTotalResultChart giveTable={this.props.quizResultsUltraJoinedTable} />
 
             </div>
         )

@@ -4,7 +4,7 @@ import { css, StyleSheet } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentQuizInfo, setCurrentQuizQuestionsInfo, setCurrentQuizAnswersInfo } from '../../../ducks/reducer';
+import { setCurrentQuizInfo, setCurrentQuizQuestionsInfo, setCurrentQuizAnswersInfo, getQuizTable } from '../../../ducks/reducer';
 
 class QuizEditor extends Component {
     constructor() {
@@ -97,6 +97,7 @@ class QuizEditor extends Component {
     }
     handleDeleteQuizButton = () => {
         axios.delete(`/api/quizdelete/wholequiz/byid/${this.props.match.params.quizId}`).then(answerBack => {
+            this.props.getQuizTable(answerBack.data)
             console.log('success delete', answerBack)
         }).catch(err => console.log('failure', err))
     }
@@ -1000,4 +1001,4 @@ function mapStateToProps(state) {
         currentQuizAnswersInfo: state.currentQuizAnswersInfo
     }
 }
-export default connect(mapStateToProps, { setCurrentQuizInfo, setCurrentQuizQuestionsInfo, setCurrentQuizAnswersInfo })(QuizEditor);
+export default connect(mapStateToProps, { setCurrentQuizInfo, setCurrentQuizQuestionsInfo, setCurrentQuizAnswersInfo, getQuizTable })(QuizEditor);

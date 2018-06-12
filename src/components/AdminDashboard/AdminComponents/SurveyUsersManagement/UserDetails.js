@@ -70,6 +70,11 @@ class UserDetails extends React.Component {
                 <div>
                         <p>No Quizzes Owned</p>
                 </div>)
+        }else {
+            return (    
+                <div>
+                        <p>No Quizzes Owned</p>
+                </div>)
         }
             
         })
@@ -80,9 +85,9 @@ class UserDetails extends React.Component {
                 return (<button onClick={ () => this.handleDeleteUser(this.props.giveUser.id)}  className={css(anim.editingButtons, anim.buttonsHover)}>Delete User</button>)
             }
         }
-        let changeInputName = () => {
+        // let changeInputName = () => {
 
-        }
+        // }
         return (
             <div className={css(st.mainDetailsBox)}>
 

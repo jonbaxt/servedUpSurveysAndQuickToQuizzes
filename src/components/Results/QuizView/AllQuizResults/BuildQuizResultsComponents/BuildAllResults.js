@@ -32,7 +32,7 @@ function BuildAllResults(props) {
 }
 
 function CreateFirstUserChartForQuiz1(quizResultsUltraJoinedTable) {
-    let surveyTakerIds = quizResultsUltraJoinedTable.map(elem => elem.survey_taker_id).sort().filter((elem, ind, orig) => elem !== orig[ind - 1])
+    // let surveyTakerIds = quizResultsUltraJoinedTable.map(elem => elem.survey_taker_id).sort().filter((elem, ind, orig) => elem !== orig[ind - 1])
     let quizAnswersThatCanBeCharted = quizResultsUltraJoinedTable.filter(el => el.is_correct !== null)
 
     let user1Results = quizAnswersThatCanBeCharted.filter(el => el.survey_taker_id === 1 && el.quiz_id === 1).map(el => el.is_correct ? 1 : 0)

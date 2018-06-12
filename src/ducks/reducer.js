@@ -6,6 +6,7 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
+          
     },
     pathnameCurrent: [],
     
@@ -20,9 +21,9 @@ const initialState = {
     //Logic stores for dashboard to store for app to use to figure out which quiz being used.
     
     
-    //FIXME: Need to reset this Back to where it's supposed to be before deployment.
-    // currentQuizId: -1,
-    currentQuizId: '6',
+    currentQuizId: -1,
+    //For testing in the creator;
+    // currentQuizId: '6',
     //Used to have redux track what survey is currently being used when in the survey user.
     currentSurveyId: -1,
     //This is the biggest quiz table to managing the quiz wizard builder of the quiz

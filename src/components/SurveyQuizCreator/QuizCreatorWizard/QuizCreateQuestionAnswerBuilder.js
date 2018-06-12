@@ -46,12 +46,12 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
     }
     handleAddQuestion = (newQuestion) => {
         this.setState({
-            numberOfQuestions: ++this.state.numberOfQuestions,
+            numberOfQuestions: this.state.numberOfQuestions + 1,
 
         })
     }
     handleDelQuestion = () => {
-        this.setState({ numberOfQuestions: --this.state.numberOfQuestions })
+        this.setState({ numberOfQuestions: this.state.numberOfQuestions - 1 })
     }
     handleAdd = (newQuestion) => {
         this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, newQuestion] })
