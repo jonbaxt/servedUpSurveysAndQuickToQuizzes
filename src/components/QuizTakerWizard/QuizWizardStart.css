@@ -5,7 +5,8 @@
 }
 
 .quizStartBody{
-    background:rgba(51, 0, 0, 0.4);
+    /* background:rgba(51, 0, 0, 0.4); */
+    background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF);
     display: flex;
     flex-direction: column;
     margin: 0 auto;

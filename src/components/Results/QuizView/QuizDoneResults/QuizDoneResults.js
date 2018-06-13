@@ -118,7 +118,7 @@ render() {
     // console.log('From Redux: User Quiz Results All->', this.props.quizResultsFromResultsForUser)
 
     return (
-        <div className={css(styles.mainBoxForQuizDone)} >
+        <div className={css(styles.mainBoxForQuizDone, styles.titles)} >
             <h2 className={css(styles.texCent)} >{this.props.currentQuizInfo.title}</h2><h2 className={css(styles.texCent)}>Quiz Results</h2>
             <img className={css(styles.picSize)} src={this.props.currentQuizInfo.start_img} alt='' />
             <h3 className={css(styles.chartTextColorMatch, styles.texCent)} >{this.props.user.user_name}`s Quiz Results</h3>
@@ -229,6 +229,15 @@ const radarData = {
 */
 
 const styles = StyleSheet.create({
+    titles: {
+        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        borderRadius: '5%',
+        paddingBottom: '5px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        margin: '10px',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+    },
     mainBoxForQuizDone: {
         width: '100%',
         height: '100%'

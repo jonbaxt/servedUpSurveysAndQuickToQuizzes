@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 // import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -25,9 +24,7 @@ class SurveyWizardQuestion extends Component {
         // console.log(`In compdidMount`,this.props.megaQuizTable);
      //FIXME:
         if (this.props.megaSurveyTable.length === 0) {
-            axios.get('/api/surveymain/getmegasurveytable').then(theMassiveTable => {
-                this.props.getMegaSurveyTable(theMassiveTable.data)
-            }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
+                this.props.getMegaSurveyTable()
         }
     }
     handleNavigationErrors() {

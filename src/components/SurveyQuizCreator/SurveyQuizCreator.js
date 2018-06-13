@@ -6,9 +6,11 @@ function SurveyQuizCreator(props) {
     // console.log(props)
         return (
             <div className={css(createStartPageStyle.mainCreateHome, createStartPageStyle.pageStart)} >
+                <div className={css(createStartPageStyle.titles)} >
                 <h1 className={css(createStartPageStyle.normalH1, createStartPageStyle.tabletH1, createStartPageStyle.laptopH1, createStartPageStyle.biggestH1)}>Quiz/Survey Creator</h1>
                 <br /><br />
                 <h3  className={css(createStartPageStyle.normalH3, createStartPageStyle.tabletH3, createStartPageStyle.laptopH3, createStartPageStyle.biggestH3)} >Quiz or Survey?</h3>
+                </div>
                 <br /><br /><br /><br />
                 <div className={css(createStartPageStyle.buttArea)} >
                     <Link to={`/createnew/${props.match.params.currentUserId}/quiz/quizsetup`} className={css(createStartPageStyle.removeLine)} >
@@ -23,6 +25,16 @@ function SurveyQuizCreator(props) {
     }
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const createStartPageStyle = StyleSheet.create({
+    titles: {
+        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        // borderRadius: '5%',
+        // paddingBottom: '5px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        margin: '2px',
+        marginTop: '0px',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+    },
     pageStart: {
         animationName: initialOpacityKeyframes,
         animationDuration: '1s',

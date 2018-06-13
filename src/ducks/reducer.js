@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 const initialState = {
     //Main app use variables
@@ -6,7 +6,7 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
-          
+
     },
     pathnameCurrent: [],
     
@@ -103,14 +103,23 @@ export function getUserById(id) {
     }
 }
 //Gets complete list of users from from app users database.
-export function getAllUsers(surveyUserTable) {
+export function getAllUsers() {
+    let surveyUserTable = axios.get('/api/getSurveyUsers').then(response => {
+        return response.data
+    }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
+
     // console.log(surveyUserTable)
     return {
         type: GET_ALL_USERS,
         payload: surveyUserTable
     }
 }
-export function getSurveyAdmins(surveyAdminsTable) {
+export function getSurveyAdmins() {
+    let surveyAdminsTable =  axios.get('/api/getAdmins').then(response => {
+        return response.data
+        // this.props.getSurveyAdmins(response.data);
+    }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
+    
     return {
         type: GET_SURVEY_ADMINS,
         payload: surveyAdminsTable
@@ -156,24 +165,20 @@ export function setCurrentQuizAnswersInfo(quizAnswers) {
     }
 }
 // Retrieve Quiz Table from Database
-export function getQuizTable(newTable) {
-    // let newQuizTable = axios.get('/api/quizmain').then(resDat => {
-    //     console.log(resDat.data);
-    //     return resDat.data
-    // })
-
-    // console.log(newTable);
+export function getQuizTable() {
+    let newQuizTable = axios.get('/api/quizmain').then(resDat => {
+        return resDat.data
+    })
     return {
         type: GET_QUIZ_TABLE,
-        payload: newTable
+        payload: newQuizTable
     }
 }
-export function getMegaQuizTable(theMegaTable) {
-    // let theMegaTable = axios.get('/api/quizmain/getmegaquiztable').then( theMassiveTable => {
-    //     console.log(theMassiveTable.data);
-    //     return theMassiveTable.data;
-    // }).catch( err => { console.log(`Failure on entry with getting the massive table: ${err}`)})
-    // console.log( theMegaTable );
+export function getMegaQuizTable() {
+    let theMegaTable = axios.get('/api/quizmain/getmegaquiztable').then(theMassiveTable => {
+        return theMassiveTable.data
+        // this.props.getMegaQuizTable(theMassiveTable.data)
+    }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
     return {
         type: GET_MEGA_QUIZ_TABLE,
         payload: theMegaTable
@@ -185,18 +190,6 @@ export function insertNewQuizAnswerIntoResultsArray(newAnswer) {
         payload: newAnswer
     }
 }
-
-//Axios way
-// export function getQuizResultsJustPostedAfterQuiz(userId) {
-//     let quizResults = axios.get(`/api/quizResultsByUser/${userId}`).then(userQuizResults => userQuizResults.data )
-//     // .catch(err => console.log('unable to retrieve table for user', err))
-//     console.log(quizResults);
-
-//     return {
-//         type: GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ,
-//         payload: quizResults
-//     }
-// }
 export function getQuizResultsJustPostedAfterQuiz(quizResults) {
     return {
         type: GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ,
@@ -209,15 +202,12 @@ export function getQuizResultsInJoinedTable(quizJoinedTable) {
         payload: quizJoinedTable
     }
 }
-
 export function getNewQuizJustCreated(newQuiz){
     return {
         type: GET_NEW_QUIZ_JUST_CREATED,
         payload: newQuiz
     }
 }
-
-
 //Survey Actions
 export function setSelectedSurvey(surveyId) {
     return {
@@ -232,21 +222,19 @@ export function setCurrentSurveyInfo(surveyInfoObject) {
         payload: surveyInfoObject
     }
 }
-export function getSurveyTable(newTable) {
-    // let newSurveyTable = axios.get('/api/surveymain').then(resDat => {
-    //     return resDat.data
-    // })
+export function getSurveyTable() {
+    let newSurveyTable = axios.get('/api/surveymain').then(resDat => {
+        return resDat.data
+    })
     return {
         type: GET_SURVEY_TABLE,
-        payload: newTable
+        payload: newSurveyTable
     }
 }
-export function getMegaSurveyTable(theMegaTable) {
-    // let theMegaTable = axios.get('/api/quizmain/getmegaquiztable').then( theMassiveTable => {
-    //     console.log(theMassiveTable.data);
-    //     return theMassiveTable.data;
-    // }).catch( err => { console.log(`Failure on entry with getting the massive table: ${err}`)})
-    // console.log( theMegaTable );
+export function getMegaSurveyTable() {
+    let theMegaTable = axios.get('/api/surveymain/getmegasurveytable').then(theMassiveTable => {
+        return theMassiveTable.data
+    }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
     return {
         type: GET_MEGA_SURVEY_TABLE,
         payload: theMegaTable
@@ -271,11 +259,6 @@ export function insertNewSurveyAnswerIntoResultsArray(newAnswer) {
     }
 }
 export function getCurrentScaleInSurvey(scaleValue) {
-    // let theMegaTable = axios.get('/api/quizmain/getmegaquiztable').then( theMassiveTable => {
-    //     console.log(theMassiveTable.data);
-    //     return theMassiveTable.data;
-    // }).catch( err => { console.log(`Failure on entry with getting the massive table: ${err}`)})
-    // console.log( theMegaTable );
     return {
         type: GET_CURRENT_SCALE_IN_SURVEY,
         payload: scaleValue
@@ -295,16 +278,9 @@ export default function reducer(state = initialState, action) {
         //     return console.log(`${action.payload} did not make it for some reason`)
         case GET_USER_BY_ID:
             return Object.assign({}, state, { user: action.payload })
-        case GET_ALL_USERS:
-            return (
-                // console.log(action.payload),
-                Object.assign({}, state, { surveyUsersTable: action.payload })
-            )
-        // case GET_ALL_USERS + '_FULFILLLED':
-        // return( console.log(action.payload),
-        //      Object.assign({}, state, { surveyUsersTable: action.payload })
-        //         )
-        case GET_SURVEY_ADMINS:
+        case GET_ALL_USERS + '_FULFILLED':
+            return Object.assign({}, state, { surveyUsersTable: action.payload })
+        case GET_SURVEY_ADMINS + '_FULFILLED':
             return Object.assign({}, state, { surveyAdminsTable: action.payload })
         case SET_CURRENT_PATHNAME:
             return Object.assign({}, state, { pathnameCurrent: [action.payload] })
@@ -319,9 +295,9 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { currentQuizQuestionsInfo: action.payload })
         case SET_CURRENT_QUIZ_ANSWERS_INFO:
             return Object.assign({}, state, { currentQuizAnswersInfo: action.payload })
-        case GET_QUIZ_TABLE:
+        case GET_QUIZ_TABLE + '_FULFILLED':
             return Object.assign({}, state, { quizTable: action.payload })
-        case GET_MEGA_QUIZ_TABLE:
+        case GET_MEGA_QUIZ_TABLE + '_FULFILLED':
             return Object.assign({}, state, { megaQuizTable: action.payload })
         case INSERT_NEW_QUIZ_ANS_RESULT:
             return Object.assign({}, state, {
@@ -342,27 +318,21 @@ export default function reducer(state = initialState, action) {
         //     return console.log('Did not submit properly with axios.');
         // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_PENDING':
         //     return console.log('Still loading the results from the call.');
-        // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_FULFILLED':
-        //     return Object.assign({}, state, { resultsTemporaryStore: initialState.resultsTemporaryStore, quizResultsFromResultsForUser: action.payload })
         //-----------------------------------SURVEY CASES-----------------------------------
         case SET_SURVEY_ID:
             return Object.assign({}, state, { currentSurveyId: action.payload })
         case SET_CURRENT_SURVEY_INFO:
             return Object.assign({}, state, { currentSurveyInfo: action.payload })
-        case GET_SURVEY_TABLE:
+        case GET_SURVEY_TABLE + '_FULFILLED':
             return Object.assign({}, state, { surveyTable: action.payload })
-        case GET_MEGA_SURVEY_TABLE:
+        case GET_MEGA_SURVEY_TABLE + '_FULFILLED':
             return Object.assign({}, state, { megaSurveyTable: action.payload })
-
         case GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY:
             return Object.assign({}, state, { surveyResultsFromResultsForUser: action.payload })
         case GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE:
             return Object.assign({}, state, { surveyResultsUltraJoinedTable: action.payload })
         case INSERT_NEW_SURVEY_ANS_RESULT:
-            return Object.assign({}, state, {
-                resultsSurTemporaryStore: [...state.resultsSurTemporaryStore,
-                action.payload]
-            })
+            return Object.assign({}, state, { resultsSurTemporaryStore: [...state.resultsSurTemporaryStore, action.payload] })
         case GET_CURRENT_SCALE_IN_SURVEY:
             return Object.assign({}, state, { scaleValueForSurveysSave: action.payload })
         //----------------------------------DEFAULT RETURN----------------------------------

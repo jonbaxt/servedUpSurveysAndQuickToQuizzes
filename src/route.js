@@ -7,6 +7,7 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 
 import UserSurveyQuizManagement from './components/UserSurveyQuizManagement/UserSurveyQuizManagement';
 import QuizEditor from './components/UserSurveyQuizManagement/QuizEditor/QuizEditor';
+// import QuizEditor2 from './components/UserSurveyQuizManagement/QuizEditor/QuizEditorV2';
 import SurveyEditor from './components/UserSurveyQuizManagement/SurveyEditor/SurveyEditor';
 
 import QuizWizardStart from './components/QuizTakerWizard/QuizWizardStart';
@@ -39,6 +40,7 @@ export default (
         {/* SurveyManagement Links */}
         <Route path='/manage/userssurveys/:currentUserId' component={UserSurveyQuizManagement} />
         <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor} />
+        {/* <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor2} /> */}
         <Route path='/manage/userssurveys/:currentUserId/:surveyId/EditDelete' component={SurveyEditor} />
 
         {/* Quiz Taker stuff */}

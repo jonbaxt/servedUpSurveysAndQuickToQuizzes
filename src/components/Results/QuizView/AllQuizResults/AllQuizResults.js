@@ -32,7 +32,7 @@ class AllQuizResults extends Component {
         return (
             <div className={css(Styles.pageStart)}>
                 {/* <br /> */}
-                <h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)}>Total Quiz Charts</h2>
+                <h2 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.titles)}>Total Quiz Charts</h2>
                 <br />
                 <BuildTotalResultChart giveTable={this.props.quizResultsUltraJoinedTable} />
 
@@ -43,6 +43,16 @@ class AllQuizResults extends Component {
 
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
+    titles: {
+        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        // borderRadius: '5%',
+        // paddingBottom: '5px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        margin: '2px',
+        marginTop: '0px',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+    },
     pageStart: {
         animationName: initialOpacityKeyframes,
         animationDuration: '1s',

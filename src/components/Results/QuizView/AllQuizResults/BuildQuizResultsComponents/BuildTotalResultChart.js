@@ -146,7 +146,7 @@ class BuildTotalResultChart extends React.Component {
         let mapQuiz1Questions = quiz1QuestionText.map((el, index) => {
             return (
                 <div key={index}>
-                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)} >{el}</p>
+                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.blackText)} >{el}</p>
                     <br />
                 </div>
             )
@@ -154,7 +154,7 @@ class BuildTotalResultChart extends React.Component {
         let mapQuiz2Questions = quiz2QuestionText.map((el, index) => {
             return (
                 <div key={index}>
-                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)} >{el}</p>
+                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.blackText)} >{el}</p>
                     <br />
                 </div>
             )
@@ -162,7 +162,7 @@ class BuildTotalResultChart extends React.Component {
         let mapQuiz3Questions = quiz3QuestionText.map((el, index) => {
             return (
                 <div key={index}>
-                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid)} >{el}</p>
+                    <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.blackText)} >{el}</p>
                     <br />
                 </div>
             )
@@ -176,7 +176,7 @@ class BuildTotalResultChart extends React.Component {
                     <Pie className={css(onClickStyles.pieClick)} data={chartingTotal} />
                     {/* <Bar className={css(onClickStyles.pieClick)} data={chartingTotal}/>
                     <Line className={css(onClickStyles.pieClick)} data={chartingTotal} /> */}
-                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>Questions</h3>
+                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen, Styles.blackText)}>Questions</h3>
                     {mapQuiz1Questions}
                 </div>)
             } else if (this.state.quiz2Display === 'show') {
@@ -184,7 +184,7 @@ class BuildTotalResultChart extends React.Component {
                     <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)} >Quiz: {quiz2Title}</h3>
                     <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>How many have taken quiz: {totalSurveyTakersQuiz2}</p>
                     <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz2} />
-                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>Questions</h3>
+                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen, Styles.blackText)}>Questions</h3>
                     {mapQuiz2Questions}
                 </div>)
             } else if (this.state.quiz3Display === 'show') {
@@ -192,7 +192,7 @@ class BuildTotalResultChart extends React.Component {
                     <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>Quiz: {quiz3Title}</h3>
                     <p className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>How many have taken quiz: {totalSurveyTakersQuiz3}</p>
                     <Pie className={css(onClickStyles.pieClick)} data={chartingTotalQuiz3} />
-                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen)}>Questions</h3>
+                    <h3 className={css(Styles.tabletSizeFontMid, Styles.smallLaptopSizeFontMid, Styles.textCen, Styles.blackText)}>Questions</h3>
                     {mapQuiz3Questions}
                 </div>)
             } else {
@@ -228,6 +228,9 @@ const onClickStyles = StyleSheet.create({
 })
 
 const Styles = StyleSheet.create({
+    blackText: {
+        color: 'black',
+    },
     mar0: {
         display: 'flex',
         justifyContent: 'center'
@@ -238,22 +241,22 @@ const Styles = StyleSheet.create({
     },
     tabletSizeFontMid: {
         '@media (min-width: 490px)': {
-            fontSize: '23px'
+            fontSize: '15px'
         }
     },
     tabletSizeFontSmall: {
         '@media (min-width: 490px)': {
-            fontSize: '23px'
+            fontSize: '14px'
         }
     },
     smallLaptopSizeFontMid: {
         '@media (min-width: 700px)': {
-            fontSize: '28px'
+            fontSize: '20px'
         }
     },
     smallLaptopSizeFontSmall: {
         '@media (min-width: 700px)': {
-            fontSize: '28px'
+            fontSize: '18px'
         }
     },
     tabletSizeButton: {

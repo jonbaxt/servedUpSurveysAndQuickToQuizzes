@@ -13,7 +13,7 @@ class SurveyWizardEnd extends React.Component {
         axios.get(`/api/findSessionUser/${this.props.match.params.currentUserId}`).then( resBack => { console.log('I went into database', resBack) }).catch( err => console.log('Couldnt make it to the database'))
         axios.post('/api/surveyAnswerSubmission/SubmitToSurveyResultsTable', resultsSurTemporaryStore).then(resBack => {
             console.log('I went into database', resBack.data);
-        }).catch(err => console.log('Couldnt make it to the database'))
+        }).catch(err => console.log('Couldnt make it to the database', err))
 
         // axios.get(`/api/quizResultsByUser/${currentId}`).then(userQuizResults => {
         //     this.props.getQuizResultsJustPostedAfterQuiz( userQuizResults.data )

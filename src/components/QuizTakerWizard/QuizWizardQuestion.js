@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 // import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -23,9 +22,7 @@ class QuizWizardQuestion extends Component {
         //     }).catch(err => { console.log(err) })
         // console.log(`In compdidMount`,this.props.megaQuizTable);
         if (this.props.megaQuizTable.length === 0) {
-            axios.get('/api/quizmain/getmegaquiztable').then(theMassiveTable => {
-                this.props.getMegaQuizTable(theMassiveTable.data)
-            }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
+                this.props.getMegaQuizTable()
         }
     }
     handleNavigationErrors() {

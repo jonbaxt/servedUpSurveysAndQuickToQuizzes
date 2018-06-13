@@ -13,13 +13,14 @@ import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 class Login extends React.Component {
 
     componentDidMount(){
-        console.log(this.props)
+        // console.log(this.props)
         setLoginPath(this.props)
     }
 
     render() {
 
         return (
+            <div className={css(Styles.outer, Styles.fuzzIn)}>
             <div className={css(Styles.mainContainer, Styles.fuzzIn)}>
                 <h1 className={css(Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Welcome to</h1>
 
@@ -36,7 +37,7 @@ class Login extends React.Component {
                 <a href={process.env.REACT_APP_LOGIN} className={css(Styles.noLine)} >
                     <span className={css(Styles.loginButton, Styles.hoverButton, Styles.tabletSizeButton, Styles.smallLaptopSizeButton, Styles.SizeButton)} >Login</span>
                 </a>
-
+                </div>
                 {/* <span onChange={()=> setLoginPath(props)} ></span> */}
             </div>
         )
@@ -119,10 +120,20 @@ const initialTranslateKeyframes = {
 //   )
 
 const Styles = StyleSheet.create({
+    outer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        background: 'linear-gradient(to left, rgba(51, 0, 0, 0.9), rgba(51, 0, 51, 0.9), rgba(51, 0, 102, 0.9), rgba(51, 0, 153, 0.9), rgba(51, 0, 204, 0.9), rgba(51, 0, 255, 1))',
+        width: '60%',
+        padding: '8px',
+        borderRadius: '2%',
+        boxShadow: '6px 10px 8px rgba(0, 204, 255, 0.4)', 
+        // boxShadow: '',
     },
     margins: {
         marginBottom: '15px'

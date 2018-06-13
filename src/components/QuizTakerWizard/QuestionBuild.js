@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 

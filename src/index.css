@@ -2,9 +2,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: #00ccff;
+  
+  /* background: linear-gradient(to left, rgba(51, 0, 0, 0.9), rgba(51, 0, 51, 0.9), rgba(51, 0, 102, 0.9), rgba(51, 0, 153, 0.9), rgba(51, 0, 204, 0.9), rgba(51, 0, 255, 1)); */
 
-  background: linear-gradient(to left, rgba(51, 0, 0, 0.9), rgba(51, 0, 51, 0.9), rgba(51, 0, 102, 0.9), rgba(51, 0, 153, 0.9), rgba(51, 0, 204, 0.9), rgba(51, 0, 255, 1));
+
   /* background: linear-gradient(to left, rgb(178, 72, 37), rgb(255, 133, 93), rgb(255, 188, 165)); */
   /* background: linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF); */
-  color: #00ccff;
 }

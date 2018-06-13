@@ -6,7 +6,7 @@ function AllViews(props) {
     // console.log(props)
     // console.log(props.match.params.currentUserId)
     return (
-        <div className={css(st.pageStart, st.allViewMain)}>
+        <div className={css(st.pageStart, st.allViewMain, st.titles)}>
             <h1 className={css(st.texCen)} >Results Page</h1>
             <h3 className={css(st.texCen)} >Would you like to see all results for:</h3><br/><br/><br/>
         <div className={css(st.innerArea)} >
@@ -24,6 +24,15 @@ function AllViews(props) {
 }
 const initialOpacity = { 'from': { opacity: 0, }, 'to': { opacity: 1, }, }
 const st = StyleSheet.create({
+    titles: {
+        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        borderRadius: '5%',
+        paddingBottom: '5px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        margin: '10px',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+    },
     pageStart: {
         animationName: initialOpacity,
         animationDuration: '1s',

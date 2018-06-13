@@ -7,22 +7,26 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
 // import NavMenu from '../NavMenu/NavMenu';
 import './SurveyWizardStart.css'
-import { setCurrentSurveyInfo, getMegaSurveyTable } from '../../ducks/reducer';
+import { setCurrentSurveyInfo, getMegaSurveyTable, getSurveyTable } from '../../ducks/reducer';
 
 class SurveyWizardStart extends Component {
     componentDidMount() {
         //FIXME: Need to add user verification later.
         // if(this.props.user.id !== this.props.match.params.currentUserId){
         //     console.log('does not match in redux')
+        //  }
+        
+        if(this.props.megaSurveyTable.length === 0){
+                this.props.getMegaSurveyTable();
+        }
+        if(this.props.surveyTable.length === 0){
+            this.props.getSurveyTable();
+        }
+        // if(this.props.currentSurveyInfo.length !== 0){
+            axios.get(`/api/surveytaker/getSurveyInfo/${this.props.match.params.surveyId}`).then((surveyInfo) => {
+                this.props.setCurrentSurveyInfo(surveyInfo.data[0])
+            })
         // }
-        axios.get(`/api/surveytaker/getSurveyInfo/${this.props.match.params.surveyId}`).then((surveyInfo) => {
-            this.props.setCurrentSurveyInfo(surveyInfo.data[0])
-            if(this.props.megaSurveyTable.length === 0){
-                axios.get('/api/surveymain/getmegasurveytable').then(theMassiveTable => {
-                    this.props.getMegaSurveyTable(theMassiveTable.data)
-                }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
-            }
-        })
     }
     render() {
         let anonymous = 'not anonymous';
@@ -66,11 +70,13 @@ let mapStateToProps = (state) => {
     return {
         currentSurveyInfo: state.currentSurveyInfo,
         user: state.user,
+        surveyTable: state.surveyTable,
         megaSurveyTable: state.megaSurveyTable
     }
 }
 const mapDispatchToProps = {
     setCurrentSurveyInfo, 
-    getMegaSurveyTable
+    getMegaSurveyTable,
+    getSurveyTable
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SurveyWizardStart);

@@ -7,7 +7,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 // import NavMenu from '../NavMenu/NavMenu';
 import './QuizWizardStart.css'
-import { setCurrentQuizInfo, getMegaQuizTable, setCurrentPathname } from '../../ducks/reducer';
+import { setCurrentQuizInfo, getMegaQuizTable, getQuizTable, setCurrentPathname } from '../../ducks/reducer';
 
 class QuizWizardStart extends Component {
     componentDidMount() {
@@ -18,13 +18,10 @@ class QuizWizardStart extends Component {
         // if(this.props.user.id !== this.props.match.params.currentUserId){
         //     console.log('does not match in redux')
         // }
+        if(this.props.currentQuizInfo.length === 0){ this.props.getQuizTable(); }
+        if(this.props.megaQuizTable.length === 0){ this.props.getMegaQuizTable() }
         axios.get(`/api/quiztaker/getQuizInfo/${this.props.match.params.quizId}`).then((quizInfo) => {
-            this.props.setCurrentQuizInfo(quizInfo.data[0])
-            if(this.props.megaQuizTable.length === 0){
-                axios.get('/api/quizmain/getmegaquiztable').then( theMassiveTable => {
-                    this.props.getMegaQuizTable( theMassiveTable.data )
-                }).catch( err => { console.log(`Failure on entry with getting the massive table: ${err}`)})
-            }
+            if(this.props.currentQuizInfo !== 0){ this.props.setCurrentQuizInfo(quizInfo.data[0]) }
         })
     }
     render() {
@@ -60,10 +57,7 @@ class QuizWizardStart extends Component {
         )
     }
 }
-const initialOpacityKeyframes = {
-    'from': { opacity: 0 },
-    'to': { opacity: 1 }
-}
+const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
     pageStart: {
         animationName: initialOpacityKeyframes,
@@ -83,6 +77,7 @@ let mapStateToProps = (state) => {
 const mapDispatchToProps = {
     setCurrentQuizInfo, 
     getMegaQuizTable,
+    getQuizTable,
     setCurrentPathname
 }
 export default connect(mapStateToProps, mapDispatchToProps)(QuizWizardStart);

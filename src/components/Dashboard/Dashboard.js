@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { css, StyleSheet } from 'aphrodite';
-import { Link } from 'react-router-dom';
 
-// import NavMenu from '../NavMenu/NavMenu';
 import './Dashboard.css'
+import QuizListHOC from './QuizList';
+import SurveyListHOC from './SurveyList';
+
 import { getUser, getUserById, getAllUsers, getSurveyAdmins, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
 
 class Dashboard extends Component {
@@ -26,114 +27,35 @@ class Dashboard extends Component {
         axios.get('/auth/me').then(res => {
             this.props.getUser(res.data)
         }).catch((err) => console.log('Didnt work', err))
-        //Gets user table
-        axios.get('/api/getSurveyUsers').then(response => {
-            this.props.getAllUsers(response.data);
-        }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
-        axios.get('/api/getAdmins').then(response => {
-            this.props.getSurveyAdmins(response.data);
-        }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
-        
+        //Gets user table   
+        this.props.getAllUsers();
+        this.props.getSurveyAdmins();
         //Gets query to show quizzes
-        axios.get('/api/quizmain').then(resDat => {
-            this.props.getQuizTable(resDat.data);
-        }).catch(err => console.log(err))
-        axios.get('/api/surveymain').then(resDat => {
-            this.props.getSurveyTable(resDat.data);
-        }).catch(err => console.log(err))
+        this.props.getQuizTable();
+        this.props.getSurveyTable();
         //Gets the mega table.
-        axios.get('/api/quizmain/getmegaquiztable').then(theMassiveTable => {
-            // console.log(theMassiveTable.data);
-            this.props.getMegaQuizTable(theMassiveTable.data)
-        }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
-        axios.get('/api/surveymain/getmegasurveytable').then(theMassiveTable => {
-            // console.log(theMassiveTable.data);
-            this.props.getMegaSurveyTable(theMassiveTable.data)
-        }).catch(err => { console.log(`Failure on entry with getting the massive table: ${err}`) })
+        this.props.getMegaQuizTable();
+        this.props.getMegaSurveyTable();
     }
-    render() {
-        // console.log(this.props.match.params)
-        let showSurveyList = this.props.surveyTable.filter(el => el.site_approval === true ).map((element, index) => {
-            // let anonymous = 'not anonymous';
-            // element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
-            return (
-                <Link to={`/${this.props.user.id}/survey/${element.survey_id}/start`} key={element.survey_id} onClick={() => this.props.setSelectedSurvey(element.survey_id)}
-                    className='noLineUnderneath'
-                    style={{ textDecoration: 'none' }} >
-                    <div className='displayBox'  >
-                        <div className='rightSide'>
-                            <div className='leftSide'>
-                                <img className='linkPicture' src={element.start_img} alt='' />
-                            </div>
-                            <div className='marBot'>
-                                <h4>{element.title}</h4>
-                            </div>
-                            <div>
-                                <p className='underline'>Description</p>
-                                <p>{element.description}</p>
-                            </div>
-                            <div className='centerBox'>
-                                <p className='underline'>Created by</p> <p>{element.survey_creator}</p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            )
-        })
-
-        let showQuizList = this.props.quizTable.filter(el => el.site_approval === true ).map((element, index) => {
-            // let timedString = 'not timed'
-            // if (element.timed) {
-            //     timedString = 'timed'
-            // } else {
-            //     timedString = 'not timed'
-            // }
-            return (
-                <Link to={`/${this.props.user.id}/quiz/${element.quiz_id}/start`} key={element.quiz_id} onClick={() => this.props.setSelectedQuiz(element.quiz_id)} style={{ textDecoration: 'none' }} className='noLineUnderneath' >
-                    <div className='displayBox'  >
-
-                        <div className='rightSide'>
-
-                            <div className='leftSide'>
-                                <img className='linkPicture' src={element.start_img} alt='' />
-                            </div>
-                            <div className='marBot'>
-                                <h4>{element.title}</h4>
-                            </div>
-
-                            <div
-                            // className='border'
-                            >
-                                <p className='underline'>Description</p>
-                                <p>{element.description}</p>
-                            </div>
-                            <div className='centerBox'>
-                                <p className='underline'>Created by</p><p>{element.quiz_creator}</p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            )
-        })
+    render() {  
+        // console.log(this.props.surveyUsersTable)
+        // console.log(this.props.surveyAdminsTable)
+        // console.log(this.props.megaQuizTable)
+        // console.log(this.props.megaSurveyTable)
         return (
             <div className={css(Styles.pageStart, Styles.dashMain)} >
-                {/* <NavMenu /> */}
                 <div className='body'>
                     <div className='AvailableSurveysBox'>
-                        <div>
+                        <div className='titles'>
                             <p className='boxTitles' >Surveys</p>
                         </div>
-                        <div className='wrapWhenBig'>
-                        {showSurveyList}
-                        </div>
+                        <SurveyListHOC surveyTable={this.props.surveyTable} user={this.props.user} loading={this.props.surveyTable.length === 0} />
                     </div>
                     <div className='AvailableQuizzesBox' >
-                        <div>
+                        <div className='titles'>
                             <p className='boxTitles' >Quizzes</p>
                         </div>
-                        <div className='wrapWhenBig'>
-                        {showQuizList}
-                        </div>
+                        <QuizListHOC quizTable={this.props.quizTable} user={this.props.user} loading={this.props.quizTable.length === 0} />
                     </div>
                 </div>
             </div>

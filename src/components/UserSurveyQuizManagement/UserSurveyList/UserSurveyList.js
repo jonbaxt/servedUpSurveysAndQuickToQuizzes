@@ -11,7 +11,7 @@ export default function UserSurveyList(props){
         if(surveyListTable.filter(el => el.survey_owner_id === userStuff.id).length !== 0 ) {
         userSurveys = surveyListTable.filter(el => el.survey_owner_id === userStuff.id).map((el, ind) => {
             return (
-                <div className={css(Styles.tempBorder, Styles.tempBorderWide, Styles.quizSurveyBoxes)} key={el.survey_id}>
+                <div className={css(Styles.tempBorder, Styles.titles, Styles.quizSurveyBoxes, Styles.tempBorderWide)} key={el.survey_id}>
                     <Link className={css(Styles.linkFormat)} to={`/manage/userssurveys/${userStuff.id}/${el.survey_id}/EditDelete`} >
                     <div >
                         <br/><h3 className={css(Styles.textTitle, Styles.texCen)}>{el.title}</h3><br />
@@ -24,7 +24,7 @@ export default function UserSurveyList(props){
             )
         });
     } else{
-        userSurveys = ( <div className={css(Styles.tempBorder, Styles.quizSurveyBoxes, Styles.fuzzyBeforeHover, Styles.notFuzzy)}>
+        userSurveys = ( <div className={css(Styles.tempBorder, Styles.titles, Styles.quizSurveyBoxes, Styles.tempBorderWide)}>
         <Link className={css(Styles.linkFormat)} to={`/createnew/${userStuff.id}/survey/surveysetup`} >
         <h3 className={css(Styles.textTitle, Styles.texCen)}>You haven't made a Survey. Create one!</h3>
         </Link> <br /><br />
@@ -34,6 +34,7 @@ export default function UserSurveyList(props){
             <div>
                 <br />
                 {userSurveys}
+                <br/>
             </div>
         )
     }
@@ -44,16 +45,23 @@ export default function UserSurveyList(props){
     )
 }
 const Styles = StyleSheet.create({
+    titles: {
+        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        margin: '2px',
+        marginTop: '0px',
+        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+    },
     tempBorder: {
         boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.2)',
         transition: '2s all ease',
-        // border: '1px solid black'
     },
     tempBorderWide: {
         ':hover': {
+        background: 'linear-gradient(to left, rgba(51, 0, 0, 0.6), rgba(51, 0, 51, 0.6), rgba(51, 0, 102, 0.6), rgba(51, 0, 153, 0.6), rgba(51, 0, 204, 0.6), rgba(51, 0, 255, 0.6))',
         boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
         transition: '2s all ease',
-        // border: '1px solid black'
         }
     },
     mainQuizSurveyBox: {
@@ -66,7 +74,7 @@ const Styles = StyleSheet.create({
         width: '280px',
         display: 'flex',
         textAlign: 'start',
-        background: 'rgba(51, 0, 0, 0.2)'
+        marginBottom: '8px',
     },
     picResize: {
         width: '280px'
@@ -99,30 +107,3 @@ const Styles = StyleSheet.create({
         textDecorationLine: 'underline'
     }
 })
-
-/*
-h1{
-  font-size: 40px;
-  font-weight: bolder;
-}
-h2{
-  font-size: 30px;
-  font-weight: bolder;
-}
-h3{
-  font-size: 20px;
-  font-weight: bolder;
-}
-h4{
-  font-size: 10px;
-  font-weight: bolder;
-}
-h5{
-  font-size: 5px;
-  font-weight: bolder;
-}
-h6{
-  font-size: 3px;
-  font-weight: bolder;
-}
-*/
