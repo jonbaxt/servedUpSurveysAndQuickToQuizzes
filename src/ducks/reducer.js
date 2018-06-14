@@ -6,7 +6,6 @@ const initialState = {
 
     //FIXME: This will need to be not hardcoded after building project
     user: {
-
     },
     pathnameCurrent: [],
     

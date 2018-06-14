@@ -84,7 +84,7 @@ class AdminDashboard extends Component {
         let changeIconSurveyAll = () => { return (this.state.surveyAllToggle ? <FontAwesomeIcon icon={faMinusSquare} /> : <FontAwesomeIcon icon={faPlusSquare} />) }
         let changeIconQuizAll = () => { return (this.state.surveyAllToggle ? <FontAwesomeIcon icon={faMinusSquare} /> : <FontAwesomeIcon icon={faPlusSquare} />) }
         return (
-            <div className={css(st.pageStart, st.mainAdmin)}>
+            <div className={css(st.pageStart, st.mainAdmin, st.mainAdminTab, st.mainAdminLap, st.mainAdminBig)}>
                 <h1 className={css(st.underline, st.tcent)}>Admin Dashboard</h1><br /><br />
 
                 <div className={css(st.outUsers)} >
@@ -189,6 +189,24 @@ const st = StyleSheet.create({
         borderRadius: '2%',
         boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.5)',
         transition: '1s all ease',
+    },
+    mainAdminTab: {
+        '@media (min-width: 490px)': {
+            width: '400px',
+            transition: '1s ease all',
+        }
+    },
+    mainAdminLap: {
+        '@media (min-width: 700px)': {
+            width: '600px',
+            transition: '1s ease all',
+        }
+    },
+    mainAdminBig: {
+        '@media (min-width: 1400px)': {
+            width: '1000px',
+            transition: '1s ease all',
+        }
     },
     outUsers: {
         background: 'rgba(255, 234, 165, 0.6)',

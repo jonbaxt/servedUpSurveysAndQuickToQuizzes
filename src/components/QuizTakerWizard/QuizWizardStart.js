@@ -21,7 +21,7 @@ class QuizWizardStart extends Component {
         if(this.props.currentQuizInfo.length === 0){ this.props.getQuizTable(); }
         if(this.props.megaQuizTable.length === 0){ this.props.getMegaQuizTable() }
         axios.get(`/api/quiztaker/getQuizInfo/${this.props.match.params.quizId}`).then((quizInfo) => {
-            if(this.props.currentQuizInfo !== 0){ this.props.setCurrentQuizInfo(quizInfo.data[0]) }
+             this.props.setCurrentQuizInfo(quizInfo.data[0])
         })
     }
     render() {

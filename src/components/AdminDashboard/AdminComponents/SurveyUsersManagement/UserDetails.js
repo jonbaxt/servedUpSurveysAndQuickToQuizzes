@@ -20,76 +20,72 @@ class UserDetails extends React.Component {
 
         }
     }
-    componentDidMount(){
+    componentDidMount() {
 
     }
     handleClicked = () => {
-        this.setState({ currentClicked: !this.state.currentClicked,
-        
-                inputEditNameStore: this.props.giveUser.user_name,
-                inputEditImgStore: this.props.giveUser.img,
-         })
+        this.setState({currentClicked: !this.state.currentClicked,})
     }
     handleInputEditNameStore = (e) => {
-        this.setState({ inputEditNameStore: e})
+        this.setState({ inputEditNameStore: e })
     }
     handleInputEditImgStore = (e) => {
-        this.setState({ inputEditImgStore: e})
+        this.setState({ inputEditImgStore: e })
     }
 
-    handleDeleteUser= (userId) => {
-        axios.delete(`/api/deleteUserById/${userId}`).then( usersReturn => {
+    handleDeleteUser = (userId) => {
+        axios.delete(`/api/deleteUserById/${userId}`).then(usersReturn => {
             this.props.getAllUsers(usersReturn.data)
-        }).catch( err => console.log(err))
+        }).catch(err => console.log(err))
     }
 
     handleEditUserName = (userId, name) => {
-        axios.put(`/api/editUserName/${userId}`, name).then( tableReturn =>{
+        axios.put(`/api/editUserName/${userId}`, name).then(tableReturn => {
             this.props.getAllUsers(tableReturn.data)
-        }).catch( err => console.log(err))
-        console.log( userId, name)
+        }).catch(err => console.log(err))
+        console.log(userId, name)
     }
 
     handleEditUserImage = (userId, image) => {
-        console.log( userId, image)
+        console.log(userId, image)
     }
 
     render() {
         console.log(this.props)
         // console.log(this.props.giveUser.id === this.state.currentClicked)
         let createNewQuizList = this.props.quizTable.filter(el => el.quiz_owner_id === this.props.giveUser.id).map(el => {
-            if(el.quiz_owner_id === this.props.giveUser.id){
-            return (    
-            <div key={el.quiz_id} className={css(st.listFlex)}>
-                    <img src={el.start_img} alt='' className={css(st.startPicResize)} />
-                    <p>{el.title}</p>
-            </div>
-            )
-        }else if(el.quiz_owner_id !== this.props.giveUser.id){
-            return (    
-                <div>
+            if (el.quiz_owner_id === this.props.giveUser.id) {
+                return (
+                    <div key={el.quiz_id} className={css(st.listFlex)}>
+                        <img src={el.start_img} alt='' className={css(st.startPicResize)} />
+                        <p>{el.title}</p>
+                    </div>
+                )
+            } else if (el.quiz_owner_id !== this.props.giveUser.id) {
+                return (
+                    <div>
                         <p>No Quizzes Owned</p>
-                </div>)
-        }else {
-            return (    
-                <div>
+                    </div>)
+            } else {
+                return (
+                    <div>
                         <p>No Quizzes Owned</p>
-                </div>)
-        }
-            
+                    </div>)
+            }
+
         })
         let changeDeleteButton = () => {
-            if(String(this.props.giveUser.id) === String(this.props.user.id)){
+            if (String(this.props.giveUser.id) === String(this.props.user.id)) {
                 return ''
-            }else {
-                return (<button onClick={ () => this.handleDeleteUser(this.props.giveUser.id)}  className={css(anim.editingButtons, anim.buttonsHover)}>Delete User</button>)
+            } else {
+                return (<button onClick={() => this.handleDeleteUser(this.props.giveUser.id)} className={css(anim.editingButtons, anim.buttonsHover)}>Delete User</button>)
             }
         }
         // let changeInputName = () => {
 
         // }
         return (
-            <div className={css(st.mainDetailsBox)}>
+            <div className={css(st.mainDetailsBox, st.mainDetailsBoxTab, st.mainDetailsBoxLap, st.mainDetailsBoxLapBig)}>
 
                 <div className={css(st.alwaysView)} onClick={() => {
                     this.handleClicked()
@@ -102,22 +98,28 @@ class UserDetails extends React.Component {
                     <FontAwesomeIcon icon={faWrench} />
                 </div>
                 <div className={this.state.currentClicked ? css(dDST.dropDownBox, st.fontInsideSize, anim.dropDown) : css(dDST.dropDownBox, st.fontInsideSize, anim.dropDown, anim.hide)}>
-                    {/* <div className={css(st.listFlex)}>
-                        <input type='text' value={this.state.inputEditNameStore} onChange={(e) => this.handleInputEditNameStore(e.target.value)} />
+                    <div className={css(st.listFlex)}>
+                        <input type='text' 
+                        value={this.state.inputEditNameStore} 
+                        placeholder={this.props.giveUser.user_name}
+                        onChange={(e) => this.handleInputEditNameStore(e.target.value)} />
                         <button onClick={()=> this.handleEditUserName(this.props.giveUser.id, this.state.inputEditNameStore)} className={css(anim.editingButtons, anim.buttonsHover)}>Edit Name</button>
                     </div>
                     <div className={css(st.listFlex)}>
-                        <input type='text' value={this.state.inputEditImgStore} onChange={(e) => this.handleInputEditImgStore(e.target.value)} />
+                        <input type='text' 
+                        value={this.state.inputEditImgStore} 
+                        placeholder={this.props.giveUser.img}
+                        onChange={(e) => this.handleInputEditImgStore(e.target.value)} />
                         <button className={css(anim.editingButtons, anim.buttonsHover)}>Edit Image</button>
-                    </div> */}
-                        {changeDeleteButton()}
-                        
-                    <br/>
+                    </div>
+                    {changeDeleteButton()}
+
+                    <br />
                     <div>
                         <p className={css(st.texCen)}>{this.props.giveUser.user_name}'s Quizzes</p>
                         {createNewQuizList}
                     </div>
-                    <br/>
+                    <br />
                     <div>
                         <p className={css(st.texCen)}>{this.props.giveUser.user_name}'s Surveys</p>
                     </div>
@@ -171,7 +173,26 @@ const anim = StyleSheet.create({
 const st = StyleSheet.create({
     mainDetailsBox: {
         width: '270px',
-        borderRadius: '0',
+        transition: '1s ease all',
+    },
+    mainDetailsBoxTab: {
+        '@media (min-width: 490px)': {
+            width: '360px',
+            transition: '1s ease all',
+        }
+    },
+    mainDetailsBoxLap: {
+        '@media (min-width: 700px)': {
+            width: '560px',
+            transition: '1s ease all',
+        }
+
+    },
+    mainDetailsBoxLapBig: {
+        '@media (min-width: 1400px)': {
+            width: '960px',
+            transition: '1s ease all',
+        }
     },
     texCen: {
         textAlign: 'center'

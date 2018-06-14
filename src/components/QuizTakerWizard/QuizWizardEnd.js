@@ -19,6 +19,7 @@ class QuizWizardEnd extends React.Component {
             this.props.getQuizResultsJustPostedAfterQuiz( userQuizResults.data )
         }).catch(err => console.log('unable to retrieve table for user', err))
         // this.props.getQuizResultsJustPostedAfterQuiz(currentId);
+        
     }
 
     render() {
