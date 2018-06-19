@@ -26,14 +26,15 @@ function SurveyQuizCreator(props) {
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const createStartPageStyle = StyleSheet.create({
     titles: {
-        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        textShadow: '1px 1px 2px #3300CC',
+        // background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
         // borderRadius: '5%',
         // paddingBottom: '5px',
         paddingLeft: '0px',
         paddingRight: '0px',
         margin: '2px',
         marginTop: '0px',
-        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+        // boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
     },
     pageStart: {
         animationName: initialOpacityKeyframes,

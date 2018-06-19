@@ -115,9 +115,9 @@ class Survey1ResultsBuild extends React.Component {
             return (<div key={ind} className={css(st.responseList)} >
             <div className={css(st.responseInner)}>
                       <img src={el.taker_img} alt='' className={css(st.littlePic)} />
-                         <p>{el.taker_name}</p>
+                         <p className={css(st.shad)}>{el.taker_name}</p>
                          </div>
-                         <p>{el.takers_answer}</p>
+                         <p className={css(st.shad)}>{el.takers_answer}</p>
                      </div>)
         })
     }
@@ -179,31 +179,31 @@ class Survey1ResultsBuild extends React.Component {
         }
     }
     return (<div>
-        <h1>{survey1Name}</h1><br />
+        <h1 className={css(st.shad)}>{survey1Name}</h1><br />
         {survey1Image}<br />
-        <h3>Question 1</h3>
-        <h3>{questionOneText}</h3>
+        <h3  className={css(st.shad)}>Question 1</h3>
+        <h3  className={css(st.shad)}>{questionOneText}</h3>
         {/* <Pie data={table1MultChoiceQuesOne} /> */}
         <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion1ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion1ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion1ViewLine()}>Line</button>
         {ques1ResultsView()}
-        <h3>Question 2</h3>
-        <h3>{questionTwoText}</h3>
+        <h3 className={css(st.shad)}>Question 2</h3>
+        <h3 className={css(st.shad)}>{questionTwoText}</h3>
         <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion2ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion2ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion2ViewLine()}>Line</button>
         {ques2ResultsView()}
-        <h3>Question 3</h3>
-        <h3>{questionThreeText}</h3>
+        <h3 className={css(st.shad)}>Question 3</h3>
+        <h3 className={css(st.shad)}>{questionThreeText}</h3>
         <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion3ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion3ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion3ViewLine()}>Line</button>
         {ques3ResultsView()}
-        <h3>Question 4</h3>
-        <h3>{questionFourText}</h3>
+        <h3 className={css(st.shad)}>Question 4</h3>
+        <h3 className={css(st.shad)}>{questionFourText}</h3>
         <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion4ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion4ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion4ViewLine()}>Line</button>
       {ques4ResultsView()}
-        <h3>Question 5</h3>
-        <h3>{questionFiveText}</h3>
+        <h3 className={css(st.shad)}>Question 5</h3>
+        <h3 className={css(st.shad)}>{questionFiveText}</h3>
         <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion5ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion5ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=>this.handleQuestion5ViewLine()}>Line</button>
        {ques5ResultsView()}
-        <h3>Question 6</h3>
-        <h3>{question6Text}</h3>
+        <h3 className={css(st.shad)}>Question 6</h3>
+        <h3 className={css(st.shad)}>{question6Text}</h3>
         <div className={css(st.containerBorder)}>
             {mapResponsesTable}
         </div>
@@ -211,6 +211,9 @@ class Survey1ResultsBuild extends React.Component {
     }
 }
 const st = StyleSheet.create({
+    shad: {
+        textShadow: '1px 1px 2px #3300CC',
+    },
     mainResultsDiv: {
         textAlign: 'center',
     },

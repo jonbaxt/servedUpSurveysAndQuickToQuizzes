@@ -18,11 +18,11 @@ class SurveyUserManagement extends React.Component {
     }
     componentDidMount(){
         for( var i=0; i<this.props.surveyUsersTable.length; i++){
-            console.log(this.props.surveyUsersTable[i])
+            // console.log(this.props.surveyUsersTable[i])
             this.handleNaming(this.props.surveyUsersTable[i].user_name)
         }
         
-        console.log(this.props.surveyUsersTable.length)
+        // console.log(this.props.surveyUsersTable.length)
     }
     handleCurrentSurveyUserClicked = (e) => {
         this.setState({ currentSurveyUserClicked: e })

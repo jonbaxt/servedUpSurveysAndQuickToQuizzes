@@ -34,7 +34,7 @@ class ChangeInputs extends React.Component {
     }
     confirmDeleteBoxChange = () => {
         this.setState({ confirmDeleteBoxVisible: !this.state.confirmDeleteBoxVisible })
-        console.log(this.state.confirmDeleteBoxVisible)
+        // console.log(this.state.confirmDeleteBoxVisible)
     }
     handleSelectedChange = (e) => {
         this.setState({ selectedChange: e })
@@ -67,7 +67,7 @@ class ChangeInputs extends React.Component {
                                 <p>New Title</p>
                                 <input type='text' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -81,7 +81,7 @@ class ChangeInputs extends React.Component {
                                 <button
                                     className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -97,7 +97,7 @@ class ChangeInputs extends React.Component {
                                 <p>New Description</p>
                                 <textarea type='text' rows='4' cols='30' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -107,7 +107,7 @@ class ChangeInputs extends React.Component {
                                 >Cancel</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -123,7 +123,7 @@ class ChangeInputs extends React.Component {
                                 <p>New URL Image Enter</p>
                                 <input type='text' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -135,7 +135,7 @@ class ChangeInputs extends React.Component {
                                 >Cancel</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -147,12 +147,12 @@ class ChangeInputs extends React.Component {
                             <div className={css(Styles.flBox, Styles.flSpAr)}>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(true)
                                     }} >Yes Timed</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(false)
                                     }} >No Timed</button>
                             </div>

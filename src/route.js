@@ -6,8 +6,10 @@ import Dashboard from './components/Dashboard/Dashboard';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 
 import UserSurveyQuizManagement from './components/UserSurveyQuizManagement/UserSurveyQuizManagement';
-import QuizEditor from './components/UserSurveyQuizManagement/QuizEditor/QuizEditor';
-// import QuizEditor2 from './components/UserSurveyQuizManagement/QuizEditor/QuizEditorV2';
+
+// import QuizEditor from './components/UserSurveyQuizManagement/QuizEditor/QuizEditor';
+
+import QuizEditor2 from './components/UserSurveyQuizManagement/QuizEditor/QuizEditorV2';
 import SurveyEditor from './components/UserSurveyQuizManagement/SurveyEditor/SurveyEditor';
 
 import QuizWizardStart from './components/QuizTakerWizard/QuizWizardStart';
@@ -29,6 +31,8 @@ import QuizCreateStart from './components/SurveyQuizCreator/QuizCreatorWizard/Qu
 import QuizCreateQuestionAnswerBuilder from './components/SurveyQuizCreator/QuizCreatorWizard/QuizCreateQuestionAnswerBuilder';
 import SurveyCreateStart from './components/SurveyQuizCreator/SurveyCreatorWizard/SurveyCreateStart';
 
+import loaderTooling from './components/A-HigherOrderComponents/loadingAnim';
+
 export default (
     <Switch>
         {/* Login and DashBoardRoutes */}
@@ -39,8 +43,8 @@ export default (
 
         {/* SurveyManagement Links */}
         <Route path='/manage/userssurveys/:currentUserId' component={UserSurveyQuizManagement} />
-        <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor} />
-        {/* <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor2} /> */}
+        {/* <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor} /> */}
+        <Route path='/manage/usersquizzes/:currentUserId/:quizId/EditDelete' component={QuizEditor2} />
         <Route path='/manage/userssurveys/:currentUserId/:surveyId/EditDelete' component={SurveyEditor} />
 
         {/* Quiz Taker stuff */}
@@ -68,6 +72,8 @@ export default (
         {/* <Route path='/createnew/:currentUserId/quiz/:quizId/quizquestionssetup' component={QuizCreateQuestionAnswerBuilder} /> */}
         <Route path='/createnew/:currentUserId/survey/surveysetup' component={SurveyCreateStart} />
 
+
+    <Route path='/loader' component={loaderTooling} />
 
         {/* <Route path='/Admin/Dashboard' component={AdminDashboard} /> */}
     </Switch>

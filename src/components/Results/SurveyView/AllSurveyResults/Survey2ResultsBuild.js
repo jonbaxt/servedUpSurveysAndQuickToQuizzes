@@ -207,9 +207,9 @@ class Survey2ResultBuild extends React.Component {
                 return (<div key={ind} className={css(st.responseList)} >
                     <div className={css(st.responseInner)}>
                         <img src={el.taker_img} alt='' className={css(st.littlePic)} />
-                        <p>{el.taker_name}</p>
+                        <p className={css(st.shad)}>{el.taker_name}</p>
                     </div>
-                    <p>{el.takers_answer}</p>
+                    <p className={css(st.shad)}>{el.takers_answer}</p>
                 </div>)
             })
         }
@@ -344,54 +344,54 @@ class Survey2ResultBuild extends React.Component {
 
 
         return (<div>
-            <h2>{survey2Name}</h2>
+            <h2 className={css(st.shad)}>{survey2Name}</h2>
             <img src={survey2Image} alt='' className={css(st.picResize)} />
-            <h3>Question 1</h3>
-            <h3>{question1Text}</h3>
+            <h3 className={css(st.shad)}>Question 1</h3>
+            <h3 className={css(st.shad)}>{question1Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewLine()}>Line</button>
             {ques1ResultsView()}
-            <h3>Question 2</h3>
-            <h3>{question2Text}</h3>
+            <h3 className={css(st.shad)}>Question 2</h3>
+            <h3 className={css(st.shad)}>{question2Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewLine()}>Line</button>
             {ques2ResultsView()}
-            <h3>Question 3</h3>
-            <h3>{question3Text}</h3>
+            <h3 className={css(st.shad)}>Question 3</h3>
+            <h3 className={css(st.shad)}>{question3Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewLine()}>Line</button>
             {ques3ResultsView()}
-            <h3>Question 4</h3>
-            <h3>{question4Text}</h3>
+            <h3 className={css(st.shad)}>Question 4</h3>
+            <h3 className={css(st.shad)}>{question4Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion4ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion4ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion4ViewLine()}>Line</button>
             {ques4ResultsView()}
-            <h3>Question 5</h3>
-            <h3>{question5Text}</h3>
+            <h3 className={css(st.shad)}>Question 5</h3>
+            <h3 className={css(st.shad)}>{question5Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion5ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion5ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion5ViewLine()}>Line</button>
             {ques5ResultsView()}
-            <h3>Question 6</h3>
-            <h3>{question6Text}</h3>
+            <h3 className={css(st.shad)}>Question 6</h3>
+            <h3 className={css(st.shad)}>{question6Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion6ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion6ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion6ViewLine()}>Line</button>
             {ques6ResultsView()}
-            <h3>Question 7</h3>
-            <h3>{question7Text}</h3>
+            <h3 className={css(st.shad)}>Question 7</h3>
+            <h3 className={css(st.shad)}>{question7Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion7ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion7ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion7ViewLine()}>Line</button>
             {ques7ResultsView()}
-            <h3>Question 8</h3>
-            <h3>{question8Text}</h3>
+            <h3 className={css(st.shad)}>Question 8</h3>
+            <h3 className={css(st.shad)}>{question8Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion8ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion8ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion8ViewLine()}>Line</button>
             {ques8ResultsView()}
-            <h3>Question 9</h3>
-            <h3>{question9Text}</h3>
+            <h3 className={css(st.shad)}>Question 9</h3>
+            <h3 className={css(st.shad)}>{question9Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion9ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion9ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion9ViewLine()}>Line</button>
             {ques9ResultsView()}
-            <h3>Question 10</h3>
-            <h3>{question10Text}</h3>
+            <h3 className={css(st.shad)}>Question 10</h3>
+            <h3 className={css(st.shad)}>{question10Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion10ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion10ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion10ViewLine()}>Line</button>
             {ques10ResultsView()}
-            <h3>Question 11</h3>
-            <h3>{question11Text}</h3>
+            <h3 className={css(st.shad)}>Question 11</h3>
+            <h3 className={css(st.shad)}>{question11Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion11ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion11ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion11ViewLine()}>Line</button>
             {ques11ResultsView()}
-            <h3>Question 12</h3>
-            <h3>{question12Text}</h3>
+            <h3 className={css(st.shad)}>Question 12</h3>
+            <h3 className={css(st.shad)}>{question12Text}</h3>
             <div className={css(st.containerBorder)}>
                 {mapResponsesTable}
             </div>
@@ -401,6 +401,9 @@ class Survey2ResultBuild extends React.Component {
 }
 
 const st = StyleSheet.create({
+    shad: {
+        textShadow: '1px 1px 2px #3300CC',
+    },
     mainResultsDiv: {
         textAlign: 'center',
     },

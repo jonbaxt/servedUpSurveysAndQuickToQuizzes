@@ -109,24 +109,27 @@ class Survey3ResultBuild extends React.Component {
             }
         }
         return (<div>
-            <h2>{survey3Name}</h2>
+            <h2 className={css(st.shad)}>{survey3Name}</h2>
             {survey3Image}
-            <h3>Question 1</h3>
-            <h3>{question1Text}</h3>
+            <h3 className={css(st.shad)}>Question 1</h3>
+            <h3 className={css(st.shad)}>{question1Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion1ViewLine()}>Line</button>
             {ques1ResultsView()}
-            <h3>Question 2</h3>
-            <h3>{question2Text}</h3>
+            <h3 className={css(st.shad)}>Question 2</h3>
+            <h3 className={css(st.shad)}>{question2Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion2ViewLine()}>Line</button>
             {ques2ResultsView()}
-            <h3>Question 3</h3>
-            <h3>{question3Text}</h3>
+            <h3 className={css(st.shad)}>Question 3</h3>
+            <h3 className={css(st.shad)}>{question3Text}</h3>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewPie()}>Pie</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewBar()}>Bar</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={() => this.handleQuestion3ViewLine()}>Line</button>
             {ques3ResultsView()}
         </div>)
     }
 }
 const st = StyleSheet.create({
+    shad: {
+        textShadow: '1px 1px 2px #3300CC',
+    },
     mainResultsDiv: {
         textAlign: 'center',
     },

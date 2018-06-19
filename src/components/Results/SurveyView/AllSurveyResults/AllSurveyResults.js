@@ -59,7 +59,7 @@ handleSur3 = () => {
             }
         }
      return(<div className={css(st.mainResultsDiv, st.pageStart)}>
-            <h1>All Survey Results</h1><br/>
+            <h1 className={css(st.shad)}>All Survey Results</h1><br/>
             <button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur1()}>Survey 1</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur2()} >Survey 2</button><button className={css(st.surveyButtons, st.buttonsHover)} onClick={()=> this.handleSur3()} >Survey 3</button>
     {currentSurveyViewed()}
         </div>)
@@ -67,6 +67,9 @@ handleSur3 = () => {
 }
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const st = StyleSheet.create({
+    shad: {
+        textShadow: '1px 1px 2px #3300CC',
+    },
     pageStart: {
         animationName: initialOpacityKeyframes,
         animationDuration: '1s',

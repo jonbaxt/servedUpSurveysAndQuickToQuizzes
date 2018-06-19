@@ -24,15 +24,15 @@ class SurveyCreateStart extends React.Component {
         this.handleNewAnonymousChange = this.handleNewAnonymousChange.bind(this);
     }
     handleNewTitle(newTit) {
-        console.log(newTit)
+        // console.log(newTit)
         this.setState({ newTitle: newTit })
     }
     handleNewDescription(newDes) {
-        console.log(newDes)
+        // console.log(newDes)
         this.setState({ newDescription: newDes })
     }
     handleNewStartImg(newImg) {
-        console.log(newImg)
+        // console.log(newImg)
         this.setState({ newStartImg: newImg })
     }
     handleNewAnonymousChange(trueOrFalse) {

@@ -12,7 +12,7 @@ class QuizWizardEnd extends React.Component {
         const currentId = Number(this.props.match.params.currentUserId);
         // axios.get(`/api/findSessionUser/${this.props.match.params.currentUserId}`).then( resBack => { console.log('I went into database', resBack) }).catch( err => console.log('Couldnt make it to the database'))
         axios.post('/api/quizAnswerSubmission/SubmitToQuizResultsTable', resultsTemporaryStore).then(resBack => {
-            console.log('I went into database', resBack.data);
+            // console.log('I went into database', resBack.data);
         }).catch(err => console.log('Couldnt make it to the database'))
 
         axios.get(`/api/quizResultsByUser/${currentId}`).then(userQuizResults => {
@@ -23,8 +23,8 @@ class QuizWizardEnd extends React.Component {
     }
 
     render() {
-        console.log(this.props.resultsTemporaryStore)
-        console.log(this.props.user.user_name)
+        // console.log(this.props.resultsTemporaryStore)
+        // console.log(this.props.user.user_name)
         return (
             <div className={css(styles.quizMainEnd, styles.pageStart)}>
                 <h1 className={css(styles.h1Normal, styles.h1Tablet, styles.h1Laptop, styles.h1Biggest)}>End of Quiz</h1><br/><br/>

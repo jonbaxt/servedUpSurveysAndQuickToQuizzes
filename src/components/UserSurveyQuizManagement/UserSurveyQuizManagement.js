@@ -17,7 +17,9 @@ class UserSurveyQuizManagement extends Component {
     render() {
         return (
             <div className={css(Styles.pageStart, Styles.SurveyQuizMainBox)}>
-                <div className={css(Styles.titles)} ><h1>{this.props.user.user_name}'s </h1><h2>Surveys/Quizzes</h2><h3>Maintenance and Management</h3><br />
+                <div 
+                className={css(Styles.titles)} 
+                ><h1>{this.props.user.user_name}'s </h1><h2>Surveys/Quizzes</h2><h3>Maintenance and Management</h3><br />
                     <h2 className={css(Styles.underLiner)}>Quizzes</h2></div>
                 <UserQuizList getUser={this.props.user} getQuizzes={this.props.quizTable} /><br />
                 <h2 className={css(Styles.underLiner, Styles.titles)}>Surveys</h2>
@@ -29,13 +31,17 @@ class UserSurveyQuizManagement extends Component {
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const Styles = StyleSheet.create({
     titles: {
-        background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        // background: 'linear-gradient(to left,#330000, #330033, #330066, #330099, #3300CC, #3300FF)',
+        textShadow: '1px 1px 2px #3300CC',
         paddingLeft: '0px',
         paddingRight: '0px',
         margin: '2px',
         marginTop: '0px',
-        boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
+        // boxShadow: '2px 6px 4px rgba(0, 204, 255, 0.9)',
     },
+    // textShadowing: {
+    //     textShadow: '1px 1px 2px #3300CC',
+    // },
     pageStart: {
         animationName: initialOpacityKeyframes,
         animationDuration: '1s',

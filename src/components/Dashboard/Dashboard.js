@@ -7,7 +7,13 @@ import './Dashboard.css'
 import QuizListHOC from './QuizList';
 import SurveyListHOC from './SurveyList';
 
-import { getUser, getUserById, getAllUsers, getSurveyAdmins, getQuizTable, getMegaQuizTable, getMegaSurveyTable, setSelectedQuiz, setSelectedSurvey, getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
+import { 
+    // getUser, getUserById, getAllUsers, getSurveyAdmins, 
+    getQuizTable, getMegaQuizTable, getMegaSurveyTable, 
+    setSelectedQuiz, setSelectedSurvey, 
+    getSurveyTable, setCurrentPathname } from '../../ducks/reducer';
+
+import { getUser, getUserById, getAllUsers, getSurveyAdmins } from '../../ducks/actionCreatorsUser'
 
 class Dashboard extends Component {
     constructor() {
@@ -46,15 +52,15 @@ class Dashboard extends Component {
             <div className={css(Styles.pageStart, Styles.dashMain)} >
                 <div className='body'>
                     <div className='AvailableSurveysBox'>
-                        <div className='titles'>
+                        {/* <div className='titles'> */}
                             <p className='boxTitles' >Surveys</p>
-                        </div>
+                        {/* </div> */}
                         <SurveyListHOC surveyTable={this.props.surveyTable} user={this.props.user} loading={this.props.surveyTable.length === 0} />
                     </div>
                     <div className='AvailableQuizzesBox' >
-                        <div className='titles'>
+                        {/* <div className='titles'> */}
                             <p className='boxTitles' >Quizzes</p>
-                        </div>
+                        {/* </div> */}
                         <QuizListHOC quizTable={this.props.quizTable} user={this.props.user} loading={this.props.quizTable.length === 0} />
                     </div>
                 </div>

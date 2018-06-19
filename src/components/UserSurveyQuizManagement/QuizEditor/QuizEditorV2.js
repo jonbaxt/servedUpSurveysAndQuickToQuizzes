@@ -586,7 +586,7 @@ class QuizEditor extends Component {
 
         return (
             <div className={css(Styles.marCent, conditionalDisplayStyles.pageStart)} >
-                <h1>Quiz Editor</h1>
+                <h1  className={css(st.textShadowing)}>Quiz Editor</h1>
                 <br />
                 <QuizEditBuild currentQuizInfo={this.props.currentQuizInfo} />
             </div>
@@ -747,6 +747,11 @@ const conditionalDisplayStyles = StyleSheet.create({
     },
 })
 // REGULAR STYLES=================================================================================================================
+const st = StyleSheet.create({
+    textShadowing: {
+        textShadow: '1px 1px 2px #3300CC',
+    }
+})
 const Styles = StyleSheet.create({
     editorMainBox: {
         display: 'flex',

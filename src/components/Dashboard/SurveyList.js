@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import loadingHOC from '../A-HigherOrderComponents/LoadingHOC';
+import { setSelectedSurvey } from '../../ducks/reducer'
 
-// function QuizList(props){
 class SurveyList extends React.Component {
 
     render() {
         let showSurveyList = this.props.surveyTable.filter(el => el.site_approval === true ).map((element, index) => {
-            // let anonymous = 'not anonymous';
-            // element.anonymous ? anonymous = 'anonymous' : anonymous = 'not anonymous'
             return (
                 <Link to={`/${this.props.user.id}/survey/${element.survey_id}/start`} key={element.survey_id} onClick={() => this.props.setSelectedSurvey(element.survey_id)}
                     className='noLineUnderneath'
@@ -43,4 +42,4 @@ class SurveyList extends React.Component {
 
 }
 
-export default loadingHOC(SurveyList)
+export default connect(null, { setSelectedSurvey } )(loadingHOC(SurveyList))

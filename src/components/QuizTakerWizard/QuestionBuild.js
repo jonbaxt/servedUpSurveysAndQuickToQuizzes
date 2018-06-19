@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-
-import { insertNewQuizAnswerIntoResultsArray, getMegaQuizTable } from '../../ducks/reducer';
 import { Link } from 'react-router-dom';
 
+import { insertNewQuizAnswerIntoResultsArray, getMegaQuizTable } from '../../ducks/reducer';
+import { handleProp, calcQuesCount, calcQuestionType, calcQuizTitle, calcQuesNum, calcQuesImage, calcQuesText } from './QuestionBuildComponents/BuildQuestionData'; 
+import MultipleChoiceAnswer from './QuestionBuildComponents/MultipleChoiceAnswer';
+import TextAreaAnswer from './QuestionBuildComponents/TextAreaAnswer';
 function QuestionBuild(props) {
     return (
         <div className={css(styles.fuzzIn)} >
@@ -13,19 +15,14 @@ function QuestionBuild(props) {
     )
 }
 function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
-    let handleProps = megaTable.filter(arrayValue => arrayValue.quiz_id === Number(nestedRoutes.quizId) && arrayValue.ques_num === Number(nestedRoutes.quesId))
-    let quesNumArray = megaTable.filter(arrayValue => arrayValue.quiz_id === Number(nestedRoutes.quizId)).map(element => element.ques_num).filter((element, index, origin) => element !== origin[index - 1])
-    let quesCount = Math.max(...quesNumArray)    // Get the number of questions
-    let qType = megaTable.filter(el => el.quiz_id === Number(nestedRoutes.quizId) && el.ques_num === Number(nestedRoutes.quesId)).map(el => el.ques_type).filter((el, ind, orig) => el !== orig[ind - 1])
-    let qT = qType[0];      //Get the question type for logic statement.
-    let currentQuizTitle = megaTable.filter(el => el.quiz_id === Number(nestedRoutes.quizId)).map(el => el.title).filter((val, ind, orig) => val !== orig[ind - 1])
-    let quizTitle = currentQuizTitle[0];    //Quiz Title for display
-    let currentQuesNum = megaTable.filter(el => el.quiz_id === Number(nestedRoutes.quizId) && el.ques_num === Number(nestedRoutes.quesId)).map(el => el.ques_num).filter((val, ind, orig) => val !== orig[ind - 1])
-    let questionNumber = currentQuesNum[0]; //Question Number
-    let currentQuesImg = megaTable.filter(el => el.quiz_id === Number(nestedRoutes.quizId) && el.ques_num === Number(nestedRoutes.quesId)).map(el => el.ques_img).filter((val, ind, orig) => val !== orig[ind - 1])
-    let questionImage = currentQuesImg[0]; //Question Image
-    let currentQuesText = megaTable.filter(el => el.quiz_id === Number(nestedRoutes.quizId) && el.ques_num === Number(nestedRoutes.quesId)).map(el => el.ques_text).filter((val, ind, orig) => val !== orig[ind - 1])
-    let questionText = currentQuesText[0]; //Question Text
+    let handleProps = handleProp(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
+    let quesCount = calcQuesCount(megaTable, nestedRoutes.quizId)
+    let qT = calcQuestionType(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
+    let quizTitle = calcQuizTitle(megaTable, nestedRoutes.quizId)
+    let questionNumber = calcQuesNum(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
+    let questionImage = calcQuesImage(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
+    let questionText = calcQuesText(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
+
     let possibleAnswers = handleProps.map(element => {  //Possible answers to map through
         return { ques_image: element.ques_image, ans_id: element.ans_id, ans_num: element.ans_num, ans_text: element.ans_text, ans_img: element.ans_img, ans_special: element.ans_special, is_correct: element.is_correct }
     })
@@ -33,69 +30,25 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
     let nextRoute = Number(nestedRoutes.quesId) + 1;
     if (qT === "mult-choice") {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
-            //TODO: 
-            //TODO: 
             //TODO: Need to fix the Taken count to increment properly.
-            //TODO: 
-            //TODO: 
-            //TODO: 
             const compiledAnswer = {
                 Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: 1, Survey_Taker_Id: nestedRoutes.currentUserId
             }
             return (
-                <Link to={
-                    quesCount <= nestedRoutes.quesId ?
-                        `/quizDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.quizId}/${nestedRoutes.quesId}/complete`
-                        : `/${nestedRoutes.currentUserId}/quiz/${nestedRoutes.quizId}/${nextRoute}`
-                }
-                    style={{ textDecoration: 'none' }}
-                    key={element.ans_id}>
-                    <span className={css(styles.answerBoxes, styles.answerBoxesTablet, styles.answerBoxesLaptop, styles.answerBoxesBiggest, styles.hoverButton, styles.fuzzIn)} onClick={() => {
-                        propsObject.insertNewQuizAnswerIntoResultsArray(compiledAnswer)
-                        // console.log(`I was clicked ${element.ans_id} and ${element.ans_text}`)
-                    }} >
-                        {decideImageAnswerArea(element.ans_img)}
-                        <p className={css(styles.answerBoxText, styles.answerBoxTextTablet, styles.answerBoxTextLaptop, styles.answerBoxTextBiggest)} >{element.ans_text}</p>
-                    </span>
-                </Link>
+                <MultipleChoiceAnswer key={element.ans_id} nestedRoutes={nestedRoutes} propsObject={propsObject} element={element} compiledAnswer={compiledAnswer} quesCount={quesCount} nextRoute={nextRoute} decideImageAnswerArea={decideImageAnswerArea}
+                handleProps={handleProps} />
             )
         })
     } else if (qT === 'text-area') {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
             let textAreaText = ''
             return (
-                <span key={element.ans_id}>
-                    <textarea onChange={(e) => textAreaText = e.target.value} className={css(styles.fuzzIn)} />
-                    <Link to={
-                        quesCount <= nestedRoutes.quesId ?
-                            `/quizDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.quizId}/${nestedRoutes.quesId}/complete`
-                            : `/${nestedRoutes.currentUserId}/quiz/${nestedRoutes.quizId}/${nextRoute}`
-                    }
-                        style={{ textDecoration: 'none' }}
-                        key={element.ans_id}>
-                        <button className={css(styles.answerBoxes, styles.hoverButton, styles.fuzzIn)} onClick={() => {
-                            // console.log(`Hello, the Ans_Id# is ${element.ans_id}  ${textAreaText}`)
-                            let compiledAnswer = {
-                                Quiz_Ques_Id: handleProps[0].ques_id,
-                                Answer_Id: element.ans_id,
-                                Takers_Answer: textAreaText,
-                                Taken_Count: 1,
-                                Survey_Taker_Id: nestedRoutes.currentUserId
-                            }
-                            propsObject.insertNewQuizAnswerIntoResultsArray(compiledAnswer)
-                        }}>Submit Text Entry</button>
-                    </Link>
-                </span>
+                <TextAreaAnswer  key={element.ans_id} nestedRoutes={nestedRoutes} propsObject={propsObject} element={element} quesCount={quesCount} nextRoute={nextRoute} textAreaText={textAreaText} />
             )
         })
     } else if (qT === 'pic_guess') {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
-            //TODO: 
-            //TODO: 
             //TODO: Need to fix the Taken count to increment properly.
-            //TODO: 
-            //TODO: 
-            //TODO: 
             const compiledAnswer = {
                 Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: 1, Survey_Taker_Id: nestedRoutes.currentUserId
             }

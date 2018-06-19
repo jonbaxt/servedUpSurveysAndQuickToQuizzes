@@ -39,7 +39,7 @@ class QuizEditor extends Component {
     }
     confirmDeleteBoxChange = () => {
         this.setState({ confirmDeleteBoxVisible: !this.state.confirmDeleteBoxVisible })
-        console.log(this.state.confirmDeleteBoxVisible)
+        // console.log(this.state.confirmDeleteBoxVisible)
     }
     handleSelectedChange = (e) => {
         this.setState({ selectedChange: e })
@@ -71,7 +71,7 @@ class QuizEditor extends Component {
     handleEditButttons = (userEdit) => {
         const bodyInfo = [this.state.selectedChange, userEdit]
         axios.put(`/api/quizedit/from/quiztable/where/id/${Number(this.props.match.params.quizId)}`, bodyInfo).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.props.setCurrentQuizInfo(res.data[0])
             this.editBoxChange();
         }).catch(err => console.log('Didn`t work'))
@@ -80,12 +80,12 @@ class QuizEditor extends Component {
     handleQuestionButtons = (userEdit) => {
         const bodyInfo = [this.state.selectedChange, userEdit]
 
-        console.log(bodyInfo)
-        console.log(this.state.temporaryQuesIdSelected)
-        console.log(this.props.match.params.quizId)
+        // console.log(bodyInfo)
+        // console.log(this.state.temporaryQuesIdSelected)
+        // console.log(this.props.match.params.quizId)
         // axios.put(`/api/quizedit/from/quizquestionstable/where/${Number(this.props.match.params.quizId)}/${Number(this.state.temporaryQuesIdSelected)}`, bodyInfo).then(res => {
         axios.put(`/api/quizedit/from/quizquestionstable/where/${this.props.match.params.quizId}/${this.state.temporaryQuesIdSelected}`, bodyInfo).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.props.setCurrentQuizQuestionsInfo(res.data)
             this.editQuestionBoxChange();
         }).catch(err => console.log('Didn`t work', err))
@@ -148,7 +148,7 @@ class QuizEditor extends Component {
                                 // disabled={this.state.editButtonDisabled}
                                 onClick={() => {
 
-                                    console.log('You clicked the edit')
+                                    // console.log('You clicked the edit')
                                     // this.handleEditButttons()
                                     this.handleSelectedChange('title')
                                     this.editBoxChange()
@@ -222,7 +222,7 @@ class QuizEditor extends Component {
                                 onClick={() => {
                                     this.confirmDeleteBoxChange()
                                     // this.handleDeleteQuizButton();
-                                    console.log('NO DON`T DELETE IT! CHERISH IT!')
+                                    // console.log('NO DON`T DELETE IT! CHERISH IT!')
                                 }} >DELETE QUIZ</span>
                             <p>WARNING: CLICKING THIS WILL REMOVE QUIZ COMPLETELY</p>
                             <br />
@@ -375,7 +375,7 @@ class QuizEditor extends Component {
                                 <br />
                                 <button className={css(Styles.editStyle)} onClick={() => {
                                     this.handleTemporaryAnsIdSelected(ansElem.ans_id)
-                                    console.log(this.state.temporaryAnsIdSelected)
+                                    // console.log(this.state.temporaryAnsIdSelected)
                                     // this.editBoxChange()
                                 }} >Edit Answer #{ind + 1}</button>
                                 <br />
@@ -445,7 +445,7 @@ class QuizEditor extends Component {
                                 <p>New Title</p>
                                 <input type='text' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -459,7 +459,7 @@ class QuizEditor extends Component {
                                 <button
                                     className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -475,7 +475,7 @@ class QuizEditor extends Component {
                                 <p>New Description</p>
                                 <textarea type='text' rows='4' cols='30' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -485,7 +485,7 @@ class QuizEditor extends Component {
                                 >Cancel</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -501,7 +501,7 @@ class QuizEditor extends Component {
                                 <p>New URL Image Enter</p>
                                 <input type='text' value={this.state.tempTexBoxSave}
                                     onChange={(e) => {
-                                        console.log(e.target.value)
+                                        // console.log(e.target.value)
                                         this.handleTempTextBoxChange(e.target.value)
                                     }} />
                             </div>
@@ -513,7 +513,7 @@ class QuizEditor extends Component {
                                 >Cancel</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(this.state.tempTexBoxSave)
                                     }} >Save</button>
                             </div>
@@ -525,12 +525,12 @@ class QuizEditor extends Component {
                             <div className={css(Styles.flBox, Styles.flSpAr)}>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(true)
                                     }} >Yes Timed</button>
                                 <button className={css(Styles.editStyle)}
                                     onClick={() => {
-                                        console.log('Will Send to Axios From Here')
+                                        // console.log('Will Send to Axios From Here')
                                         this.handleEditButttons(false)
                                     }} >No Timed</button>
                             </div>

@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
-import { setCurrentPathname, getAllUsers, getSurveyAdmins, getQuizTable, getSurveyTable, getMegaQuizTable, getMegaSurveyTable } from '../../ducks/reducer';
+import { setCurrentPathname, 
+    // getAllUsers, getSurveyAdmins, 
+    getQuizTable, getSurveyTable, getMegaQuizTable, getMegaSurveyTable } from '../../ducks/reducer';
+import { getAllUsers, getSurveyAdmins } from '../../ducks/actionCreatorsUser';
 import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare'
 import faMinusSquare from '@fortawesome/fontawesome-free-solid/faMinusSquare'
 

@@ -14,67 +14,60 @@ import faFolderOpen from '@fortawesome/fontawesome-free-solid/faFolderOpen'
 import faEject from '@fortawesome/fontawesome-free-solid/faEject'
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 
-import { resetReduxToInitialState, setCurrentPathname } from '../../ducks/reducer' 
+import { resetReduxToInitialState, setCurrentPathname } from '../../ducks/reducer'
 
-// function NavMenu() {
 class NavMenu extends Component {
     constructor() {
         super()
         this.state = {
-            showNav: false
+            showNav: false,
+            currentAdmin: '',
         }
     }
-
+    componentDidMount() {
+        if (this.props.surveyAdminsTable.length === 0) {
+            let thisAdmin = this.props.surveyAdminsTable.filter(el => el.survey_user_id === this.props.user.id);
+            this.setState({ currentAdmin: thisAdmin })
+        }
+    }
     changeVisibility = () => {
-        if(this.props.pathnameCurrent.length !== 0){
-            if(this.props.pathnameCurrent[0] !== '/'){
+        if (this.props.pathnameCurrent.length !== 0) {
+            if (this.props.pathnameCurrent[0] !== '/') {
                 return css(hideStyles.visNav, Styles.topNav, Styles.trans)
-            }else{
+            } else {
                 return css(hideStyles.hidNav, Styles.topNav)
             }
-        }else{
+        } else {
             return css(Styles.topNav, Styles.trans)
         }
     }
-
     showNavFn = () => {
         this.setState({ showNav: !this.state.showNav })
-        // console.log(this.state.showNav)
     }
-
     render() {
-        // console.log(this.props)
-        // console.log(this.props.pathnameCurrent)
         let showImage = () => {
-            if(this.props.user){
+            if (this.props.user) {
                 return (<img className={css(Styles.userImg, Styles.tabletUserImage, Styles.laptopUserImage, Styles.biggestUserImage)} src={this.props.user.img} alt='' />)
-            }else{
-                return(<div></div>)
+            } else {
+                return (<div></div>)
             }
         }
-
         let adminPrivilegeLink = () => {
-            let currentAdmin = ''
-            if( this.props.surveyAdminsTable.length !== 0 ){
-            currentAdmin = this.props.surveyAdminsTable.filter(el => el.survey_user_id === this.props.user.id)           
-            } 
-            if(currentAdmin !== ''){
-                return(<div><Link to={`/Admin/Dashboard/${this.props.user.id}/AdminView`}>{showImage()}</Link></div> )
-            }else{
-                return(<div>{showImage()}</div>)
+            if (this.state.currentAdmin !== '') {
+                return (<div><Link to={`/Admin/Dashboard/${this.props.user.id}/AdminView`}>{showImage()}</Link></div>)
+            } else {
+                return (<div>{showImage()}</div>)
             }
         }
 
         return (
             <header className={this.changeVisibility()}>
-            {/* <header className={css(Styles.topNav, Styles.trans)}> */}
                 <div
                     className={css(Styles.topArea)}
                 >
                     <div className={css(Styles.flR)}>
                         {adminPrivilegeLink()}
                         <Link className={css(Styles.noLine)} to={`/Dashboard/${this.props.user.id}`} >
-                        {/* <Link className={css(Styles.noLine)} to={`/Dashboard`} > */}
                             <h1 className={css(Styles.hTag, Styles.hTagTablet, Styles.hTagLaptop, Styles.hTagBiggest)}>
                                 <FontAwesomeIcon icon={faCofee} />
                                 Served Up Surveys
@@ -85,62 +78,56 @@ class NavMenu extends Component {
                         className={css(Styles.threeBarImage, Styles.hTagTablet, Styles.hTagLaptop, Styles.hTagBiggest)}
                         onClick={this.showNavFn}
                     />
-                    {/* <img className={css(Styles.threeBarImage)} src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png'
-                        alt=''
-                        onClick={this.showNavFn} /> */}
                 </div>
                 <div
-                    // className={css (this.state.showNav ? Styles.dropDown : Styles.dropDown, Styles.hide )}>
                     className={this.state.showNav ?
                         css(Styles.dropDown, Styles.dropDownTablet, Styles.dropDownLaptop, Styles.dropDownBiggest) :
                         css(Styles.dropDown, Styles.hide)
                     }>
                     <div className={css(Styles.dropDownInnerBox)}>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/createnew/${this.props.user.id}/start`} >
-                        {/* <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/createnew/userId/start`} > */}
                             <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => {
                                 this.showNavFn()
-                                console.log('Clicked Create Survey/Quiz')}}>
+                                // console.log('Clicked Create Survey/Quiz')
+                            }}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faPlus} />
                                 <span>Create Survey/Quiz</span>
                             </span>
                         </Link>
-                        <Link 
-                        className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} 
-                        to={`/mainresults/resultsnavredirect/${this.props.user.id}/home`} >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
-                                console.log('Clicked Results')}}>
+                        <Link
+                            className={css(Styles.dropDownInnerInnerBox, Styles.noLine)}
+                            to={`/mainresults/resultsnavredirect/${this.props.user.id}/home`} >
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => {
+                                this.showNavFn()
+                                // console.log('Clicked Results')
+                            }}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faChartArea} />
                                 <span>Results</span>
                             </span>
                         </Link>
                     </div>
                     <div className={css(Styles.dropDownInnerBox)}>
-                        {/* <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/manage/userssurveys/userId`} > */}
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to={`/manage/userssurveys/${this.props.user.id}`} >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { this.showNavFn()
-                                console.log('Clicked Your Surveys and Quizzes')}}>
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => {
+                                this.showNavFn()
+                                // console.log('Clicked Your Surveys and Quizzes')
+                            }}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faFolderOpen} />
                                 <span>Your Surveys and Quizzes</span>
                             </span>
                         </Link>
                         <Link className={css(Styles.dropDownInnerInnerBox, Styles.noLine)} to='/' >
-                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => { 
+                            <span className={css(Styles.dropDownInnerInnerBox)} onClick={() => {
                                 this.props.resetReduxToInitialState();
                                 this.props.setCurrentPathname('/')
                                 this.showNavFn()
-                                console.log('Clicked Logout')}}>
+                                // console.log('Clicked Logout')
+                            }}>
                                 <FontAwesomeIcon className={css(Styles.iconLarge, Styles.iconTablet, Styles.iconLaptop, Styles.iconBiggest)} icon={faEject} />
                                 <span>Logout</span>
                             </span>
                         </Link>
                     </div>
-                    {/* <ul>
-                        <li className={css(Styles.showBorder)}>Create Survey/Quiz</li>
-                        <li className={css(Styles.showBorder)}>Your Surveys</li>
-                        <li className={css(Styles.showBorder)}>See Results</li>
-                        <li className={css(Styles.showBorder)}>Logout</li>
-                    </ul> */}
                 </div>
             </header>
         )
@@ -349,4 +336,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { resetReduxToInitialState, setCurrentPathname  })(NavMenu);
+export default connect(mapStateToProps, { resetReduxToInitialState, setCurrentPathname })(NavMenu);

@@ -58,15 +58,15 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
     }
 
     handleNewTitle(newTit) {
-        console.log(newTit)
+        // console.log(newTit)
         this.setState({ newTitle: newTit })
     }
     handleNewDescription(newDes) {
-        console.log(newDes)
+        // console.log(newDes)
         this.setState({ newDescription: newDes })
     }
     handleNewStartImg(newImg) {
-        console.log(newImg)
+        // console.log(newImg)
         this.setState({ newStartImg: newImg })
     }
     handleNewTimedChange(trueOrFalse) {
@@ -84,7 +84,7 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
             Quiz_Owner: this.props.user.id
         }
         axios.post('/api/quizCreation/newQuiz', compiledAnswer).then((response) => {
-            console.log(response)
+            // console.log(response)
         }).catch((err) => console.log(err))
     }
     render() {

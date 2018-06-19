@@ -27,15 +27,15 @@ class QuizCreateStart extends React.Component {
         this.handleNewTimedChange = this.handleNewTimedChange.bind(this);
     }
     handleNewTitle(newTit) {
-        console.log(newTit)
+        // console.log(newTit)
         this.setState({ newTitle: newTit })
     }
     handleNewDescription(newDes) {
-        console.log(newDes)
+        // console.log(newDes)
         this.setState({ newDescription: newDes })
     }
     handleNewStartImg(newImg) {
-        console.log(newImg)
+        // console.log(newImg)
         this.setState({ newStartImg: newImg })
     }
     handleNewTimedChange(trueOrFalse) {
@@ -55,7 +55,7 @@ class QuizCreateStart extends React.Component {
         axios.post('/api/quizCreation/newQuiz', compiledAnswer).then((response) => {
             this.props.getNewQuizJustCreated(response.data)
             this.props.setSelectedQuiz(Number(response.data[0].quiz_id))   
-            console.log(response)
+            // console.log(response)
         }).catch((err) => console.log(err))
     }
     render() {

@@ -7,7 +7,8 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faWrench from '@fortawesome/fontawesome-free-solid/faWrench'
 // import
 
-import { getAllUsers } from '../../../../ducks/reducer';
+// import { getAllUsers } from '../../../../ducks/reducer';
+import { getAllUsers } from '../../../../ducks/actionCreatorsUser';
 
 
 class UserDetails extends React.Component {
@@ -43,15 +44,15 @@ class UserDetails extends React.Component {
         axios.put(`/api/editUserName/${userId}`, name).then(tableReturn => {
             this.props.getAllUsers(tableReturn.data)
         }).catch(err => console.log(err))
-        console.log(userId, name)
+        // console.log(userId, name)
     }
 
     handleEditUserImage = (userId, image) => {
-        console.log(userId, image)
+        // console.log(userId, image)
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         // console.log(this.props.giveUser.id === this.state.currentClicked)
         let createNewQuizList = this.props.quizTable.filter(el => el.quiz_owner_id === this.props.giveUser.id).map(el => {
             if (el.quiz_owner_id === this.props.giveUser.id) {
@@ -89,7 +90,7 @@ class UserDetails extends React.Component {
 
                 <div className={css(st.alwaysView)} onClick={() => {
                     this.handleClicked()
-                    console.log('clicked', this.props.giveUser.id)
+                    // console.log('clicked', this.props.giveUser.id)
                 }} >
                     <div>
                         <img src={this.props.giveUser.img} alt='' className={css(st.picResize)} />

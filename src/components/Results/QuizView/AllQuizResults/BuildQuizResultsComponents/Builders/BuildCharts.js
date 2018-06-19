@@ -23,12 +23,13 @@ export default function BuildCharts(quizResults, numberOfQuestions){
             datasets: [
                 {
                     label: 'Total Results Correct By Question',
-                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    backgroundColor: ['red', 'green'],
+                    // backgroundColor: 'rgba(255,99,132,0.2)',
                     borderColor: 'rgba(255,99,132,1)',
-                    pointBackgroundColor: 'rgba(255,99,132,1)',
+                    // pointBackgroundColor: 'rgba(255,99,132,1)',
                     pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(255,99,132,1)',
+                    // pointHoverBackgroundColor: '#fff',
+                    // pointHoverBorderColor: 'rgba(255,99,132,1)',
                     data: quizResults
                 }
             ]

@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
 import SurveyWizardQuestionBuild from './SurveyWizardQuestionBuild';
-import { getUser, getMegaSurveyTable } from '../../ducks/reducer';
+import { 
+    // getUser, 
+    getMegaSurveyTable } from '../../ducks/reducer';
+import { getUser } from '../../ducks/actionCreatorsUser';
 
 class SurveyWizardQuestion extends Component {
     constructor() {

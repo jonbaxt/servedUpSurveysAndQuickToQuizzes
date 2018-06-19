@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import cup from '../../resources/Pictures/teaCupDrawing.jpg'
-// import People from './People';
+import LoadingAnim from './loadingAnim';
 
 export default function LoadingHOC(WrappedComponent) {
     return class extends Component {
@@ -13,11 +12,8 @@ export default function LoadingHOC(WrappedComponent) {
     render(){
         return(
             <div>
-
-                {/* { this.props.loading ? <h1>ITS THE END!</h1> : <WrappedComponent {...this.props} />} */}
-                {/* { this.props.loading ? <img src={cup} alt='' /> : <WrappedComponent {...this.props} />} */}
-                {/* { this.props.loading ? '...loading' : <WrappedComponent {...this.props} />} */}
-                { this.props.loading ? <h1>...loading page</h1> : <WrappedComponent {...this.props} />}
+                {/* { this.props.loading ? <h1>...loading page</h1> : <WrappedComponent {...this.props} />} */}
+                { this.props.loading ? <LoadingAnim /> : <WrappedComponent {...this.props} />}
             </div>
         )
     }

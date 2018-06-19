@@ -1,10 +1,7 @@
 import axios from 'axios';
-
 const initialState = {
     //Main app use variables
     //User information of who is currently logged in.
-
-    //FIXME: This will need to be not hardcoded after building project
     user: {
     },
     pathnameCurrent: [],
@@ -18,8 +15,6 @@ const initialState = {
     quizNewCreatedTable: [],
     //All of this is for people who are currently taking quizzes
     //Logic stores for dashboard to store for app to use to figure out which quiz being used.
-    
-    
     currentQuizId: -1,
     //For testing in the creator;
     // currentQuizId: '6',
@@ -44,10 +39,6 @@ const initialState = {
     resultsSurTemporaryStore: [],
     scaleValueForSurveysSave: 5
 }
-
-
-
-
 //User Types
 const GET_USER = 'GET_USER';
 const GET_USER_BY_ID = 'GET_USER_BY_ID';
@@ -82,48 +73,7 @@ const GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY = 'GET_SURVEY_RESULTS_JUST_POS
 const GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE = 'GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE';
 
 //Action Creators
-
-//-------------------------------------------------User Actions----------------------------------------------------------------------
-//Gets the current user from login cycle.
-export function getUser(userResult) {
-    // let userResult = axios.get('/auth/me').then(res => {
-    //     return res.data // this.props.getUser(res.data)
-    // }).catch((err) => console.log('Didnt work', err))
-    return {
-        type: GET_USER,
-        payload: userResult
-    }
-}
-export function getUserById(id) {
-
-    return {
-        type: GET_USER_BY_ID,
-        payload: id
-    }
-}
-//Gets complete list of users from from app users database.
-export function getAllUsers() {
-    let surveyUserTable = axios.get('/api/getSurveyUsers').then(response => {
-        return response.data
-    }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
-
-    // console.log(surveyUserTable)
-    return {
-        type: GET_ALL_USERS,
-        payload: surveyUserTable
-    }
-}
-export function getSurveyAdmins() {
-    let surveyAdminsTable =  axios.get('/api/getAdmins').then(response => {
-        return response.data
-        // this.props.getSurveyAdmins(response.data);
-    }).catch((err) => console.log(`Problem when trying to get all the users into the place. ${err}`))
-    
-    return {
-        type: GET_SURVEY_ADMINS,
-        payload: surveyAdminsTable
-    }
-}
+//-------------------------------------------------VarieousPaths Actions----------------------------------------------------------------------
 export function setCurrentPathname(newPathname) {
     return {
         type: SET_CURRENT_PATHNAME,
