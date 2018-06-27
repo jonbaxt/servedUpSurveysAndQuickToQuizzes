@@ -3,12 +3,7 @@ import LoadingAnim from './loadingAnim';
 
 export default function LoadingHOC(WrappedComponent) {
     return class extends Component {
-//     constructor(){
-//     super()
-//     this.state= {
 
-//     }
-// }
     render(){
         return(
             <div>

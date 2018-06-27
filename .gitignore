@@ -3,7 +3,7 @@
 node_modules
 .env
 .env.prod
-/db/seedfile
+/db/seedfile.sql
 
 # dependencies
 /node_modules

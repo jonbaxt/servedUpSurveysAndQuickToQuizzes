@@ -6,7 +6,7 @@ import { StyleSheet, css } from 'aphrodite';
 import QuestionBuild from './QuestionBuild';
 import { 
     // getUser, 
-    getMegaQuizTable } from '../../ducks/reducer';
+    getMegaQuizTable, getQuizResultsUltraJoinedTableThroughAxios } from '../../ducks/reducer';
 import { getUser } from '../../ducks/actionCreatorsUser';
 
 class QuizWizardQuestion extends Component {
@@ -27,6 +27,9 @@ class QuizWizardQuestion extends Component {
         if (this.props.megaQuizTable.length === 0) {
                 this.props.getMegaQuizTable()
         }
+        if(this.props.quizResultsUltraJoinedTable.length === 0){
+        this.props.getQuizResultsUltraJoinedTableThroughAxios();
+        }
     }
     handleNavigationErrors() {
         if (this.props.match.params.quesId === 1) {
@@ -35,16 +38,14 @@ class QuizWizardQuestion extends Component {
     }
 
     render() {
-        // let nextRoute = Number(this.props.match.params.quesId) + 1;
-        let quesNumArray = this.props.megaQuizTable.filter((arrVal) => arrVal.quiz_id === Number(this.props.match.params.quizId)).map((el) => el.ques_num).filter((el, ind, orig) => el !== orig[ind - 1])
+        let quesNumArray = [];
+        if(this.props.megaQuizTable.length !== 0){
+        quesNumArray = this.props.megaQuizTable.filter((arrVal) => arrVal.quiz_id === Number(this.props.match.params.quizId)).map((el) => el.ques_num).filter((el, ind, orig) => el !== orig[ind - 1])
+        }
         let quesCount = Math.max(...quesNumArray)
         console.log(quesCount)
-        // this.setState({ countOfQuestions: quesCount })
         return (
             <div className={css(quesStyles.quizWizQuesMain, quesStyles.pageStart)} >
-                {/* <div className={css(quesStyles.buttonDiv)} >
-                    <Link className={css(quesStyles.bottomButtons)} to={`/${this.props.match.params.currentUserId}/quiz/${this.props.match.params.quizId}/start`} >Restart</Link>
-                </div> */}
                 <QuestionBuild sendTable={this.props.megaQuizTable} sendParams={this.props.match.params} />
                 <div className='' >
 
@@ -85,11 +86,13 @@ const quesStyles = StyleSheet.create({
 let mapStateToProps = (state) => {
     return {
         user: state.user,
-        megaQuizTable: state.megaQuizTable
+        megaQuizTable: state.megaQuizTable,
+        quizResultsUltraJoinedTable: state.quizResultsUltraJoinedTable,
     }
 }
 const mapDispatchToProps = {
     getUser,
-    getMegaQuizTable
+    getMegaQuizTable,
+    getQuizResultsUltraJoinedTableThroughAxios
 }
 export default connect(mapStateToProps, mapDispatchToProps)(QuizWizardQuestion);

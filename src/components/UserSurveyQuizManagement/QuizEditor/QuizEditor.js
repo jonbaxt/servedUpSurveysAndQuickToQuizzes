@@ -39,7 +39,6 @@ class QuizEditor extends Component {
     }
     confirmDeleteBoxChange = () => {
         this.setState({ confirmDeleteBoxVisible: !this.state.confirmDeleteBoxVisible })
-        // console.log(this.state.confirmDeleteBoxVisible)
     }
     handleSelectedChange = (e) => {
         this.setState({ selectedChange: e })
@@ -56,7 +55,6 @@ class QuizEditor extends Component {
     handleTemporaryAnsIdSelected = (e) => {
         this.setState({ temporaryAnsIdSelected: e })
     }
-
     componentDidMount() {
         axios.get(`/api/quiztaker/getQuizInfo/${this.props.match.params.quizId}`).then((quizInfo) => {
             this.props.setCurrentQuizInfo(quizInfo.data[0])
@@ -768,47 +766,32 @@ const conditionalDisplayStyles = StyleSheet.create({
         left: '-400px'
     },
     displayQuestionEditor: {
-        // display: 'flex',
-        // justifyContent: 'center',
-        // transform: '1s all ease',
-        // overflow: 'hidden',
         animationName: [initialOpacityKeyframes, initialTranslateKeyframes],
         animationDuration: '0.5s',
         animationTimingFunction: 'ease-in',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
-        // width: '100%',
         width: '310px',
-        // height: '400px',
-        // height: '500px',
         position: 'fixed'
     },
     hideQuestionEditor: {
-        // transform: '1s all ease',
         animationName: [outOpacityKeyframes, outTranslateKeyframes],
         animationDuration: '1s',
         animationTimingFunction: 'ease-out',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
-        // width: '0%',
-        // width: '310px',
-        // height: '0px',
-        // height: '500px',
         position: 'absolute',
         left: '-400px'
     },
     displayAnswerEditor: {
         animationName: [initialOpacityKeyframes, initialTranslateKeyframes],
         animationDuration: '0.5s',
-        // overflow: 'visible',
-        // overflow: 'scroll',
         overflow: 'auto',
         animationTimingFunction: 'ease-in',
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
         height: '600px',
         width: '310px',
-        // left: '50px',
         position: 'fixed'
     },
     hideAnswerEditor: {
@@ -818,7 +801,6 @@ const conditionalDisplayStyles = StyleSheet.create({
         animationIterationCount: 'initial',
         background: 'rgba(51, 0, 204, 0.8)',
         width: '310px',
-        // height: '600px',
         position: 'absolute',
         left: '-400px'
     },

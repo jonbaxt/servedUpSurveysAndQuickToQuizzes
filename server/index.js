@@ -110,6 +110,7 @@ app.post('/api/quizCreation/newQuiz', controller.postNewQuiz);
 //Quiz Edit Calls
 app.put('/api/quizedit/from/quiztable/where/id/:quizId', controller.editQuizTableById );
 app.put('/api/quizedit/from/quizquestionstable/where/:quizId/:quesId', controller.editQuizQuestionTableById );
+app.put('/api/quizedit/from/quizanswerstable/where/:quizId/:ansId', controller.editQuestionAnswersTableById);
 
 //Quiz Delete Calls
 app.delete('/api/quizdelete/wholequiz/byid/:quizId', controller.deleteQuizById);
@@ -121,6 +122,7 @@ app.get(`/api/surveytaker/getSurveyInfo/:surveyId`, controller.getSurveyStartInf
 app.post('/api/surveyAnswerSubmission/SubmitToSurveyResultsTable', controller.postToSurveyResults);
 app.get('/api/surveyresults/allresults/ultrajoined', controller.getAllSurveyTableResultsInformation);
 
+// This is for if you're using browser router in the future.
 // const path = require('path');
 // app.get('*', (req, res)=>{
 //     res.sendFile(path.join(__dirname, '../build/index.html'));

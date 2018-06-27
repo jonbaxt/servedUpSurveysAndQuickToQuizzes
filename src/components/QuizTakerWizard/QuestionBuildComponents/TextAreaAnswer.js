@@ -1,33 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
-export default function TextAreaAnswer(props){
-    const { nestedRoutes, propsObject, element, quesCount, nextRoute, handleProps } = props;
-    let { textAreaText } = props;
+import { insertNewQuizAnswerIntoResultsArray } from '../../../ducks/reducer';
+
+// export default function TextAreaAnswer(props){
+class TextAreaAnswer extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            textAreaText: '',
+        }
+    }
+    handleTextChange = (e) => {
+        this.setState({ textAreaText: e})
+    } 
+    render(){
     return (
         <span>
-                    <textarea onChange={(e) => textAreaText = e.target.value} className={css(styles.fuzzIn)} />
-                    <Link to={
-                        quesCount <= nestedRoutes.quesId ?
-                            `/quizDoneReDirect/${nestedRoutes.currentUserId}/${nestedRoutes.quizId}/${nestedRoutes.quesId}/complete`
-                            : `/${nestedRoutes.currentUserId}/quiz/${nestedRoutes.quizId}/${nextRoute}`
+                    <textarea onChange={(e) => {this.handleTextChange(e.target.value)}} className={css(styles.fuzzIn)} />
+                     <Link to={
+                        this.props.quesCount <= this.props.nestedRoutes.quesId ?
+                            `/quizDoneReDirect/${this.props.nestedRoutes.currentUserId}/${this.props.nestedRoutes.quizId}/${this.props.nestedRoutes.quesId}/complete`
+                            : `/${this.props.nestedRoutes.currentUserId}/quiz/${this.props.nestedRoutes.quizId}/${this.props.nextRoute}`
                     }
                         style={{ textDecoration: 'none' }}
-                        key={element.ans_id}>
+                        key={this.props.element.ans_id}>
                         <button className={css(styles.answerBoxes, styles.hoverButton, styles.fuzzIn)} onClick={() => {
                             let compiledAnswer = {
-                                Quiz_Ques_Id: handleProps[0].ques_id,
-                                Answer_Id: element.ans_id,
-                                Takers_Answer: textAreaText,
-                                Taken_Count: 1,
-                                Survey_Taker_Id: nestedRoutes.currentUserId
+                                Quiz_Ques_Id: this.props.propsObject.sendParams.quesId,
+                                Answer_Id: this.props.element.ans_id,
+                                Takers_Answer: this.state.textAreaText,
+                                Taken_Count: this.props.current_taken_number,
+                                Survey_Taker_Id: this.props.nestedRoutes.currentUserId
                             }
-                            propsObject.insertNewQuizAnswerIntoResultsArray(compiledAnswer)
+                            this.props.insertNewQuizAnswerIntoResultsArray(compiledAnswer)
                         }}>Submit Text Entry</button>
-                    </Link>
+                    </Link> 
                 </span>
     )
+}
+
 }
 const initialOpacityKeyframes = { 'from': { opacity: 0, }, 'to': { opacity: 1, } }
 const initialTranslateKeyframes = { '0%': { transform: 'translateY(100px)' }, '100%': { transform: 'translateY(0px)' } }
@@ -86,3 +100,6 @@ const styles = StyleSheet.create({
         },
     },
 })
+
+
+export default connect(null, { insertNewQuizAnswerIntoResultsArray } )(TextAreaAnswer);

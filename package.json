@@ -40,9 +40,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "main": "server/index.js",
-  "proxy": "http://localhost:3008"
+  "proxy": "http://localhost:3008",
+  "devDependencies": {
+    "cypress": "^3.0.1",
+    "jest": "^23.2.0"
+  }
 }

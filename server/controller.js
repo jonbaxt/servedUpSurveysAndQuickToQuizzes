@@ -22,29 +22,29 @@ module.exports = {
     },
     getSurveyUsersTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-        
+
         dbInstance.Get_Survey_Users_Table().then((users) => {
             res.status(200).send(users);
         }).catch((errrrrrrr) => { console.log(`DID NOT GET THE SURVEY USERS FROM DATABASE`, errrrrrrr) })
     },
-    getSurveyAdmins: ( req, res, next ) => {
+    getSurveyAdmins: (req, res, next) => {
         const dbInstance = req.app.get('db');
         dbInstance.Get_All_Admins().then((users) => {
             res.status(200).send(users);
         }).catch((errrrrrrr) => { console.log(`DID NOT GET THE SURVEY USERS FROM DATABASE`, errrrrrrr) })
     },
-    editUserName: (req, res, next ) => {
+    editUserName: (req, res, next) => {
         const dbInstance = req.app.get('db');
         console.log(req.body)
-        dbInstance.update_user_name_by_id([Number(req.params.id), req.body[0]].name).then( userTable => {
+        dbInstance.update_user_name_by_id([Number(req.params.id), req.body[0]].name).then(userTable => {
             res.status(200).send(userTable)
-        }).catch( err => res.status(500).send( err ))
+        }).catch(err => res.status(500).send(err))
     },
-    deleteUserById: (req, res, next ) =>{
+    deleteUserById: (req, res, next) => {
         const dbInstance = req.app.get('db');
-        dbInstance.delete_user_by_id([Number(req.params.id)]).then( userTableReturn => {
+        dbInstance.delete_user_by_id([Number(req.params.id)]).then(userTableReturn => {
             res.status(200).send(userTableReturn)
-        }).catch( err => res.status(500).send( err ))
+        }).catch(err => res.status(500).send(err))
     },
     // For getting quiz table list for dashboard
     fetchAllQuizzesList: (req, res, next) => {
@@ -96,7 +96,7 @@ module.exports = {
     // For getting the quiz results table back to see results data.
     getQuizResultsTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-        
+
         dbInstance.Get_All_Quiz_Results().then(quizResults => {
             res.status(200).send(quizResults);
         }).catch(err => console.log(err))
@@ -106,7 +106,7 @@ module.exports = {
         const data = req.body;
         // console.log(data.Title);
         dbInstance.Post_New_Quiz([data.Title, data.Description, data.Start_Img, data.Timed, Number(data.Quiz_Owner)]).then(newQuizReturn => {
-            console.log( newQuizReturn)
+            console.log(newQuizReturn)
             res.status(200).send(newQuizReturn);
         }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
     },
@@ -247,10 +247,23 @@ module.exports = {
     editQuestionAnswersTableById: (req, res, next) => {
         const dbInstance = req.app.get('db');
         const id = Number(req.params.quizId);
-        const quesId = Number(req.params.quesId);
+        const ansId = Number(req.params.ansId);
+        // console.log(req.body)
+        switch (req.body[0]) {
+            case 'ans_text':
+                return dbInstance.update_quiz_answers_answer_text([id, ansId, req.body[1]]).then(newQuizInfo => {
+                    res.status(200).send(newQuizInfo);
+                }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
+            case 'ans_img':
+                return dbInstance.update_quiz_answers_answer_img([id, ansId, req.body[1]]).then(newQuizInfo => {
+                    res.status(200).send(newQuizInfo);
+                }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
+            default:
+                return console.log('Did not understand the action.')
+        }
     },
     deleteQuizById: (req, res, next) => {
-        const dbInstance = req.app.get('db');  
+        const dbInstance = req.app.get('db');
         const id = Number(req.params.quizId);
         dbInstance.delete_quiz_by_id([id]).then(quizDeleted => {
             res.status(200).send(quizDeleted);
@@ -352,15 +365,15 @@ module.exports = {
     },
     getAllSurveyTableInformationInMegaTable: (req, res, next) => {
         const dbInstance = req.app.get('db');
-        
+
         dbInstance.Get_All_Survey_Tables_Info().then(megaResult => {
             // console.log( megaResult)
             res.status(200).send(megaResult);
         }).catch(err => { console.log(`Could not retrieve quiz table info: ${err}`) })
     },
-    getAllSurveyTableResultsInformation: ( req, res ) => {
+    getAllSurveyTableResultsInformation: (req, res) => {
         const dbInstance = req.app.get('db');
-        
+
         dbInstance.survey_results_mega_ultra_compiled().then(megaResult => {
             // console.log( megaResult)
             res.status(200).send(megaResult);

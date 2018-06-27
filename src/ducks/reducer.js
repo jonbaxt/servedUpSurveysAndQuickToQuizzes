@@ -61,6 +61,7 @@ const INSERT_NEW_QUIZ_ANS_RESULT = 'INSERT_NEW_QUIZ_ANS_RESULT';
 const GET_NEW_QUIZ_JUST_CREATED = 'GET_NEW_QUIZ_JUST_CREATED';
 const GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ = 'GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ';
 const GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE = 'GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE';
+const GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS = 'GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS';
 
 //Survey Types
 const SET_SURVEY_ID = 'SET_SURVEY_ID';
@@ -143,6 +144,15 @@ export function getQuizResultsJustPostedAfterQuiz(quizResults) {
     return {
         type: GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ,
         payload: quizResults
+    }
+}
+export function getQuizResultsUltraJoinedTableThroughAxios() {
+        let quizResultsMega = axios.get('/api/quizresults/joinedtable').then(tableReturned => {
+            return tableReturned.data
+        }).catch(err => console.log(err))
+    return {
+        type: GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS,
+        payload: quizResultsMega
     }
 }
 export function getQuizResultsInJoinedTable(quizJoinedTable) {
@@ -260,6 +270,8 @@ export default function reducer(state = initialState, action) {
                 resultsTemporaryStore: []
             })
         case GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE:
+            return Object.assign({}, state, { quizResultsUltraJoinedTable: action.payload })
+        case GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS + '_FULFILLED':
             return Object.assign({}, state, { quizResultsUltraJoinedTable: action.payload })
         case GET_NEW_QUIZ_JUST_CREATED:
         return Object.assign({}, state, { quizNewCreatedTable: action.payload } )

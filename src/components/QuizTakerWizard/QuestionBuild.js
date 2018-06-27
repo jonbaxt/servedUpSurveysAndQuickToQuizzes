@@ -2,17 +2,14 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { insertNewQuizAnswerIntoResultsArray, getMegaQuizTable } from '../../ducks/reducer';
-import { handleProp, calcQuesCount, calcQuestionType, calcQuizTitle, calcQuesNum, calcQuesImage, calcQuesText } from './QuestionBuildComponents/BuildQuestionData'; 
+import { handleProp, calcQuesCount, calcQuestionType, calcQuizTitle, calcQuesNum, calcQuesImage, calcQuesText } from './QuestionBuildComponents/BuildQuestionData';
 import MultipleChoiceAnswer from './QuestionBuildComponents/MultipleChoiceAnswer';
 import TextAreaAnswer from './QuestionBuildComponents/TextAreaAnswer';
 function QuestionBuild(props) {
-    return (
-        <div className={css(styles.fuzzIn)} >
-            {dealWithMegaTable(props.sendTable, props.sendParams, props)}
-        </div>
-    )
+    return (<div className={css(styles.fuzzIn)} >
+        {dealWithMegaTable(props.sendTable, props.sendParams, props)}
+    </div>)
 }
 function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
     let handleProps = handleProp(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
@@ -22,7 +19,13 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
     let questionNumber = calcQuesNum(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
     let questionImage = calcQuesImage(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
     let questionText = calcQuesText(megaTable, nestedRoutes.quizId, nestedRoutes.quesId)
-
+    let desctructureTable = -2
+    let beforeCount = -2;
+    if (propsObject.quizResultsUltraJoinedTable.length !== 0) {
+        desctructureTable = propsObject.quizResultsUltraJoinedTable.filter((el) => el.survey_taker_id === Number(nestedRoutes.currentUserId) && el.quiz_id === Number(nestedRoutes.quizId)).map(el => el.taken_count).reduce((a, b) => a === b ? a : -1)
+        beforeCount = Number(desctructureTable)
+    }
+    let current_taken_number = ++beforeCount;
     let possibleAnswers = handleProps.map(element => {  //Possible answers to map through
         return { ques_image: element.ques_image, ans_id: element.ans_id, ans_num: element.ans_num, ans_text: element.ans_text, ans_img: element.ans_img, ans_special: element.ans_special, is_correct: element.is_correct }
     })
@@ -30,27 +33,27 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
     let nextRoute = Number(nestedRoutes.quesId) + 1;
     if (qT === "mult-choice") {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
-            //TODO: Need to fix the Taken count to increment properly.
             const compiledAnswer = {
-                Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: 1, Survey_Taker_Id: nestedRoutes.currentUserId
+                Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: current_taken_number, Survey_Taker_Id: nestedRoutes.currentUserId
             }
             return (
                 <MultipleChoiceAnswer key={element.ans_id} nestedRoutes={nestedRoutes} propsObject={propsObject} element={element} compiledAnswer={compiledAnswer} quesCount={quesCount} nextRoute={nextRoute} decideImageAnswerArea={decideImageAnswerArea}
-                handleProps={handleProps} />
+                    handleProps={handleProps} />
             )
         })
-    } else if (qT === 'text-area') {
+    }
+
+    else if (qT === 'text-area') {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
             let textAreaText = ''
             return (
-                <TextAreaAnswer  key={element.ans_id} nestedRoutes={nestedRoutes} propsObject={propsObject} element={element} quesCount={quesCount} nextRoute={nextRoute} textAreaText={textAreaText} />
+                <TextAreaAnswer key={element.ans_id} nestedRoutes={nestedRoutes} propsObject={propsObject} element={element} quesCount={quesCount} nextRoute={nextRoute} textAreaText={textAreaText} current_taken_number={current_taken_number} />
             )
         })
     } else if (qT === 'pic_guess') {
         mapAnswersToScreen = possibleAnswers.map((element, index) => {
-            //TODO: Need to fix the Taken count to increment properly.
             const compiledAnswer = {
-                Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: 1, Survey_Taker_Id: nestedRoutes.currentUserId
+                Quiz_Ques_Id: handleProps[0].ques_id, Answer_Id: element.ans_id, Takers_Answer: element.ans_text, Taken_Count: current_taken_number, Survey_Taker_Id: nestedRoutes.currentUserId
             }
             return (
                 <Link to={
@@ -69,8 +72,6 @@ function dealWithMegaTable(megaTable, nestedRoutes, propsObject) {
             )
         })
     }
-
-    //FIXME:
     return (
         <div className={css(styles.quizBodyContainer, styles.pageStart)}>
             <div className={css(styles.fuzzIn)} >
@@ -93,51 +94,20 @@ function decideImageAnswerArea(AnswerImage) {
     } else { return null; }
 }
 const translateKeyframes = {
-    '0%': {
-        // transform: 'rotate(0deg)'
-        // transform: 'translate(-150px, 0px)'
-        transform: 'translate(-150px)'
-    },
-    '25%': {
-        // transform: 'rotate(360deg)'
-        // transform: 'translate(0px, 100px)'
-        transform: 'translate(-75px)'
-
-    },
-    '50%': {
-        // transform: 'rotate(0deg)'
-        // transform: 'translate(150px, 0px)'
-        transform: 'translate(0px)'
-
-    },
-    '75%': {
-        // transform: 'rotate(360deg)'
-        // transform: 'translate(0px, -100px)'
-        transform: 'translate(75px)'
-
-    },
-    '100%': {
-        // transform: 'rotate(-360deg)'
-        // transform: 'translate(-150px, 0px)'
-        transform: 'translate(150px)'
-    }
+    '0%': { transform: 'translate(-150px)' }, '25%': { transform: 'translate(-75px)' },
+    '50%': { transform: 'translate(0px)' },
+    '75%': { transform: 'translate(75px)' },
+    '100%': { transform: 'translate(150px)' }
 };
 const opacityKeyframes = { '0%': { opacity: 0 }, '5%': { opacity: 1 }, '95%': { opacity: 1 }, '100%': { opacity: 0 } };
 const initialOpacityKeyframes = { 'from': { opacity: 0, }, 'to': { opacity: 1, } }
 const initialTranslateKeyframes = { '0%': { transform: 'translateY(100px)' }, '100%': { transform: 'translateY(0px)' } }
 const outOpacityKeyframes = { 'from': { opacity: 1, }, 'to': { opacity: 0, } }
 const outTranslateKeyframes = { '0%': { transform: 'translateY(0px)' }, '100%': { transform: 'translateY(100px)' } }
-
 const styles = StyleSheet.create({
     pageStart: { animationName: initialOpacityKeyframes, animationDuration: '1s', transition: 'ease all', animationIterationCount: 'initial' },
     testBorder: { border: '1px solid black' },
-    quizBodyContainer: {
-        transition: '1s all ease',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
+    quizBodyContainer: { transition: '1s all ease', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' },
     h2Normal: { fontSize: '30px', transition: '1s all ease', },
     h2Tablet: { '@media (min-width: 490px)': { fontSize: '40px', transition: '1s all ease', }, },
     h2Laptop: { '@media (min-width: 700px)': { fontSize: '50px', transition: '1s all ease', }, },
@@ -268,7 +238,8 @@ const styles = StyleSheet.create({
 });
 function mapStateToProps(state) {
     return {
-        megaQuizTable: state.megaQuizTable
+        megaQuizTable: state.megaQuizTable,
+        quizResultsUltraJoinedTable: state.quizResultsUltraJoinedTable,
     }
 }
 export default connect(mapStateToProps, { insertNewQuizAnswerIntoResultsArray, getMegaQuizTable })(QuestionBuild);
