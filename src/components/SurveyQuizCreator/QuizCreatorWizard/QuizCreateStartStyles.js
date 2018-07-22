@@ -1,36 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet } from 'aphrodite';
 
-class QuesCreate extends Component {
-    constructor(){
-        super()
-        this.state = {
-            currentQuizId: 6,
-            
-        }
-    }
-    render(){
-        return(<div>
-            <h1>Question # {this.props.giveQuesNum}</h1>
-            <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >Question Type</h1><br /><br />
-                    
-                    <div>
-                    <button>
-                    Multiple Choice    
-                    </button>
-                    <button>
-                    Text Write In
-                    </button>
-                    <button>
-                    1 to 10 Responses
-                    </button>
-                    <button>
-                    Picture Guessing
-                    </button>
-                    </div>
-        </div>)
-    }
-}
 const initialOpacityKeyframes = { 'from': { opacity: 0 }, 'to': { opacity: 1 } }
 const translateKeyframes = {
     '0%': {
@@ -46,7 +15,7 @@ const translateKeyframes = {
     },
 };
 const loopableOpacityKeyframes = { '0%': { opacity: 0 }, '50%': { opacity: 1 }, '100%': { opacity: 0 } }
-const st = StyleSheet.create({
+export const st = StyleSheet.create({
     pageStart: {
         animationName: initialOpacityKeyframes,
         animationDuration: '1s',
@@ -314,4 +283,3 @@ const st = StyleSheet.create({
     }
 
 })
-export default QuesCreate;

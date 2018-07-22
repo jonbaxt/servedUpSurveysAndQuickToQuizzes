@@ -4,9 +4,13 @@ const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const massive = require('massive');
-const controller = require('./controller');
 const chalk = require('chalk');
 require('dotenv').config();
+const controller = require('./controller');
+const creators = require('./creators');
+const readers = require('./readers');
+const updaters = require('./updaters');
+const deleters = require('./deleters');
 
 const {
     SERVER_PORT,
@@ -30,7 +34,8 @@ app.use( bodyParser.json() );
 app.use( session({
     secret: SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    // cookie: { },
 }))
 
 app.use(passport.initialize());
@@ -88,39 +93,57 @@ app.get('/auth/me', (req, res) => {
 app.get('/api/findSessionUser/:id', controller.findTheSurveyUser);
 app.get( '/api/getSurveyUsers', controller.getSurveyUsersTable);
 app.get('/api/getAdmins', controller.getSurveyAdmins);
-app.put('/api/editUserName/:id', controller.editUserName);
-app.delete('/api/deleteUserById/:id', controller.deleteUserById);
+app.put('/api/editUserName/:id', updaters.editUserName);
+app.delete('/api/deleteUserById/:id', deleters.deleteUserById);
 
 //Quiz Calls
-app.get( '/api/quizmain', controller.fetchAllQuizzesList);
-app.get( '/api/quizmain/getmegaquiztable', controller.getAllQuizTableInformationInMegaTable);
-app.get( '/api/quiztaker/getQuizInfo/:quizId', controller.getQuizStartInformation);
-app.get( '/api/quiztaker/getQuizQuestionsInfo/:quizId', controller.getQuizQuestionsStartInformation ); 
-app.get( '/api/quiztaker/getQuizAnswersInfo/:quizId', controller.getQuizAnswersStartInformation ); 
+app.get( '/api/quizmain', readers.fetchAllQuizzesList);
+app.get( '/api/quizmain/getmegaquiztable', readers.getAllQuizTableInformationInMegaTable);
+app.get( '/api/quiztaker/getQuizInfo/:quizId', readers.getQuizStartInformation);
+app.get( '/api/quiztaker/getQuizQuestionsInfo/:quizId', readers.getQuizQuestionsStartInformation ); 
+app.get( '/api/quiztaker/getQuizAnswersInfo/:quizId', readers.getQuizAnswersStartInformation ); 
 
 
-app.get( '/api/quizresults/all', controller.getQuizResultsTable);
-app.post('/api/quizAnswerSubmission/SubmitToQuizResultsTable', controller.postToQuizResults);
-app.get( '/api/quizResultsByUser/:id', controller.getQuizResultsByUserId);
-app.get( '/api/quizresults/joinedtable', controller.getJoinedAllQuizResults);
+app.get( '/api/quizresults/all', readers.getQuizResultsTable);
+app.post('/api/quizAnswerSubmission/SubmitToQuizResultsTable', creators.postToQuizResults);
+app.get( '/api/quizResultsByUser/:id', readers.getQuizResultsByUserId);
+app.get( '/api/quizresults/joinedtable', readers.getJoinedAllQuizResults);
 
 //QuizCreatorCalls
-app.post('/api/quizCreation/newQuiz', controller.postNewQuiz);
+app.post('/api/quizCreation/newQuiz', creators.postNewQuiz);
+app.post('/api/quizQuestionCreate/:quizId', creators.createNewQuizQuestionTemplate);
+app.post('/api/quizAnswerCreate/:quizId/:quizQuesId/:ansNum', creators.createNewQuizAnswerTemplate);
+// Session Information that is stored and can be called on:
+app.post('/api/sessiondata/current_quiz/set', (req, res) => {
+    console.log(req.body);
+
+
+    req.session = {stuff: req.body};
+    // req.session.cookie('Current_quiz', req.body.quiz_data, {maxAge: null, expires: null, path: '/api/sessiondata/currentQuizInfo'})
+    // res.cookie('Current Session', req.body.quiz_id, { maxAge: 9000000, httpOnly: true });
+    res.status(200).send(req.session);
+})
+app.get('/api/sessiondata/currentQuizInfo', (req, res) => {
+    // console.log(req.session)
+    // console.log(req);
+    // console.log(res.cookie)
+    res.status(200).send(res) })
+
 
 //Quiz Edit Calls
-app.put('/api/quizedit/from/quiztable/where/id/:quizId', controller.editQuizTableById );
-app.put('/api/quizedit/from/quizquestionstable/where/:quizId/:quesId', controller.editQuizQuestionTableById );
-app.put('/api/quizedit/from/quizanswerstable/where/:quizId/:ansId', controller.editQuestionAnswersTableById);
+app.put('/api/quizedit/from/quiztable/where/id/:quizId', updaters.editQuizTableById );
+app.put('/api/quizedit/from/quizquestionstable/where/:quizId/:quesNum', updaters.editQuizQuestionTableById );
+app.put('/api/quizedit/from/quizanswerstable/where/:quizId/:ansId', updaters.editQuestionAnswersTableById);
 
 //Quiz Delete Calls
-app.delete('/api/quizdelete/wholequiz/byid/:quizId', controller.deleteQuizById);
+app.delete('/api/quizdelete/wholequiz/byid/:quizId', deleters.deleteQuizById);
 
 //Survey Calls
-app.get('/api/surveymain', controller.fetchAllSurveysList);
-app.get( '/api/surveymain/getmegasurveytable', controller.getAllSurveyTableInformationInMegaTable);
-app.get(`/api/surveytaker/getSurveyInfo/:surveyId`, controller.getSurveyStartInformation);
-app.post('/api/surveyAnswerSubmission/SubmitToSurveyResultsTable', controller.postToSurveyResults);
-app.get('/api/surveyresults/allresults/ultrajoined', controller.getAllSurveyTableResultsInformation);
+app.get('/api/surveymain', readers.fetchAllSurveysList);
+app.get( '/api/surveymain/getmegasurveytable', readers.getAllSurveyTableInformationInMegaTable);
+app.get(`/api/surveytaker/getSurveyInfo/:surveyId`, readers.getSurveyStartInformation);
+app.post('/api/surveyAnswerSubmission/SubmitToSurveyResultsTable', creators.postToSurveyResults);
+app.get('/api/surveyresults/allresults/ultrajoined', readers.getAllSurveyTableResultsInformation);
 
 // This is for if you're using browser router in the future.
 // const path = require('path');

@@ -1,15 +1,15 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+// import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
-import faImages from '@fortawesome/fontawesome-free-solid/faImages'
+// import faImages from '@fortawesome/fontawesome-free-solid/faImages'
 // import faToggleOff from '@fortawesome/fontawesome-free-solid/faToggleOff'
 // import faToggleOn from '@fortawesome/fontawesome-free-solid/faToggleOn'
 
-import { getNewQuizJustCreated } from '../../../ducks/reducer'
-import QuesCreate from './QuesCreateComponents/QuesCreate';
+import { getNewQuizJustCreated, setSelectedQuiz, getQuizTable, setCurrentQuizInfo } from '../../../ducks/reducer'
+// import QuesCreate from './QuesCreateComponents/QuesCreate';
 
 class QuizCreateQuestionAnswerBuilder extends React.Component {
     constructor() {
@@ -18,134 +18,63 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
             numberOfQuestions: 1,
             temporaryQuestionsArrayStore: [],
             temporaryAnswersArrayStore: [],
-            newTitle: '',
-            newDescription: '',
-            newStartImg: '',
-            newTimed: false,
-            toggler: false
         }
         this.handleTempQuestionsArrStore = this.handleTempQuestionsArrStore.bind(this);
         this.handleTempAnswersArrStore = this.handleTempAnswersArrStore.bind(this);
-        this.handleNewTitle = this.handleNewTitle.bind(this);
-        this.handleNewDescription = this.handleNewDescription.bind(this);
-        this.handleNewStartImg = this.handleNewStartImg.bind(this);
-        this.handleNewTimedChange = this.handleNewTimedChange.bind(this);
     }
     componentDidMount() {
-        if (this.props.quizNewCreatedTable.length === 0) {
-            axios.get(`/api/quiztaker/getQuizInfo/${this.props.currentQuizId}`).then((quizInfo) => {
-                this.props.getNewQuizJustCreated(quizInfo.data[0])
-            })
+        // if(this.props.currentQuizId === -1){
+            this.props.getQuizTable();
+            console.log(this.props.quizTable)
+            this.props.getNewQuizJustCreated(this.props.quizTable[5]);
+            this.props.setCurrentQuizInfo(this.props.quizTable[5]);
+            this.props.setSelectedQuiz(6);
+            // axios.post('/api/sessiondata/current_quiz/set', {quiz_id: 6}).then( (sessData) => console.log('success', sessData)).catch(err => console.log(err));
+            // axios.get('/api/sessiondata/currentQuizInfo').then(currentQuizId => {
+                // console.log(currentQuizId)
+                // this.props.getNewQuizJustCreated(currentQuizId.data)
+                // this.props.setSelectedQuiz()})
+        // }
+        // if (this.props.quizNewCreatedTable.length === 0) {
+            // axios.get(`/api/quiztaker/getQuizInfo/${this.props.currentQuizId}`).then((quizInfo) => {
+                // this.props.getNewQuizJustCreated(quizInfo.data[0])
+            // })
+        // }
+    }
+    componentDidUpdate(prevProps){
+        if(prevProps.quizTable.length !== this.props.quizTable.length){
+            console.log('updated props')
+            this.props.getQuizTable();
+            this.props.getNewQuizJustCreated(this.props.quizTable[5]);
+            this.props.setCurrentQuizInfo(this.props.quizTable[5]);
+            this.props.setSelectedQuiz(6);
         }
     }
+
+
+
+
     handleTempQuestionsArrStore(e) {
         this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e] })
     }
     handleTempAnswersArrStore(e) {
         this.setState({ temporaryAnswersArrayStore: [...this.state.temporaryAnswersArrayStore, e] })
     }
-    handleAddQuestion = (newQuestion) => {
-        this.setState({
-            numberOfQuestions: this.state.numberOfQuestions + 1,
-
-        })
-    }
-    handleDelQuestion = () => {
-        this.setState({ numberOfQuestions: this.state.numberOfQuestions - 1 })
-    }
-    handleAdd = (newQuestion) => {
-        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, newQuestion] })
-    }
-
-    handleNewTitle(newTit) {
-        // console.log(newTit)
-        this.setState({ newTitle: newTit })
-    }
-    handleNewDescription(newDes) {
-        // console.log(newDes)
-        this.setState({ newDescription: newDes })
-    }
-    handleNewStartImg(newImg) {
-        // console.log(newImg)
-        this.setState({ newStartImg: newImg })
-    }
-    handleNewTimedChange(trueOrFalse) {
-        this.setState({ newTimed: trueOrFalse })
-    }
-    handleToggler = () => {
-        this.setState({ toggler: !this.state.toggler })
-    }
-    handleSubmitQuizCreate = () => {
-        const compiledAnswer = {
-            Title: this.state.newTitle,
-            Description: this.state.newDescription,
-            Start_Img: this.state.newStartImg,
-            Timed: this.state.newTimed,
-            Quiz_Owner: this.props.user.id
-        }
-        axios.post('/api/quizCreation/newQuiz', compiledAnswer).then((response) => {
-            // console.log(response)
-        }).catch((err) => console.log(err))
-    }
+    
     render() {
-        let createQuestions = () => {
-            // if(this.state.temporaryQuestionsArrayStore.length !== 0)
-
-
-            // for ( var i=0; i<this.state.numberOfQuestions; i++ ){
-            //     return <QuesCreate key={i} giveQuesNum={i+1} />
-            // }
-            return (<div>
-                <QuesCreate key={1} giveQuesNum={1} />
-            </div>)
-            // }
-        }
-        let previewImage = () => { return (this.state.newStartImg !== '' ? <img src={this.state.newStartImg} alt='' className={css(st.picResize)} /> : <div className={css(st.fontResizePicArea)}><FontAwesomeIcon className={css(st.fontResize, st.fontResizeTablet, st.fontResizeLaptop, st.fontResizeBiggest)} icon={faImages} /></div>) }
+        // let createQuestions = () => {
+        //     return (<div>
+        //         <QuesCreate key={1} giveQuesNum={1} />
+        //     </div>)
+        // }
         return (
             <div className={css(st.fl, st.jConCen, st.marTop, st.pageStart)}>
-                <div className={css(st.boxW, st.boxWTablet, st.boxWLaptop, st.boxWBiggest, st.borderShadow)} >
-                    {/* <h1></h1> */}
                     <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >All Questions Currently</h1>
-
                     <button
                         onClick={() => this.handleAddQuestion()}>Add Question</button>
                     <button
                         onClick={() => this.handleDelQuestion()}>Delete Question</button>
-
-                    <br /><br /><br /><br />
-
-                    <br /><br /><br />
-                    {createQuestions()}
-
-
-
-
-
-
-
-
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >Question Maker</h1><br /><br />
-
-                    <h3 className={css(st.texCen, st.h3Normal, st.h3Tablet, st.h3Laptop, st.h3Biggest)} >Question Text</h3><br />
-                    <input type='text' placeholder='Enter Quiz Name Here' className={css(st.inputBoxStyled, st.inputBoxStyledTablet, st.inputBoxStyledLaptop, st.inputBoxStyledBiggest)} value={this.state.newTitle} onChange={(el) => this.handleNewTitle(el.target.value)} /><br /><br />
-
-                    <h3 className={css(st.texCen, st.h3Normal, st.h3Tablet, st.h3Laptop, st.h3Biggest)} >Description</h3>
-                    <p className={css(st.pNormal, st.pTablet, st.pLaptop, st.pBiggest)}>This will be used to show the a brief description of what the survey is about on the quiz selection page.</p><br />
-
-                    <textarea className={css(st.textAreaBoxStyled, st.textAreaBoxStyledTablet, st.textAreaBoxStyledLaptop, st.textAreaBoxStyledBiggest)} value={this.state.newDescription} onChange={(el) => this.handleNewDescription(el.target.value)} placeholder='Your Description' rows='5' /><br /><br />
-
-                    <h3 className={css(st.texCen, st.h3Normal, st.h3Tablet, st.h3Laptop, st.h3Biggest)} >Pick a Start Image</h3>
-                    <p className={css(st.pNormal, st.pTablet, st.pLaptop, st.pBiggest)}>Make a start image! Copy a URL and paste into the textbox and see your image here!</p><br />
-                    <input className={css(st.inputBoxStyled, st.inputBoxStyledTablet, st.inputBoxStyledLaptop, st.inputBoxStyledBiggest)} placeholder='URL Link' type='url' onChange={(el) => this.handleNewStartImg(el.target.value)} value={this.state.newStartImg} /><br /><br />
-
-                    {previewImage()}<br /><br />
-                </div>
+                    
             </div>
         )
     }
@@ -439,8 +368,10 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         currentQuizId: state.currentQuizId,
-        quizNewCreatedTable: state.quizNewCreatedTable
+        currentQuizInfo: state.currentQuizInfo,
+        quizNewCreatedTable: state.quizNewCreatedTable,
+        quizTable: state.quizTable
     }
 }
 
-export default connect(mapStateToProps, { getNewQuizJustCreated })(QuizCreateQuestionAnswerBuilder);
+export default connect(mapStateToProps, { getNewQuizJustCreated, setSelectedQuiz, getQuizTable, setCurrentQuizInfo })(QuizCreateQuestionAnswerBuilder);

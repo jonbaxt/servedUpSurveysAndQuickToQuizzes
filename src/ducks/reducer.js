@@ -3,9 +3,14 @@ const initialState = {
     //Main app use variables
     //User information of who is currently logged in.
     user: {
+        id: 6,
+        user_name: "Jerry Lewis",
+        img: "https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2017/08/20140023/Jerry-Lewis-nutty-professor-700x380.jpg",
+        auth0_id: "AuthorizNutProfessor"
+
     },
     pathnameCurrent: [],
-    
+
     //SurveyUsersTable is the table of all users who are currently registered to the app as a whole.
     surveyUsersTable: [],
     surveyAdminsTable: [],
@@ -81,7 +86,7 @@ export function setCurrentPathname(newPathname) {
         payload: newPathname
     }
 }
-export function resetReduxToInitialState(){
+export function resetReduxToInitialState() {
     return {
         type: RESET_REDUX_TO_INITIAL_STATE,
     }
@@ -147,9 +152,9 @@ export function getQuizResultsJustPostedAfterQuiz(quizResults) {
     }
 }
 export function getQuizResultsUltraJoinedTableThroughAxios() {
-        let quizResultsMega = axios.get('/api/quizresults/joinedtable').then(tableReturned => {
-            return tableReturned.data
-        }).catch(err => console.log(err))
+    let quizResultsMega = axios.get('/api/quizresults/joinedtable').then(tableReturned => {
+        return tableReturned.data
+    }).catch(err => console.log(err))
     return {
         type: GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS,
         payload: quizResultsMega
@@ -161,7 +166,7 @@ export function getQuizResultsInJoinedTable(quizJoinedTable) {
         payload: quizJoinedTable
     }
 }
-export function getNewQuizJustCreated(newQuiz){
+export function getNewQuizJustCreated(newQuiz) {
     return {
         type: GET_NEW_QUIZ_JUST_CREATED,
         payload: newQuiz
@@ -199,13 +204,13 @@ export function getMegaSurveyTable() {
         payload: theMegaTable
     }
 }
-export function getSurveyResultsJustPostedAfterSurvey(surveyRes){
+export function getSurveyResultsJustPostedAfterSurvey(surveyRes) {
     return {
         type: GET_SURVEY_RESULTS_JUST_POSTED_AFTER_SURVEY,
         payload: surveyRes
     }
 }
-export function getSurveyResultsUltraJoinedTable(ultraTable){
+export function getSurveyResultsUltraJoinedTable(ultraTable) {
     return {
         type: GET_SURVEY_RESULTS_ULTRA_JOINED_TABLE,
         payload: ultraTable
@@ -274,7 +279,7 @@ export default function reducer(state = initialState, action) {
         case GET_QUIZ_RESULTS_JOINED_ULTRA_TABLE_BY_AXIOS + '_FULFILLED':
             return Object.assign({}, state, { quizResultsUltraJoinedTable: action.payload })
         case GET_NEW_QUIZ_JUST_CREATED:
-        return Object.assign({}, state, { quizNewCreatedTable: action.payload } )
+            return Object.assign({}, state, { quizNewCreatedTable: action.payload })
         // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_REJECTED':
         //     return console.log('Did not submit properly with axios.');
         // case GET_QUIZ_RESULTS_JUST_POSTED_AFTER_QUIZ + '_PENDING':
