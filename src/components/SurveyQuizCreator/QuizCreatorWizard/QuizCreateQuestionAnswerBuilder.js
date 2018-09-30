@@ -21,6 +21,8 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
         }
         this.handleTempQuestionsArrStore = this.handleTempQuestionsArrStore.bind(this);
         this.handleTempAnswersArrStore = this.handleTempAnswersArrStore.bind(this);
+        this.handleAddQuestion = this.handleAddQuestion.bind(this);
+        this.handleDelQuestion = this.handleDelQuestion.bind(this);
     }
     componentDidMount() {
         // if(this.props.currentQuizId === -1){
@@ -55,12 +57,20 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
 
 
     handleTempQuestionsArrStore(e) {
-        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e] })
+        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e] });
     }
     handleTempAnswersArrStore(e) {
-        this.setState({ temporaryAnswersArrayStore: [...this.state.temporaryAnswersArrayStore, e] })
+        this.setState({ temporaryAnswersArrayStore: [...this.state.temporaryAnswersArrayStore, e] });
     }
     
+    handleAddQuestion() {
+        console.log('Add Question Clicked');
+    }
+
+    handleDelQuestion() {
+        console.log('Delte Question Clicked');
+    }
+
     render() {
         // let createQuestions = () => {
         //     return (<div>

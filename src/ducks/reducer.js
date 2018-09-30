@@ -3,11 +3,10 @@ const initialState = {
     //Main app use variables
     //User information of who is currently logged in.
     user: {
-        id: 6,
-        user_name: "Jerry Lewis",
-        img: "https://s3-us-west-2.amazonaws.com/flx-editorial-wordpress/wp-content/uploads/2017/08/20140023/Jerry-Lewis-nutty-professor-700x380.jpg",
-        auth0_id: "AuthorizNutProfessor"
-
+        id: 13,
+        user_name: "Donald Duck",
+        img: "https://vignette.wikia.nocookie.net/disney/images/d/db/Donald_Duck_Iconic.png/revision/latest?cb=20160905174817",
+        auth0_id: "authDonny"
     },
     pathnameCurrent: [],
 
