@@ -10,8 +10,10 @@ class QuesCreate extends Component {
         }
     }
     render(){
+        console.log('Question Number: ', this.props.qNum);
         return(<div>
-            <h1>Question # {this.props.giveQuesNum}</h1>
+             <h1>Question # {this.props.qNum}</h1>
+            {/*
             <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >Question Type</h1><br /><br />
                     
                     <div>
@@ -27,7 +29,7 @@ class QuesCreate extends Component {
                     <button>
                     Picture Guessing
                     </button>
-                    </div>
+                    </div> */}
         </div>)
     }
 }

@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 // import faToggleOn from '@fortawesome/fontawesome-free-solid/faToggleOn'
 
 import { getNewQuizJustCreated, setSelectedQuiz, getQuizTable, setCurrentQuizInfo } from '../../../ducks/reducer'
-// import QuesCreate from './QuesCreateComponents/QuesCreate';
+import QuesCreate from './QuesCreateComponents/QuesCreate';
+import { dirname } from 'path';
 
 class QuizCreateQuestionAnswerBuilder extends React.Component {
     constructor() {
@@ -57,7 +58,10 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
 
 
     handleTempQuestionsArrStore(e) {
-        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e] });
+        let addQuestion = this.state.numberOfQuestions + 1;
+        this.setState({ temporaryQuestionsArrayStore: [...this.state.temporaryQuestionsArrayStore, e],
+        numberOfQuestions: addQuestion
+        });
     }
     handleTempAnswersArrStore(e) {
         this.setState({ temporaryAnswersArrayStore: [...this.state.temporaryAnswersArrayStore, e] });
@@ -65,26 +69,35 @@ class QuizCreateQuestionAnswerBuilder extends React.Component {
     
     handleAddQuestion() {
         console.log('Add Question Clicked');
+        // this.setState({})
     }
 
     handleDelQuestion() {
-        console.log('Delte Question Clicked');
+        console.log('Delete Question Clicked');
     }
 
     render() {
-        // let createQuestions = () => {
-        //     return (<div>
-        //         <QuesCreate key={1} giveQuesNum={1} />
-        //     </div>)
-        // }
+        console.log(this.state.temporaryQuestionsArrayStore);
+        let createQuestions = this.state.temporaryQuestionsArrayStore.map((el, ind) => {
+            return el;
+        });
         return (
-            <div className={css(st.fl, st.jConCen, st.marTop, st.pageStart)}>
+            <div className={css(st.fl, st.jConCen, st.marTop, st.pageStart, st.flCol)}>
                     <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >All Questions Currently</h1>
+                    <div className={css(st.fl, st.jConCen)} >
                     <button
-                        onClick={() => this.handleAddQuestion()}>Add Question</button>
+                        onClick={() => this.handleTempQuestionsArrStore(<QuesCreate key={this.state.numberOfQuestions} qNum={this.state.numberOfQuestions}/>) 
+                            // this.handleAddQuestion()
+                        
+                        }>Add Question</button>
                     <button
-                        onClick={() => this.handleDelQuestion()}>Delete Question</button>
-                    
+                        onClick={() => this.handleDelQuestion()}
+                        disabled={true}>Delete Question</button>
+                        </div>
+                        <div className={css(st.fl, st.flCol)}>
+
+                {createQuestions}                  
+                        </div>
             </div>
         )
     }
@@ -124,6 +137,9 @@ const st = StyleSheet.create({
     },
     fl: {
         display: 'flex'
+    },
+    flCol: {
+        flexDirection: 'column',
     },
     jConCen: {
         justifyContent: 'center'
