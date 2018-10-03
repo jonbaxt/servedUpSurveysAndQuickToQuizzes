@@ -6,13 +6,38 @@ class QuesCreate extends Component {
         super()
         this.state = {
             currentQuizId: 6,
-            
+            qText: '',
+            qType: '',
+            qImage: '',
+            qTimeLimit: ''
         }
+        this.handleQuestionText = this.handleQuestionText.bind(this);
     }
+    handleQuestionText(e) {
+        this.setState({ qText: e });
+    }
+
     render(){
         console.log('Question Number: ', this.props.qNum);
         return(<div>
              <h1>Question # {this.props.qNum}</h1>
+                <br />
+
+            <h4>Question Text</h4>
+            <input type='text' 
+            onChange={(e)=> this.handleQuestionText(e.target.value)} 
+            value={this.state.qText}
+            />
+            <h3>{this.state.qText}</h3>
+
+            <h4>Question Type</h4>
+            <input type='text' onChange={()=> console.log('hi')} />
+            
+            <h4>Question Image</h4>
+            <input type='text' />
+            
+            <h4>Time Limit</h4>
+            <input type='text' />
             {/*
             <h1 className={css(st.texCen, st.h1Normal, st.h1Tablet, st.h1Laptop, st.h1Biggest)} >Question Type</h1><br /><br />
                     
