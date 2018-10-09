@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import faCofee from '@fortawesome/fontawesome-free-solid/faCoffee'
-import faBars from '@fortawesome/fontawesome-free-solid/faBars'
+import { faCoffee, faBars, faChartArea, faFolderOpen, faEject, faPlus } from '@fortawesome/free-solid-svg-icons'
+// import faBars from '@fortawesome/fontawesome-free-solid/faBars'
+
+
 // import faCopy from '@fortawesome/fontawesome-free-solid/faCopy'
 // import faChartPie from '@fortawesome/fontawesome-free-solid/faChartPie'
 // import faChartLine from '@fortawesome/fontawesome-free-solid/faChartLine'
-import faChartArea from '@fortawesome/fontawesome-free-solid/faChartArea'
-import faFolderOpen from '@fortawesome/fontawesome-free-solid/faFolderOpen'
-import faEject from '@fortawesome/fontawesome-free-solid/faEject'
-import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
+
+
+
+
+// import faChartArea from '@fortawesome/fontawesome-free-solid/faChartArea'
+// import faFolderOpen from '@fortawesome/fontawesome-free-solid/faFolderOpen'
+// import faEject from '@fortawesome/fontawesome-free-solid/faEject'
+// import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
 
 import { resetReduxToInitialState, setCurrentPathname } from '../../ducks/reducer'
 
@@ -69,7 +75,7 @@ class NavMenu extends Component {
                         {adminPrivilegeLink()}
                         <Link className={css(Styles.noLine)} to={`/Dashboard/${this.props.user.id}`} >
                             <h1 className={css(Styles.hTag, Styles.hTagTablet, Styles.hTagLaptop, Styles.hTagBiggest)}>
-                                <FontAwesomeIcon icon={faCofee} />
+                                <FontAwesomeIcon icon={faCoffee} />
                                 Served Up Surveys
                 </h1>
                         </Link>

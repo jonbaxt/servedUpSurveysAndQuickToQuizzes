@@ -3,8 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRoad } from '@fortawesome/free-solid-svg-icons';
 // import NavMenu from '../NavMenu/NavMenu';
 import './QuizWizardStart.css'
 import { setCurrentQuizInfo, getMegaQuizTable, getQuizTable, setCurrentPathname } from '../../ducks/reducer';

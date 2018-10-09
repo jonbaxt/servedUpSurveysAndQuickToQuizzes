@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { setCurrentPathname, 
     // getAllUsers, getSurveyAdmins, 
     getQuizTable, getSurveyTable, getMegaQuizTable, getMegaSurveyTable } from '../../ducks/reducer';
 import { getAllUsers, getSurveyAdmins } from '../../ducks/actionCreatorsUser';
-import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare'
-import faMinusSquare from '@fortawesome/fontawesome-free-solid/faMinusSquare'
+import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+// import faMinusSquare from '@fortawesome/fontawesome-free-solid/faMinusSquare'
 
 
 import SurveyUsersManagement from './AdminComponents/SurveyUsersManagement/SurveyUsersManagement';

@@ -1,11 +1,11 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import { connect } from 'react-redux';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setCurrentPathname } from '../../ducks/reducer'
-import faCofee from '@fortawesome/fontawesome-free-solid/faCoffee'
-import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
+import { setCurrentPathname } from '../../ducks/reducer';
+import { faCoffee, faRoad } from '@fortawesome/free-solid-svg-icons';
+// import faRoad from '@fortawesome/fontawesome-free-solid/faRoad'
 // import faArrowAltCircleUp from '@fortawesome/fontawesome-free-regular/f0aa'
 // import faArrowAltCircleUp from '@fortawesome/fontawesome-free-regular/fa-arrow-circle-up'
 
@@ -26,7 +26,7 @@ class Login extends React.Component {
 
                     <h1 className={css(Styles.margins, Styles.smallestFont, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >Served Up Surveys</h1>
 
-                    <FontAwesomeIcon className={css(Styles.twirlyText, Styles.twirlyTextTablet, Styles.twirlyTextLaptop, Styles.twirlyTextBiggest, Styles.hoverFont, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faCofee} />
+                    <FontAwesomeIcon className={css(Styles.twirlyText, Styles.twirlyTextTablet, Styles.twirlyTextLaptop, Styles.twirlyTextBiggest, Styles.hoverFont, Styles.fontAwesSize, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} icon={faCoffee} />
 
                     <h1 className={css(Styles.smallestFont, Styles.tabletSizeFont, Styles.smallLaptopSizeFont, Styles.SizeFont)} >And</h1>
 

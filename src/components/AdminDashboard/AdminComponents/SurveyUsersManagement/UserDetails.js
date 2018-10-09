@@ -2,10 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import faWrench from '@fortawesome/fontawesome-free-solid/faWrench'
-// import
+import { faWrench } from '@fortawesome/free-solid-svg-icons';
 
 // import { getAllUsers } from '../../../../ducks/reducer';
 import { getAllUsers } from '../../../../ducks/actionCreatorsUser';

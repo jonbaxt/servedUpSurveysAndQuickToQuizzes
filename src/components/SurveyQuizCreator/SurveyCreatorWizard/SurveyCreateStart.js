@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import faImages from '@fortawesome/fontawesome-free-solid/faImages'
+import { faImages } from '@fortawesome/free-solid-svg-icons';
 // import faToggleOff from '@fortawesome/fontawesome-free-solid/faToggleOff'
 // import faToggleOn from '@fortawesome/fontawesome-free-solid/faToggleOn'
 

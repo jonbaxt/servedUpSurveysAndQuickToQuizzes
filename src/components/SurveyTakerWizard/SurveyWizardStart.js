@@ -3,8 +3,8 @@ import axios from 'axios';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 // import NavMenu from '../NavMenu/NavMenu';
 import './SurveyWizardStart.css'
 import { setCurrentSurveyInfo, getMegaSurveyTable, getSurveyTable } from '../../ducks/reducer';
