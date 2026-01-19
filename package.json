@@ -36,7 +36,7 @@
     "react-rangeslider": "^2.2.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^5.0.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^5.1.1"
@@ -52,7 +52,7 @@
   "proxy": "http://localhost:3008",
   "devDependencies": {
     "cypress": "^3.3.1",
-    "jest": "^23.6.0"
+    "jest": "^30.2.0"
   },
   "browserslist": [
     ">0.2%",
